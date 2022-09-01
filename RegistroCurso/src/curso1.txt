@@ -1,4 +1,4 @@
-nombre curso,cantidad de alumnos (int), sumar (mate), restar(mate), leer(leng), english(ENG)
-nombre estudiante 1, run, cantidad de habilidades aprendidas, true true false ture
-nombre estudiante 2, run, cantidad de habilidades aprendidas, false true false true
-nombre estudiante 3, run, cantidad de habilidades aprendidas, true false false false
+Curso 1, Sumar (Matemáticas), Restar(Matemáticas), Leer(Lenguaje), Leer inglés (Inglés)
+nombre estudiante 1, 123, True, True, False, True
+nombre estudiante 2, 456, False, True, False, True
+nombre estudiante 3, 789, True, False, False, False

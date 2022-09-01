@@ -14,6 +14,7 @@ public class Curso
 {
    private String nombre;
    private Hashtable<Integer,Alumno> alumnos;
+   private ArrayList<String> nombreHabilidades;
    private int cantAlumnos;
 
     /*constructores: igual lo cambiamos luego*/
@@ -21,6 +22,7 @@ public class Curso
     {
         this.nombre = "Nombre";
         this.alumnos = new Hashtable<>();
+        this.nombreHabilidades = new ArrayList<>();
         this.cantAlumnos = 0;
     }
 
@@ -33,7 +35,7 @@ public class Curso
     {
         return cantAlumnos;
     }
-    public String getNombre() 
+    public String getNombreCurso() 
     {
         return nombre;
     }
@@ -43,6 +45,14 @@ public class Curso
     {
     	this.nombre = nombre;
     }
+    public void setCantAlumnos(int cantidad)
+    {
+    	this.cantAlumnos = cantidad;
+    }
+    public void setNombreHabilidades(ArrayList<String> nombreHabilidades)
+    {
+    	this.nombreHabilidades = nombreHabilidades;
+    }
     
     // Métodos (funciones)
     public void agregarEstudiante(String nombre, int run, ArrayList<Boolean> habilidades)
@@ -51,6 +61,7 @@ public class Curso
     	nuevo.setNombre(nombre);
     	nuevo.setRUN(run);
     	nuevo.setHabilidades(habilidades);
+    	this.alumnos.put(run, nuevo);
     }
     
     /*igual funciÃ³n para leer de un .txt???*/

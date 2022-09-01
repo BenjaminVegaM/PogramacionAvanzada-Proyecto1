@@ -26,7 +26,7 @@ public class Alumno
     {
         this.nombre = "José Antonio";
         this.run = 0;
-        this.habilidades = new ArrayList<>();
+        this.habilidades = null;
     }
     /*hay que hacer una wea para que los ruts sean válidos
     * revisar casos en los que sean el último dígito sea k
