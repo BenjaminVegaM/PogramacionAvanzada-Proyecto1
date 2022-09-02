@@ -33,6 +33,4 @@ public class Habilidades
     {
         return conseguido;
     }
-  
-    
 }

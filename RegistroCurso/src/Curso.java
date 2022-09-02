@@ -40,6 +40,10 @@ public class Curso
     {
         return nombre;
     }
+    public ArrayList<String> getNombreHabilidades()
+    {
+    	return nombreHabilidades;
+    }
     
     //Setters
     public void setNombre(String nombre)
@@ -56,6 +60,7 @@ public class Curso
     }
     
     // Métodos (funciones)
+    /*para agrergar un estudiante con los datos separados, puede que no queramos esto*/
     public void agregarEstudiante(String nombre, int run, ArrayList<Boolean> habilidades)
     {
     	Alumno nuevo = new Alumno();
@@ -64,6 +69,8 @@ public class Curso
     	nuevo.setHabilidades(habilidades);
     	this.alumnos.put(run, nuevo);
     }
+    
+    /*para cuando se quiera agregar un objeto estudiante al hashtable*/
     public void agregarEstudiante(Alumno estudiante)
     {
     	System.out.println("Nombre: " + estudiante.getNombre() + "\nRut: "+estudiante.getRUN()+"\nEstado Habilidades: ");
@@ -72,11 +79,14 @@ public class Curso
     	this.alumnos.put(estudiante.getRUN(), estudiante);
     }
     
+    /*para retornar un estudiante del hashtable cuando se le da un rut*/
+    /*lo podríamos usar para alterar datos de un estudiante específico, requiere experimentación*/
     public Alumno buscarEstudiante(int run)
     {
     	return this.alumnos.get(run);
     }
     
+    /*cuando se quiera mostrar los datos de un estudiante buscándolo por rut*/
     public void mostrarDatosEstudiante (int run)
     {
     	Alumno estudiante = this.alumnos.get(run);
@@ -97,6 +107,7 @@ public class Curso
 		this.nombreHabilidades = nombreHabilidadesTemp;
     }
     
+    /*importa un estudiante de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
     public void importarEstudiante (String[] textoSeparado, int posInicial)
     {
     	Alumno alumnoTemp = new Alumno();
@@ -116,5 +127,4 @@ public class Curso
 		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
     }
     /*igual funciÃ³n para leer de un .txt???*/
-   
 }

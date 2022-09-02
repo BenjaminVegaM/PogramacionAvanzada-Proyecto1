@@ -65,6 +65,7 @@ public class Alumno
     //toggleHabilidad -> cambie una habilidad i entre True y False
     
     //funciones
+    /*para mostrar el estado de las habilidades de un estudiante*/
     public void mostrarEstadoHabilidades()
     {
     	//System.out.print("El estado de las habilidades es: ");
@@ -74,6 +75,7 @@ public class Alumno
     	}
     }
     
+    /*muestra el nombre y el rut de un estudiante*/
     public void mostrarDatos()
     {
     	System.out.println("\nNombre: "+ this.nombre);
