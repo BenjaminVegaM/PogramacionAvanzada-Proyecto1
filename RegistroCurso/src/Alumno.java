@@ -15,8 +15,8 @@ public class Alumno
 {
     private String nombre;
     private int run;            /*asegurarse que el rut sea válido, pero que no rompa con el proceso de agregar alumnos*/
-    private ArrayList<Boolean> habilidades;
-    /*lo de las habilidades, se supone que serán listas????????*/
+    //private ArrayList<Boolean> habilidades;
+    private ArrayList<Habilidades> habilidades;
     /*numero de habilidades aprendidas y numero de habilidades requeridas*/
     
     /*igual poner asignaturas para ver cuantas se van a aprovar, o tipo que asignaturas tengan las habiliades dentro*/
@@ -44,7 +44,7 @@ public class Alumno
     {
         return run;
     }
-    public ArrayList<Boolean> getHabilidades() 
+    public ArrayList<Habilidades> getHabilidades() 
     {
         return habilidades;
     } 
@@ -58,7 +58,7 @@ public class Alumno
     {
         this.run = run;
     }
-    public void setHabilidades(ArrayList<Boolean> habilidades)
+    public void setHabilidades(ArrayList<Habilidades> habilidades)
     {
         this.habilidades = habilidades;
     }
@@ -66,12 +66,12 @@ public class Alumno
     
     //funciones
     /*para mostrar el estado de las habilidades de un estudiante*/
-    public void mostrarEstadoHabilidades()
+    public void mostrarHabilidades()
     {
     	//System.out.print("El estado de las habilidades es: ");
     	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
     	{
-    		System.out.print(this.habilidades.get(index)+" ");
+    		System.out.println(this.habilidades.get(index).getNombre()+": "+ this.habilidades.get(index).getEstado());
     	}
     	
     	System.out.println("\n");

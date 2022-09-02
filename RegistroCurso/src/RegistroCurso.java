@@ -23,7 +23,7 @@ public class RegistroCurso
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     	//hay que pedirle al usuario la dirección
     	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA WEA SE CAE*/
-		File file = new File("D:\\Programación Avanzada (2241-1)\\PogramacionAvanzada-Proyecto1\\RegistroCurso\\src\\curso1.txt");
+		File file = new File(".\\src\\curso1.txt");
 		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
 		String lineText = null;
 		
@@ -57,6 +57,8 @@ public class RegistroCurso
             inputUsuario = lector.readLine();
             /*igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo*/
             opcion = Integer.parseInt(inputUsuario);
+            
+            System.out.println("Miku dayo no es real");
             
             switch (opcion)
             {
@@ -97,6 +99,7 @@ public class RegistroCurso
                 /*le pide el nombre del curso y luego busca para ver si esta, si se encuentra, intenta importar el estudiante*/
                 /*si fuera una lista sería más rápido ┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴*/
                 case 2:
+                	/*podríamos cambiar esto para que sea una wea de objeto y tal*/
                     System.out.println("Agregar estudiante a un curso");
                     System.out.println("Ingrese el nombre del curso al que quiere agregar este estudiante: ");
                     inputUsuario = lector.readLine();

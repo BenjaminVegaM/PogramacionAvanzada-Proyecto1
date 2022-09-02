@@ -12,16 +12,16 @@ public class Habilidades
 {
     private String nombre;
     /*le queremos poner nombre de asignatura???*/
-    private boolean conseguido;
+    private boolean estado;
 
     /*constructores: igual lo cambiamos luego*/
-    public Habilidades(String nombre) 
+    public void setNombre(String nombre) 
     {
         this.nombre = nombre;
     }
-    public Habilidades(boolean conseguido) 
+    public void setEstado(boolean conseguido) 
     {
-        this.conseguido = conseguido;
+        this.estado = conseguido;
     }
 
     /*getters*/
@@ -29,8 +29,8 @@ public class Habilidades
     {
         return nombre;
     }
-    public boolean isConseguido() 
+    public boolean getEstado() 
     {
-        return conseguido;
+        return estado;
     }
 }
