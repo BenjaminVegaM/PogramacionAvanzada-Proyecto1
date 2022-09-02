@@ -16,13 +16,13 @@ public class RegistroCurso
     public static void main (String arg[]) throws IOException 
     {
         /*cosas*/
-        /* revisar que las mierdas estén bien
+        /* revisar que las cosas estén bien
         * que todo sea en un menú para que se escoja lo que se quiere hacer
         */
     	System.out.println("┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴");
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     	//hay que pedirle al usuario la dirección
-    	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA WEA SE CAE*/
+    	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA APLICACION SE CAE*/
 		File file = new File(".\\src\\curso1.txt");
 		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
 		String lineText = null;
@@ -31,9 +31,9 @@ public class RegistroCurso
         String inputUsuario;
         Boolean encontrado = false;
         
-        int espacioLinea, plibre, capacidadCursos, cantHabilidades;
+        int espacioLinea, plibre, capacidadCursos; // cantHabilidades  aun no esta en uso
         capacidadCursos = 5;
-        //el nombre plibre me parece una mierda
+        //el nombre plibre me parece una horrible
         plibre = 0;
         //igual esto debería ser una lista
         Curso[] cursos = new Curso[capacidadCursos];
@@ -41,10 +41,7 @@ public class RegistroCurso
         // MENU
         while (opcion != 0)
         {
-        	/* Sabes que estaría guapo? poner un arte ASCII de una mona china
-        	 * confía en mi que saldrá bien, que
-        	 * apenas nos va a juzgar el profe, tu tranquilo
-        	 * */
+        	
             System.out.println("Seleccione lo que quiere hacer:");
             System.out.println("1. Importar Curso a través de un .txt");
             System.out.println("2. Agregar Estudiante a un curso específico");

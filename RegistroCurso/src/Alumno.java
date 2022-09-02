@@ -69,9 +69,19 @@ public class Alumno
     public void mostrarHabilidades()
     {
     	//System.out.print("El estado de las habilidades es: ");
+    	String estadoHab = "a";
     	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
     	{
-    		System.out.println(this.habilidades.get(index).getNombre()+": "+ this.habilidades.get(index).getEstado());
+    		if  (this.habilidades.get(index).getEstado()== true)
+			{
+				estadoHab = "conseguido";
+    		}
+    		else 
+    		{
+    			estadoHab = "pendiente";
+    		}
+ 
+    		System.out.println(this.habilidades.get(index).getNombre()+": "+ estadoHab);
     	}
     	
     	System.out.println("\n");
