@@ -17,6 +17,7 @@ public class Curso
    private ArrayList<String> nombreHabilidades;
    private Hashtable<Integer,Alumno> alumnos;
    private int cantAlumnos;
+   //private int cantHabilidades;
 
     /*constructores: igual lo cambiamos luego*/
     public Curso() 
@@ -120,11 +121,18 @@ public class Curso
 		alumnoTemp.setHabilidades(habilidadesTemp);
 		alumnoTemp.setNombre(textoSeparado[0]);
 		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+
+		//se asegura que el rut sea válido, el proceso se corta en caso de no ser así
+		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+		{
+			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
+			return;
+		}
 		
 		alumnoTemp.mostrarDatos();
 		alumnoTemp.mostrarEstadoHabilidades();
 		
 		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
+		System.out.println("Importación realizada con éxito\n");
     }
-    /*igual funciÃ³n para leer de un .txt???*/
 }

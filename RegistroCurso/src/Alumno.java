@@ -73,6 +73,8 @@ public class Alumno
     	{
     		System.out.print(this.habilidades.get(index)+" ");
     	}
+    	
+    	System.out.println("\n");
     }
     
     /*muestra el nombre y el rut de un estudiante*/
@@ -81,6 +83,4 @@ public class Alumno
     	System.out.println("\nNombre: "+ this.nombre);
     	System.out.println("Rut: "+ this.run);
     }
-    
-    
 }

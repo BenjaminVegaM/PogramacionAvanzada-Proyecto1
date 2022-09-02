@@ -19,37 +19,48 @@ public class RegistroCurso
         /* revisar que las mierdas estén bien
         * que todo sea en un menú para que se escoja lo que se quiere hacer
         */
+    	System.out.println("┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴");
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     	//hay que pedirle al usuario la dirección
+    	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA WEA SE CAE*/
 		File file = new File("D:\\Programación Avanzada (2241-1)\\PogramacionAvanzada-Proyecto1\\RegistroCurso\\src\\curso1.txt");
 		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
 		String lineText = null;
 		
         int opcion = -1;
         String inputUsuario;
+        Boolean encontrado = false;
         
         int espacioLinea, plibre, capacidadCursos, cantHabilidades;
         capacidadCursos = 5;
+        //el nombre plibre me parece una mierda
         plibre = 0;
+        //igual esto debería ser una lista
         Curso[] cursos = new Curso[capacidadCursos];
         
         // MENU
         while (opcion != 0)
         {
+        	/* Sabes que estaría guapo? poner un arte ASCII de una mona china
+        	 * confía en mi que saldrá bien, que
+        	 * apenas nos va a juzgar el profe, tu tranquilo
+        	 * */
             System.out.println("Seleccione lo que quiere hacer:");
             System.out.println("1. Importar Curso a través de un .txt");
-            System.out.println("2. b");
-            System.out.println("3. c");
+            System.out.println("2. Agregar Estudiante a un curso específico");
+            System.out.println("3. Buscar Estudiante en un curso por RUT");
             System.out.println("4. Reimu");
             System.out.println("5. ah");
             System.out.println("0. Salir");
             
             /*ingresar cosas*/
             inputUsuario = lector.readLine();
+            /*igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo*/
             opcion = Integer.parseInt(inputUsuario);
             
             switch (opcion)
             {
+            	//importar un curso desde un .txt
                 case 1:
                 {
                 	System.out.println("Leer txt");
@@ -82,11 +93,74 @@ public class RegistroCurso
                 		break;
                 	}
                 }
+                //agregar estudiante a un curso
+                /*le pide el nombre del curso y luego busca para ver si esta, si se encuentra, intenta importar el estudiante*/
+                /*si fuera una lista sería más rápido ┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴*/
                 case 2:
-                    System.out.println("se ha escogido 2");
+                    System.out.println("Agregar estudiante a un curso");
+                    System.out.println("Ingrese el nombre del curso al que quiere agregar este estudiante: ");
+                    inputUsuario = lector.readLine();
+                    for (int cont = 0; cont < plibre ; cont++)
+                    {
+                    	System.out.println("se compara "+ inputUsuario + " con "+cursos[cont].getNombreCurso());
+                    	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
+                    	{
+                    		System.out.println("Se ha encontrado el curso");
+                    		System.out.println("Ingrese los datos del estudiante separados por comas:");
+                    		
+                            inputUsuario = lector.readLine();
+                            String[] lineaLeida = inputUsuario.split(",");
+                            cursos[cont].importarEstudiante(lineaLeida, 2);
+                            
+                    		encontrado = true;
+                    		break;
+                    	}
+                    }
+                    
+                    if (encontrado == false)
+                    {
+                    	//igual podría crear otra variable para pedirle al usuario si quiere ir al menú o lo quiere intentar de nuevo
+                    	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
+                    	break;
+                    }
+                    encontrado = false;
                     break;
                 case 3:
-                    System.out.println("se ha escogido 3");
+                	//se busca que exista el curso, luego revisa si el rut recibido existe en el hashtable
+                    System.out.println("Buscar estudiante en un curso");
+                    System.out.println("Ingrese el nombre del curso en el que quiere hacer la búsqueda: ");
+                    inputUsuario = lector.readLine();
+                    for (int cont = 0; cont < plibre ; cont++)
+                    {
+                    	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
+                    	{
+                    		System.out.println("Se ha encontrado el curso");
+                    		System.out.println("Ingrese el rut del estudiante: ");
+                    		
+                            inputUsuario = lector.readLine();
+                            Alumno alumnoBuscado = cursos[cont].buscarEstudiante(Integer.parseInt(inputUsuario));
+                            if (alumnoBuscado == null)
+                            {
+                            	System.out.println("No se ha encontrado el alumno");
+                            }
+                            else
+                            {
+                            	//igual... deberíamos mostrar sus datos
+                            	System.out.println("Se ha encontrado el alumno");
+                            }
+                            
+                    		encontrado = true;
+                    		break;
+                    	}
+                    }
+                    
+                    if (encontrado == false)
+                    {
+                    	//igual podría crear otra variable para pedirle al usuario si quiere ir al menú o lo quiere intentar de nuevo
+                    	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
+                    	break;
+                    }
+                    encontrado = false;
                     break;
                 case 4:
                     System.out.println("se ha escogido Reimu");
