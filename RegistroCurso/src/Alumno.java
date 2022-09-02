@@ -7,8 +7,9 @@
 import java.util.*;
 
 /**
- *
- * @author pablo
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
  */
 public class Alumno 
 {
@@ -62,4 +63,22 @@ public class Alumno
         this.habilidades = habilidades;
     }
     //toggleHabilidad -> cambie una habilidad i entre True y False
+    
+    //funciones
+    public void mostrarEstadoHabilidades()
+    {
+    	//System.out.print("El estado de las habilidades es: ");
+    	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
+    	{
+    		System.out.print(this.habilidades.get(index)+" ");
+    	}
+    }
+    
+    public void mostrarDatos()
+    {
+    	System.out.println("\nNombre: "+ this.nombre);
+    	System.out.println("Rut: "+ this.run);
+    }
+    
+    
 }

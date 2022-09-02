@@ -7,8 +7,9 @@
 import java.io.*;
 import java.util.*;
 /**
- *
- * @author pablo
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
  */
 public class RegistroCurso 
 {
@@ -19,17 +20,18 @@ public class RegistroCurso
         * que todo sea en un menú para que se escoja lo que se quiere hacer
         */
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-		File file = new File("C:\\Users\\Kai\\eclipse-workspace\\Projecto 1\\PogramacionAvanzada-Proyecto1\\RegistroCurso\\src\\curso1.txt");
+    	//hay que pedirle al usuario la dirección
+		File file = new File("D:\\Programación Avanzada (2241-1)\\PogramacionAvanzada-Proyecto1\\RegistroCurso\\src\\curso1.txt");
 		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
 		String lineText = null;
 		
         int opcion = -1;
         String inputUsuario;
         
-        int i, plibre, cantidad, cantHabilidades;
-        cantidad = 5;
+        int espacioLinea, plibre, capacidadCursos, cantHabilidades;
+        capacidadCursos = 5;
         plibre = 0;
-        Curso[] cursos = new Curso[cantidad];
+        Curso[] cursos = new Curso[capacidadCursos];
         
         // MENU
         while (opcion != 0)
@@ -51,56 +53,32 @@ public class RegistroCurso
                 case 1:
                 {
                 	System.out.println("Leer txt");
-                	
-                	if(plibre < cantidad)
+                	/*igual podríamos hacer la mitad de esto dentro del mismo objeto curso... yo solo digo... podría ser posible*/
+                	if(plibre < capacidadCursos)
                 	{
-                		//Se lee la primera linea, corresponde a los datos del curso
+                		/*se crea el curso y se le pone el nombre*/
                 		lineText = lectorTxt.readLine();
-                		//Divide la linea en secciones
                 		String[] lineaLeida = lineText.split(",");
                 		
                 		cursos[plibre] = new Curso();
                 		cursos[plibre].setNombre(lineaLeida[0]);
+                		System.out.println("\nel nombre del curso es: " + cursos[plibre].getNombreCurso());
                 		
-                		cantHabilidades = 0;
-                		i = 1;
-                		ArrayList<String> nombreHabilidades = new ArrayList<>();
-                		while(i < lineaLeida[i].length())
-                		{
-                			System.out.println(lineaLeida[i]);
-                			nombreHabilidades.add(lineaLeida[i]);
-                			cantHabilidades++;
-                			i++;
-                		}
-                		//Settea el arreglo con los nombres de las habilidades
-                		cursos[plibre].setNombreHabilidades(nombreHabilidades);
+                		/*se importan las habilidades desde la línea de texto empezando desde la posición 1*/
+                		/*igual ese 1 debería ser una constante*/
+                		espacioLinea = 1;
+                		cursos[plibre].importarHabilidades(lineaLeida, espacioLinea);
                 		
-                		// Leer estudiantes (segunda linea en adelante)
-                		
-                		//Mientras la linea leída tenga info del estudiante
+                		/*Se obtienen los estudiantes y se colocan en el arreglo que les corresponde*/
                 		while((lineText = lectorTxt.readLine()) != null)
                 		{
-                			//Divide la linea en secciones
                     		lineaLeida = lineText.split(",");
-                    		
-                    		i = 3;
-                    		//Lee los True y False de las habilidades
-                    		while(i < lineaLeida[i].length())
-                    		{
-                    			ArrayList<Boolean> habilidades = new ArrayList<>();
-                    			habilidades.add(Boolean.parseBoolean(lineaLeida[i]));
-                    			i++;
-                    		}
-                    		cursos[plibre].agregarEstudiante(lineaLeida[0], cantHabilidades, null);
+                    		espacioLinea = 2;
+                    		cursos[plibre].importarEstudiante(lineaLeida, espacioLinea);
                 		}
-
-                		/*while((lineText = lectorTxt.readLine()) != null && plibre < cantidad)
-						{
-							String[] lineaLeida = lineText.split(",");
-							plibre+=1;
-						}*/
+                		
                 		plibre++;
-                		System.out.println("Listo!");
+                		System.out.println("\nListo!");
                 		break;
                 	}
                 }
@@ -126,10 +104,6 @@ public class RegistroCurso
             }
             
         }
-        
-        
-        
-        
         
     }
 }

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 /**
- *
- * @author pablo
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
  */
 public class Habilidades 
 {
