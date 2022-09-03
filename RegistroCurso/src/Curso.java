@@ -64,24 +64,24 @@ public class Curso
     /*para cuando se quiera agregar un objeto alumno al hashtable*/
     public void agregarAlumno (Alumno alumno)
     {
-    	System.out.println("Nombre: " + alumno.getNombre() + "\nRut: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
     	alumno.mostrarHabilidades();
     	System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
     }
     
-    /*para retornar un alumno del hashtable cuando se le da un rut*/
+    /*para retornar un alumno del hashtable cuando se le da un run*/
     /*lo podríamos usar para alterar datos de un alumno específico, requiere experimentación*/
     public Alumno buscarAlumno(int run)
     {
     	return this.alumnos.get(run);
     }
     
-    /*cuando se quiera mostrar los datos de un alumno buscándolo por rut*/
+    /*cuando se quiera mostrar los datos de un alumno buscándolo por run*/
     public void mostrarDatosAlumno (int run)
     {
     	Alumno alumno = this.alumnos.get(run);
-    	System.out.println("Nombre: " + alumno.getNombre() + "\nRut: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
     	alumno.mostrarHabilidades();//cambiar para Habilidades.java
     }
     
@@ -106,7 +106,7 @@ public class Curso
 		alumnoTemp.setNombre(textoSeparado[0]);
 		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
 
-		//se asegura que el rut sea válido, el proceso se corta en caso de no ser así
+		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
 		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
 		{
 			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
@@ -138,7 +138,7 @@ public class Curso
         alumnoTemp.setNombre(textoSeparado[0]);
         alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
 
-        //se asegura que el rut sea válido, el proceso se corta en caso de no ser así
+        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
         if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
         {
             System.out.println("RUN inválido o repetido, cancelando la importación del alumno");
