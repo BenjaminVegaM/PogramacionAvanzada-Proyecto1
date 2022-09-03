@@ -91,6 +91,6 @@ public class Alumno
     public void mostrarDatos()
     {
     	System.out.println("\nNombre: "+ this.nombre);
-    	System.out.println("Rut: "+ this.run);
+    	System.out.println("RUN: "+ this.run);
     }
 }

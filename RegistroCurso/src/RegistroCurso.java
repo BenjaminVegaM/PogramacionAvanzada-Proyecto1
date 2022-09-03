@@ -19,7 +19,7 @@ public class RegistroCurso
         /* revisar que las cosas estén bien
         * que todo sea en un menú para que se escoja lo que se quiere hacer
         */
-    	System.out.println("┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴");
+    	//System.out.println("┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴");
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     	//hay que pedirle al usuario la dirección
     	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA APLICACION SE CAE*/
@@ -31,7 +31,7 @@ public class RegistroCurso
         String inputUsuario;
         Boolean encontrado = false;
         
-        int espacioLinea, plibre, capacidadCursos; // cantHabilidades  aun no esta en uso
+        int plibre, capacidadCursos; // cantHabilidades  aun no esta en uso espacioLinea sin uso
         capacidadCursos = 5;
         //el nombre plibre me parece una horrible
         plibre = 0;
@@ -45,9 +45,7 @@ public class RegistroCurso
             System.out.println("Seleccione lo que quiere hacer:");
             System.out.println("1. Importar Curso a través de un .txt");
             System.out.println("2. Agregar Estudiante a un curso específico");
-            System.out.println("3. Buscar Estudiante en un curso por RUT");
-            System.out.println("4. Reimu");
-            System.out.println("5. ah");
+            System.out.println("3. Buscar Estudiante en un curso por RUN");
             System.out.println("0. Salir");
             
             /*ingresar cosas*/
@@ -55,7 +53,7 @@ public class RegistroCurso
             /*igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo*/
             opcion = Integer.parseInt(inputUsuario);
             
-            System.out.println("Miku dayo no es real");
+            
             
             switch (opcion)
             {
@@ -76,15 +74,14 @@ public class RegistroCurso
                 		
                 		/*se importan las habilidades desde la línea de texto empezando desde la posición 1*/
                 		/*igual ese 1 debería ser una constante*/
-                		espacioLinea = 1;
-                		cursos[plibre].importarHabilidades(lineaLeida, espacioLinea);
+                		//espacioLinea = 1;
+                		cursos[plibre].importarHabilidades(lineaLeida, 1);
                 		
                 		/*Se obtienen los estudiantes y se colocan en el arreglo que les corresponde*/
                 		while((lineText = lectorTxt.readLine()) != null)
                 		{
                     		lineaLeida = lineText.split(",");
-                    		espacioLinea = 2;
-                    		cursos[plibre].importarEstudiante(lineaLeida, espacioLinea);
+                    		cursos[plibre].importarEstudiante(lineaLeida, 2);
                 		}
                 		
                 		plibre++;
@@ -135,7 +132,7 @@ public class RegistroCurso
                     	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
                     	{
                     		System.out.println("Se ha encontrado el curso");
-                    		System.out.println("Ingrese el rut del estudiante: ");
+                    		System.out.println("Ingrese el RUN del estudiante: ");
                     		
                             inputUsuario = lector.readLine();
                             Alumno alumnoBuscado = cursos[cont].buscarEstudiante(Integer.parseInt(inputUsuario));
@@ -147,6 +144,8 @@ public class RegistroCurso
                             {
                             	//igual... deberíamos mostrar sus datos
                             	System.out.println("Se ha encontrado el alumno");
+                            	int runtesteo = alumnoBuscado.getRUN();
+                            	cursos[cont].mostrarDatosEstudiante(runtesteo);
                             }
                             
                     		encontrado = true;

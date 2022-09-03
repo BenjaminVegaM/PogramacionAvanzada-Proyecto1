@@ -93,11 +93,12 @@ public class Curso
     {
     	Alumno estudiante = this.alumnos.get(run);
     	System.out.println("Nombre: " + estudiante.getNombre() + "\nRut: "+estudiante.getRUN()+"\nEstado Habilidades: ");
-    	//cambiar para Habilidades.java
+    	estudiante.mostrarHabilidades();//cambiar para Habilidades.java
     }
     
     //funciones de importacion
     /*cuidado con esto que igual pasa algo raro con la memoria*/
+    //CAMBIAR A HABILIDADES!!!!
     public void importarHabilidades (String[] textoSeparado, int posInicial)
     {
 		ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
@@ -108,6 +109,17 @@ public class Curso
 			posInicial += 1;
 		}
 		this.nombreHabilidades = nombreHabilidadesTemp;
+    }
+    public void importarHabilidades (int posInicial, String[] textoSeparado)
+    {
+        ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
+        while (posInicial < textoSeparado.length)
+        {
+            System.out.println("se ha ingresado la habilidad: " + textoSeparado[posInicial]);
+            nombreHabilidadesTemp.add(textoSeparado[posInicial]);
+            posInicial += 1;
+        }
+        this.nombreHabilidades = nombreHabilidadesTemp;
     }
     
     /*importa un estudiante de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
@@ -141,5 +153,37 @@ public class Curso
 		
 		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
 		System.out.println("Importación realizada con éxito\n");
+    }
+    //parametros de entrada invertido
+    public void importarEstudiante (int posInicial, String[] textoSeparado)
+    {
+        Alumno alumnoTemp = new Alumno();
+        ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
+        int cont = 0;
+        while(posInicial < textoSeparado.length)
+        {
+            Habilidades habTemp = new Habilidades();
+            habTemp.setNombre(this.nombreHabilidades.get(cont));
+            habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+            habilidadesTemp.add(habTemp);
+            posInicial += 1;
+            cont += 1;
+        }
+        alumnoTemp.setHabilidades(habilidadesTemp);
+        alumnoTemp.setNombre(textoSeparado[0]);
+        alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+
+        //se asegura que el rut sea válido, el proceso se corta en caso de no ser así
+        if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+        {
+            System.out.println("RUN inválido o repetido, cancelando la importación del alumno");
+            return;
+        }
+        
+        alumnoTemp.mostrarDatos();
+        alumnoTemp.mostrarHabilidades();
+        
+        this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
+        System.out.println("Importación realizada con éxito\n");
     }
 }
