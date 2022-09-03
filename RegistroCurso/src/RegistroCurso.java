@@ -42,10 +42,11 @@ public class RegistroCurso
         while (opcion != 0)
         {
         	
-            System.out.println("Seleccione lo que quiere hacer:");
+        	System.out.println("Seleccione lo que quiere hacer:");
             System.out.println("1. Importar Curso a través de un .txt");
-            System.out.println("2. Agregar Estudiante a un curso específico");
-            System.out.println("3. Buscar Estudiante en un curso por RUN");
+            System.out.println("2. Agregar un Alumno a un Curso");
+            System.out.println("3. Buscar un Alumno por RUN");
+            System.out.println("4. Mostrar todos los Alumnos de un Curso");
             System.out.println("0. Salir");
             
             /*ingresar cosas*/
@@ -142,7 +143,6 @@ public class RegistroCurso
                             }
                             else
                             {
-                            	//igual... deberíamos mostrar sus datos
                             	System.out.println("Se ha encontrado el alumno");
                             	int runtesteo = alumnoBuscado.getRUN();
                             	cursos[cont].mostrarDatosEstudiante(runtesteo);
@@ -162,10 +162,31 @@ public class RegistroCurso
                     encontrado = false;
                     break;
                 case 4:
-                    System.out.println("se ha escogido Reimu");
-                    break;
-                case 5:
-                    System.out.println("se ha escogido ah");
+                    System.out.println("se ha escogido Mostrar todos los Alumnos de un Curso");
+                    //se busca que exista el curso, luego revisa si el rut recibido existe en el hashtable
+                    System.out.println("Ingrese el nombre del curso que quiere mostrar: ");
+                    inputUsuario = lector.readLine();
+                    for (int cont = 0; cont < plibre ; cont++)
+                    {
+                    	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
+                    	{
+                    		System.out.println("Se ha encontrado el curso");
+                            Enumeration<Integer> enu = cursos[cont].getAlumnos().keys();
+                            while (enu.hasMoreElements()) {
+                                cursos[cont].mostrarDatosEstudiante(enu.nextElement());
+                            }
+                    		encontrado = true;
+                    		break;
+                    	}
+                    }
+                    
+                    if (encontrado == false)
+                    {
+                    	//igual podría crear otra variable para pedirle al usuario si quiere ir al menú o lo quiere intentar de nuevo
+                    	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
+                    	break;
+                    }
+                    encontrado = false;
                     break;
                 case 0:
                     System.out.println("se ha escogido Salir");

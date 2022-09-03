@@ -74,11 +74,11 @@ public class Alumno
     	{
     		if  (this.habilidades.get(index).getEstado()== true)
 			{
-				estadoHab = "conseguido";
+				estadoHab = "Conseguido";
     		}
     		else 
     		{
-    			estadoHab = "pendiente";
+    			estadoHab = "Pendiente";
     		}
  
     		System.out.println(this.habilidades.get(index).getNombre()+": "+ estadoHab);
