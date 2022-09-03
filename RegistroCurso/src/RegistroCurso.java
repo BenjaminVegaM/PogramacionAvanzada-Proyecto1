@@ -236,6 +236,7 @@ public class RegistroCurso
                     System.out.println("Se ha escogido Mostrar todos los Alumnos de un Curso");
                     //se busca que exista el curso, luego revisa si el run recibido existe en el hashtable
                     System.out.println("Ingrese el nombre del curso que quiere mostrar: ");
+                    encontrado = false;
                     inputUsuario = lector.readLine();
                     for (int cont = 0; cont < plibre ; cont++)
                     {
