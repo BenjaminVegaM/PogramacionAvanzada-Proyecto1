@@ -14,8 +14,6 @@ import java.util.*;
 public class Curso 
 {
    private String nombre;
-   private ArrayList<String> nombreHabilidades; /*quitar luego que no se necesita... o si?????????*/
-   /*guardad cantidad de habilidades?????*/
    private Hashtable<Integer,Alumno> alumnos;
    private int cantAlumnos;
    //private int cantHabilidades;
@@ -25,7 +23,6 @@ public class Curso
     {
         this.nombre = "Nombre";
         this.alumnos = new Hashtable<>();
-        this.nombreHabilidades = new ArrayList<>();
         this.cantAlumnos = 0;
     }
 
@@ -42,10 +39,6 @@ public class Curso
     {
         return nombre;
     }
-    public ArrayList<String> getNombreHabilidades()
-    {
-    	return nombreHabilidades;
-    }
     
     //Setters
     public void setNombre (String nombre)
@@ -56,14 +49,10 @@ public class Curso
     {
     	this.cantAlumnos = cantidad;
     }
-    public void setNombreHabilidades (ArrayList<String> nombreHabilidades)
-    {
-    	this.nombreHabilidades = nombreHabilidades;
-    }
     
     // Métodos (funciones)
-    /*para agrergar un estudiante con los datos separados, puede que no queramos esto*/
-    public void agregarEstudiante (String nombre, int run, ArrayList<Habilidades> habilidades)
+    /*para agrergar un alumno con los datos separados, puede que no queramos esto*/
+    public void agregarAlumno (String nombre, int run, ArrayList<Habilidades> habilidades)
     {
     	Alumno nuevo = new Alumno();
     	nuevo.setNombre(nombre);
@@ -72,58 +61,34 @@ public class Curso
     	this.alumnos.put(run, nuevo);
     }
     
-    /*para cuando se quiera agregar un objeto estudiante al hashtable*/
-    public void agregarEstudiante (Alumno estudiante)
+    /*para cuando se quiera agregar un objeto alumno al hashtable*/
+    public void agregarAlumno (Alumno alumno)
     {
-    	System.out.println("Nombre: " + estudiante.getNombre() + "\nRut: "+estudiante.getRUN()+"\nEstado Habilidades: ");
-    	estudiante.mostrarHabilidades();
+    	System.out.println("Nombre: " + alumno.getNombre() + "\nRut: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	alumno.mostrarHabilidades();
     	System.out.println("\n");
-    	this.alumnos.put(estudiante.getRUN(), estudiante);
+    	this.alumnos.put(alumno.getRUN(), alumno);
     }
     
-    /*para retornar un estudiante del hashtable cuando se le da un rut*/
-    /*lo podríamos usar para alterar datos de un estudiante específico, requiere experimentación*/
-    public Alumno buscarEstudiante(int run)
+    /*para retornar un alumno del hashtable cuando se le da un rut*/
+    /*lo podríamos usar para alterar datos de un alumno específico, requiere experimentación*/
+    public Alumno buscarAlumno(int run)
     {
     	return this.alumnos.get(run);
     }
     
-    /*cuando se quiera mostrar los datos de un estudiante buscándolo por rut*/
-    public void mostrarDatosEstudiante (int run)
+    /*cuando se quiera mostrar los datos de un alumno buscándolo por rut*/
+    public void mostrarDatosAlumno (int run)
     {
-    	Alumno estudiante = this.alumnos.get(run);
-    	System.out.println("Nombre: " + estudiante.getNombre() + "\nRut: "+estudiante.getRUN()+"\nEstado Habilidades: ");
-    	estudiante.mostrarHabilidades();//cambiar para Habilidades.java
+    	Alumno alumno = this.alumnos.get(run);
+    	System.out.println("Nombre: " + alumno.getNombre() + "\nRut: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	alumno.mostrarHabilidades();//cambiar para Habilidades.java
     }
     
     //funciones de importacion
-    /*cuidado con esto que igual pasa algo raro con la memoria*/
-    //CAMBIAR A HABILIDADES!!!!
-    public void importarHabilidades (String[] textoSeparado, int posInicial)
-    {
-		ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
-		while (posInicial < textoSeparado.length)
-		{
-			System.out.println("se ha ingresado la habilidad: " + textoSeparado[posInicial]);
-			nombreHabilidadesTemp.add(textoSeparado[posInicial]);
-			posInicial += 1;
-		}
-		this.nombreHabilidades = nombreHabilidadesTemp;
-    }
-    public void importarHabilidades (int posInicial, String[] textoSeparado)
-    {
-        ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
-        while (posInicial < textoSeparado.length)
-        {
-            System.out.println("se ha ingresado la habilidad: " + textoSeparado[posInicial]);
-            nombreHabilidadesTemp.add(textoSeparado[posInicial]);
-            posInicial += 1;
-        }
-        this.nombreHabilidades = nombreHabilidadesTemp;
-    }
     
-    /*importa un estudiante de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
-    public void importarEstudiante (String[] textoSeparado, int posInicial)
+    /*importa un alumno de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
+    public void importarAlumno (String[] textoSeparado, int posInicial, ArrayList<String> nombreHabilidades)
     {
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
@@ -131,7 +96,7 @@ public class Curso
     	while(posInicial < textoSeparado.length)
 		{
     		Habilidades habTemp = new Habilidades();
-    		habTemp.setNombre(this.nombreHabilidades.get(cont));
+    		habTemp.setNombre(nombreHabilidades.get(cont));
     		habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
     		habilidadesTemp.add(habTemp);
 			posInicial += 1;
@@ -155,7 +120,7 @@ public class Curso
 		System.out.println("Importación realizada con éxito\n");
     }
     //parametros de entrada invertido
-    public void importarEstudiante (int posInicial, String[] textoSeparado)
+    public void importarAlumno (int posInicial, String[] textoSeparado, ArrayList<String> nombreHabilidades)
     {
         Alumno alumnoTemp = new Alumno();
         ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
@@ -163,7 +128,7 @@ public class Curso
         while(posInicial < textoSeparado.length)
         {
             Habilidades habTemp = new Habilidades();
-            habTemp.setNombre(this.nombreHabilidades.get(cont));
+            habTemp.setNombre(nombreHabilidades.get(cont));
             habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
             habilidadesTemp.add(habTemp);
             posInicial += 1;

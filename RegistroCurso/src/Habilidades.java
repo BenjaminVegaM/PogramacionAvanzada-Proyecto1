@@ -11,17 +11,15 @@
 public class Habilidades 
 {
     private String nombre;
-    /*le queremos poner nombre de asignatura???*/
     private boolean estado;
+    
+    /*le queremos poner nombre de asignatura???*/
 
     /*constructores: igual lo cambiamos luego*/
-    public void setNombre(String nombre) 
+    public Habilidades()
     {
-        this.nombre = nombre;
-    }
-    public void setEstado(boolean conseguido) 
-    {
-        this.estado = conseguido;
+    	this.nombre = "Habilidad";
+    	this.estado = false;
     }
 
     /*getters*/
@@ -32,5 +30,15 @@ public class Habilidades
     public boolean getEstado() 
     {
         return estado;
+    }
+
+    /*setters*/
+    public void setNombre(String nombre) 
+    {
+        this.nombre = nombre;
+    }
+    public void setEstado(boolean conseguido) 
+    {
+        this.estado = conseguido;
     }
 }

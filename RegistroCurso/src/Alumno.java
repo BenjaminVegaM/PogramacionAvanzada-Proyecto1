@@ -14,9 +14,9 @@ import java.util.*;
 public class Alumno 
 {
     private String nombre;
-    private int run;            /*asegurarse que el rut sea válido, pero que no rompa con el proceso de agregar alumnos*/
-    //private ArrayList<Boolean> habilidades;
+    private int run;           						 /*asegurarse que el run sea válido, pero que no rompa con el proceso de agregar alumnos*/
     private ArrayList<Habilidades> habilidades;
+    
     /*numero de habilidades aprendidas y numero de habilidades requeridas*/
     
     /*igual poner asignaturas para ver cuantas se van a aprovar, o tipo que asignaturas tengan las habiliades dentro*/
@@ -27,9 +27,9 @@ public class Alumno
     {
         this.nombre = "José Antonio";
         this.run = 0;
-        this.habilidades = null;
+        this.habilidades = new ArrayList<>();
     }
-    /*hay que hacer una wea para que los ruts sean válidos
+    /*hay que hacer una wea para que los runs sean válidos
     * revisar casos en los que sean el último dígito sea k
     * (podríamos aplicar la fórmula también)
     * (o podemos no pedir dígito verificador uwu)
@@ -65,14 +65,14 @@ public class Alumno
     //toggleHabilidad -> cambie una habilidad i entre True y False
     
     //funciones
-    /*para mostrar el estado de las habilidades de un estudiante*/
+    /*para mostrar el estado de las habilidades de un alumno*/
     public void mostrarHabilidades()
     {
     	//System.out.print("El estado de las habilidades es: ");
     	String estadoHab = "a";
     	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
     	{
-    		if  (this.habilidades.get(index).getEstado()== true)
+    		if  (this.habilidades.get(index).getEstado() == true)
 			{
 				estadoHab = "Conseguido";
     		}
@@ -87,10 +87,50 @@ public class Alumno
     	System.out.println("\n");
     }
     
-    /*muestra el nombre y el rut de un estudiante*/
+    /*muestra el nombre y el run de un alumno*/
     public void mostrarDatos()
     {
     	System.out.println("\nNombre: "+ this.nombre);
     	System.out.println("RUN: "+ this.run);
+    }
+    public Alumno crearAlumno(String nombre, int run)
+    {
+    	Alumno nuevoAlumno = new Alumno();
+    	this.nombre = nombre;
+    	this.run = run;
+    	return nuevoAlumno;
+    }
+    public Alumno crearAlumno(int run, String nombre)
+    {
+    	Alumno nuevoAlumno = new Alumno();
+    	this.nombre = nombre;
+    	this.run = run;
+    	return nuevoAlumno;
+    }
+    public Alumno crearAlumno(String nombre, int run, ArrayList<Habilidades> habilidades)
+    {
+    	Alumno nuevoAlumno = new Alumno();
+    	this.nombre = nombre;
+    	this.run = run;
+    	this.habilidades = habilidades;
+    	return nuevoAlumno;
+    }
+    public void agregarHabilidad(String nombre, boolean estado)
+    {
+    	Habilidades nuevaHabilidad = new Habilidades();
+    	nuevaHabilidad.setNombre(nombre);
+    	nuevaHabilidad.setEstado(estado);
+    	this.habilidades.add(nuevaHabilidad);
+    }
+    public void agregarHabilidad(boolean estado, String nombre)
+    {
+    	Habilidades nuevaHabilidad = new Habilidades();
+    	nuevaHabilidad.setNombre(nombre);
+    	nuevaHabilidad.setEstado(estado);
+    	this.habilidades.add(nuevaHabilidad);
+    }
+    public void agregarHabilidad(Habilidades nuevaHabilidad)
+    {
+    	this.habilidades.add(nuevaHabilidad);
     }
 }
