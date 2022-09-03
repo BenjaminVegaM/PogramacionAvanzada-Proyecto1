@@ -183,6 +183,7 @@ public class RegistroCurso
                     		nuevaHabilidad.setNombre(lector.readLine());
                     		System.out.println("Escriba el estado de la habilidad (true = aprendida / false = no aprendida)");
                     		nuevaHabilidad.setEstado(Boolean.parseBoolean(lector.readLine()));
+                    		alumnoEncontrado.agregarHabilidad(nuevaHabilidad);
                     		System.out.println("La habilidad a sido agregada con éxito!");
                     		break;
                     	}
