@@ -5,6 +5,7 @@
  */
 
 import java.util.*;
+import java.io.*;
 
 /**
  * @author Benjamín Vega
@@ -16,7 +17,9 @@ public class Curso
    private String nombre;
    private Hashtable<Integer,Alumno> alumnos;
    private int cantAlumnos;
-   //private int cantHabilidades;
+   /*hay que ver si lo usamos o que, porque si no hay algo que no funciona aquí*/
+   //private ArrayList<String> nombreHabilidades;
+   //private int cantHabilidades
 
     /*constructores: igual lo cambiamos luego*/
     public Curso() 
@@ -24,6 +27,7 @@ public class Curso
         this.nombre = "Nombre";
         this.alumnos = new Hashtable<>();
         this.cantAlumnos = 0;
+        //this.nombreHabilidades = new ArrayList<>();
     }
 
     /*getters*/
@@ -151,4 +155,44 @@ public class Curso
         this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
         System.out.println("Importación realizada con éxito\n");
     }
+    
+    /**/
+    public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter,
+    						Enumeration<Integer> enu)
+    {
+    	Alumno alumnoTemp = this.buscarAlumno(enu.nextElement());
+    	ArrayList<Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
+    	
+    	/*asumiendo que las habilidades en todos son iguales se usan los nombres que tenga el primero para la primera linea*/
+    	printWriter.write(this.getNombreCurso());
+    	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+    	{
+    		printWriter.write(",");
+    		printWriter.write(habilidadesTemp.get(contHab).getNombre());
+    	}
+    	printWriter.write("\n");
+    	//esto se podría meter en un procedimiento
+    	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
+    	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+    	{
+    		printWriter.write(",");
+    		printWriter.write(String.valueOf(habilidadesTemp.get(contHab).getEstado()));
+    	}
+    	
+        while (enu.hasMoreElements())
+        {
+        	alumnoTemp = this.buscarAlumno(enu.nextElement());
+        	printWriter.write("\n");
+        	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
+        	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+        	{
+        		printWriter.write(",");
+        		printWriter.write(String.valueOf(habilidadesTemp.get(contHab).getEstado()));
+        	}
+        }
+    }
+    
+    
+    
+    
 }

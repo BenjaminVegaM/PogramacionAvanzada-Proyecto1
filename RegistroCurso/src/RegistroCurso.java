@@ -5,6 +5,7 @@
  */
 
 import java.io.*;
+//import java.io.PrintWriter;
 import java.util.*;
 /**
  * @author Benjamín Vega
@@ -15,13 +16,7 @@ public class RegistroCurso
 {
     public static void main (String arg[]) throws IOException 
     {
-        /*cosas*/
-        /* revisar que las cosas estén bien
-        * que todo sea en un menú para que se escoja lo que se quiere hacer
-        */
-    	//System.out.println("┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴");
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-    	//hay que pedirle al usuario la dirección
     	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA APLICACION SE CAE*/
 		File file = new File(".\\src\\curso1.txt");
 		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
@@ -34,7 +29,6 @@ public class RegistroCurso
         int plibre, capacidadCursos; // cantidad de cursos
         capacidadCursos = 5;
         plibre = 0;
-        //esto debería ser una lista
         Curso[] cursos = new Curso[capacidadCursos];
         
         // MENU
@@ -46,7 +40,7 @@ public class RegistroCurso
             System.out.println("2. Agregar un Alumno a un Curso");
             System.out.println("3. Crear un nuevo Curso");
             System.out.println("4. Agregar una habilidad a un Alumno");
-            System.out.println("5. Buscar un Alumno por RUN");
+            System.out.println("5. Buscar un Alumno por RUT");
             System.out.println("6. Mostrar todos los Alumnos de un Curso");
             System.out.println("0. Salir");
 
@@ -72,8 +66,6 @@ public class RegistroCurso
                 		System.out.println("\nEl nombre del curso es: " + cursos[plibre].getNombreCurso());
                 		
                 		/*Se importan las habilidades desde la línea de texto empezando desde la posición 1*/
-                		
-                		//cursos[plibre].importarHabilidades(lineaLeida, 1);
                 		
                 		ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
                 		int posInicial = 1;
@@ -135,8 +127,8 @@ public class RegistroCurso
                     }
                     encontrado = false;
                     break;
+                /*crear curso*/
                 case 3:
-                	//se busca que exista el curso
                     System.out.println("Crear un nuevo Curso");
                     if(plibre >= cursos.length)
                     {
@@ -165,11 +157,12 @@ public class RegistroCurso
                     	break;
                     }
                 	break;
+                /*añadir habilidad a un alumno*/
                 case 4:
                 	System.out.println("Añadir una nueva habilidad a un Alumno");
                 	
-                	//se busca que exista el curso
-                    System.out.println("Ingrese el RUN del Alumno: ");
+                	//se busca que el alumno ingresado exista
+                    System.out.println("Ingrese el RUT del Alumno: ");
                     inputUsuario = lector.readLine();
                     encontrado = false;
                     for (int cont = 0; cont < plibre ; cont++)
@@ -195,8 +188,9 @@ public class RegistroCurso
                     	break;
                     }
                 	break;
+                /*buscar alumno por RUT*/
                 case 5:
-                	//se busca que exista el curso, luego revisa si el run recibido existe en el hashtable
+                	//se busca que exista el curso, luego revisa si el rut recibido existe en el hashtable
                     System.out.println("Buscar alumno en un curso");
                     System.out.println("Ingrese el nombre del curso en el que quiere hacer la búsqueda: ");
                     inputUsuario = lector.readLine();
@@ -233,6 +227,7 @@ public class RegistroCurso
                     }
                     encontrado = false;
                     break;
+                /*Mostrar todos los alumnos de un curso*/
                 case 6:
                     System.out.println("Se ha escogido Mostrar todos los Alumnos de un Curso");
                     //se busca que exista el curso, luego revisa si el run recibido existe en el hashtable
@@ -245,7 +240,8 @@ public class RegistroCurso
                     	{
                     		System.out.println("Se ha encontrado el curso");
                             Enumeration<Integer> enu = cursos[cont].getAlumnos().keys();
-                            while (enu.hasMoreElements()) {
+                            while (enu.hasMoreElements())
+                            {
                                 cursos[cont].mostrarDatosAlumno(enu.nextElement());
                             }
                     		encontrado = true;
@@ -264,6 +260,24 @@ public class RegistroCurso
                 case 0:
                     System.out.println("se ha escogido Salir");
                     break;
+                case 177013:
+                	System.out.println("Test");
+                	/*se crea un archivo de texto de prueba para probar la actualizacion de .txt*/
+                	/*eso si, mas que actualizar, crea uno aparte para un curso específico*/
+                	File testFile = new File("dick.txt");
+                	FileWriter testFileWriter = new FileWriter(testFile);
+                	PrintWriter printWriterTestFile = new PrintWriter(testFileWriter);
+                	
+                	/*Hay que hacer esto con la lista completa*/
+                	Curso cursoTemp = cursos[0];
+                	Enumeration<Integer> enu = cursos[0].getAlumnos().keys();
+                	
+                	cursoTemp.updateFile(testFile,testFileWriter,printWriterTestFile,enu);
+                	
+                	
+                	printWriterTestFile.close();
+                	break;
+                	
                 default:
                     System.out.println("input inválido");
                     break;
