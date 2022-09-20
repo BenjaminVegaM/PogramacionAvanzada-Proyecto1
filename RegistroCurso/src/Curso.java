@@ -48,7 +48,6 @@ public class Curso
     	/*esto asume que todos los alumnos tienen los mismos nombres en las habilidades, por tanto esto se saca del primero que encuentre*/
     	Enumeration<Integer> enu = this.getAlumnos().keys();
     	Alumno alumnoTemp = this.alumnos.get(enu.nextElement());
-    	System.out.println("se retorna el arreglo de largo: "+ alumnoTemp.getNombreHabilidades().size());
     	return alumnoTemp.getNombreHabilidades();
     }
     
@@ -213,7 +212,6 @@ public class Curso
         	{
         		printWriter.write(",");
         		printWriter.write(String.valueOf(habilidadesTemp.get(contHab).getEstado()));
-        		System.out.println("se lee: "+habilidadesTemp.get(contHab).getEstado()+"\ny se escribe en el doc: "+ String.valueOf(habilidadesTemp.get(contHab).getEstado()));
         	}
         }
     }
@@ -236,6 +234,4 @@ public class Curso
     		habilidadTemp.setEstado(true);
     	}
     }
-    
-    
 }

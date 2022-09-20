@@ -55,7 +55,6 @@ public class Alumno
     	{
     		nombreHabilidades.add(this.habilidades.get(cont).getNombre());
     	}
-    	System.out.println("se retorna el arreglo de largo: "+nombreHabilidades.size());
     	return nombreHabilidades;
     }
     
