@@ -11,7 +11,7 @@
 public class Habilidades 
 {
     private String nombre;
-    private boolean estado;
+    private boolean estado = false;
     
     /*le queremos poner nombre de asignatura???*/
 

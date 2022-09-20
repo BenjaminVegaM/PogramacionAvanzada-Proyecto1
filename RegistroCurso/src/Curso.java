@@ -192,7 +192,24 @@ public class Curso
         }
     }
     
-    
+    public void cambiarEstadoHabilidadesAlumno (int rut, String inputUsuario, BufferedReader lector) throws IOException
+    {
+    	Alumno alumnoTemp = this.alumnos.get(rut);
+    	alumnoTemp.mostrarHabilidades();
+    	System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
+    	inputUsuario = lector.readLine();
+    	
+    	Habilidades habilidadTemp = alumnoTemp.getHabilidades().get(Integer.parseInt(inputUsuario));
+    	
+    	if (habilidadTemp.getEstado() == true)
+    	{
+    		habilidadTemp.setEstado(false);
+    	}
+    	else
+    	{
+    		habilidadTemp.setEstado(true);
+    	}
+    }
     
     
 }

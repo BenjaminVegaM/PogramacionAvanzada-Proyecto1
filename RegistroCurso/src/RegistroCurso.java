@@ -39,7 +39,7 @@ public class RegistroCurso
             System.out.println("1. Importar Curso a través de un .txt");
             System.out.println("2. Agregar un Alumno a un Curso");
             System.out.println("3. Crear un nuevo Curso");
-            System.out.println("4. Agregar una habilidad a un Alumno");
+            System.out.println("4. Cambiar estado de la habilidad de un alumno");
             System.out.println("5. Buscar un Alumno por RUT");
             System.out.println("6. Mostrar todos los Alumnos de un Curso");
             System.out.println("0. Salir");
@@ -89,8 +89,6 @@ public class RegistroCurso
                 	}
                 }
                 //agregar alumno a un curso
-                /*le pide el nombre del curso y luego busca para ver si esta, si se encuentra, intenta importar el alumno*/
-                /*si fuera una lista sería más rápido ┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴*/
                 case 2:
                 	/*podríamos cambiar esto para que sea una wea de objeto y tal*/
                     System.out.println("Agregar Alumno a un Curso");
@@ -99,7 +97,6 @@ public class RegistroCurso
                     encontrado = false;
                     for (int cont = 0; cont < plibre ; cont++)
                     {
-                    	//System.out.println("se compara "+ inputUsuario + " con "+cursos[cont].getNombreCurso());
                     	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
                     	{
                     		System.out.println("Se ha encontrado el curso");
@@ -110,7 +107,7 @@ public class RegistroCurso
 
                             System.out.println("Ingrese el RUN del alumno:");
                             nuevoAlumno.setRUN(Integer.parseInt(lector.readLine()));
-                            
+                            /*DISCLAIMER esto falla en la lista de las habilidades, hay que crear la funcion para el objeto curso*/
                             //String[] lineaLeida = inputUsuario.split(",");
                             cursos[cont].agregarAlumno(nuevoAlumno);
                             
@@ -159,25 +156,19 @@ public class RegistroCurso
                 	break;
                 /*añadir habilidad a un alumno*/
                 case 4:
-                	System.out.println("Añadir una nueva habilidad a un Alumno");
+                	System.out.println("Cambiar estado de la habilidad de un alumno");
+                	System.out.println("Ingrese el curso: ");
+                	inputUsuario = lector.readLine();
                 	
-                	//se busca que el alumno ingresado exista
-                    System.out.println("Ingrese el RUT del Alumno: ");
-                    inputUsuario = lector.readLine();
-                    encontrado = false;
+                	encontrado = false;
                     for (int cont = 0; cont < plibre ; cont++)
                     {
-                    	Alumno alumnoEncontrado = cursos[cont].buscarAlumno(Integer.parseInt(inputUsuario));
-                    	if (alumnoEncontrado != null)
+                    	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
                     	{
                     		encontrado = true;
-                    		System.out.println("Alumno encontrado\nEscriba el nombre de la nueva Habilidad");
-                    		Habilidades nuevaHabilidad = new Habilidades();
-                    		nuevaHabilidad.setNombre(lector.readLine());
-                    		System.out.println("Escriba el estado de la habilidad (true = aprendida / false = no aprendida)");
-                    		nuevaHabilidad.setEstado(Boolean.parseBoolean(lector.readLine()));
-                    		alumnoEncontrado.agregarHabilidad(nuevaHabilidad);
-                    		System.out.println("La habilidad a sido agregada con éxito!");
+                    		System.out.println("Se ha encontrado el curso, ahora ingrese el RUT del alumno: ");
+                    		inputUsuario = lector.readLine();
+                            cursos[cont].cambiarEstadoHabilidadesAlumno(Integer.parseInt(inputUsuario), inputUsuario, lector);
                     		break;
                     	}
                     }
@@ -185,7 +176,6 @@ public class RegistroCurso
                     if (encontrado == false)
                     {
                     	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
-                    	break;
                     }
                 	break;
                 /*buscar alumno por RUT*/
@@ -261,9 +251,10 @@ public class RegistroCurso
                     System.out.println("se ha escogido Salir");
                     break;
                 case 177013:
-                	System.out.println("Test");
+                	//System.out.println("Test");
                 	/*se crea un archivo de texto de prueba para probar la actualizacion de .txt*/
                 	/*eso si, mas que actualizar, crea uno aparte para un curso específico*/
+                	System.out.println("Guardando cambios:");
                 	File testFile = new File("dick.txt");
                 	FileWriter testFileWriter = new FileWriter(testFile);
                 	PrintWriter printWriterTestFile = new PrintWriter(testFileWriter);

@@ -68,7 +68,6 @@ public class Alumno
     /*para mostrar el estado de las habilidades de un alumno*/
     public void mostrarHabilidades()
     {
-    	//System.out.print("El estado de las habilidades es: ");
     	String estadoHab = "a";
     	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
     	{
