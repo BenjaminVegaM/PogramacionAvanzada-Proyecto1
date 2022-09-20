@@ -3,4 +3,3 @@ nombre alumno 4,21111111,true,false,false,false
 nombre alumno 1,3021291,true,true,false,true
 nombre alumno 3,31111330,true,false,false,false
 nombre alumno 2,21373170,false,true,false,true
-aslkdjfa,99999999,false,false,true,false
