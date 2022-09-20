@@ -100,16 +100,12 @@ public class RegistroCurso
                     	if (Objects.equals(inputUsuario,cursos[cont].getNombreCurso()))
                     	{
                     		System.out.println("Se ha encontrado el curso");
-                    		Alumno nuevoAlumno = new Alumno();
 
-                    		System.out.println("Ingrese el Nombre del alumno:");
-                            nuevoAlumno.setNombre(lector.readLine());
-
-                            System.out.println("Ingrese el RUN del alumno:");
-                            nuevoAlumno.setRUN(Integer.parseInt(lector.readLine()));
-                            /*DISCLAIMER esto falla en la lista de las habilidades, hay que crear la funcion para el objeto curso*/
-                            //String[] lineaLeida = inputUsuario.split(",");
-                            cursos[cont].agregarAlumno(nuevoAlumno);
+                    		System.out.println("Ingrese los datos en el siguiente formato: nombre,rut,estadoHabilidad1,...,estadoHabilidadN");
+                            System.out.println("(en caso de que se incluyan más habilidades de las que admite el curso, se ignorarán las que sobren. Si se agregan menos, el resto serán iniciadas en reprobado)");
+                            inputUsuario = lector.readLine();
+                            String[] lineaLeida = inputUsuario.split(",");
+                            cursos[cont].importarAlumno(2, lineaLeida, cursos[cont].getNombreHabilidades());
                             
                     		encontrado = true;
                     		break;
@@ -153,6 +149,7 @@ public class RegistroCurso
                     	plibre++;
                     	break;
                     }
+                    encontrado = false;
                 	break;
                 /*añadir habilidad a un alumno*/
                 case 4:
@@ -177,6 +174,7 @@ public class RegistroCurso
                     {
                     	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
                     }
+                    encontrado = false;
                 	break;
                 /*buscar alumno por RUT*/
                 case 5:

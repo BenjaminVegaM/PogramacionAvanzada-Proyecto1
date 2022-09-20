@@ -47,7 +47,17 @@ public class Alumno
     public ArrayList<Habilidades> getHabilidades() 
     {
         return habilidades;
-    } 
+    }
+    public ArrayList<String> getNombreHabilidades()
+    {
+    	ArrayList<String> nombreHabilidades = new ArrayList<String>();
+    	for (int cont = 0; cont < this.habilidades.size(); cont += 1)
+    	{
+    		nombreHabilidades.add(this.habilidades.get(cont).getNombre());
+    	}
+    	System.out.println("se retorna el arreglo de largo: "+nombreHabilidades.size());
+    	return nombreHabilidades;
+    }
     
     // Setters
     public void setNombre(String nombre)

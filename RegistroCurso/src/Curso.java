@@ -43,6 +43,14 @@ public class Curso
     {
         return nombre;
     }
+    public ArrayList<String> getNombreHabilidades()
+    {
+    	/*esto asume que todos los alumnos tienen los mismos nombres en las habilidades, por tanto esto se saca del primero que encuentre*/
+    	Enumeration<Integer> enu = this.getAlumnos().keys();
+    	Alumno alumnoTemp = this.alumnos.get(enu.nextElement());
+    	System.out.println("se retorna el arreglo de largo: "+ alumnoTemp.getNombreHabilidades().size());
+    	return alumnoTemp.getNombreHabilidades();
+    }
     
     //Setters
     public void setNombre (String nombre)
@@ -97,11 +105,19 @@ public class Curso
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
     	int cont = 0;
-    	while(posInicial < textoSeparado.length)
+    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
 		{
     		Habilidades habTemp = new Habilidades();
     		habTemp.setNombre(nombreHabilidades.get(cont));
-    		habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+    		try
+            {
+            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+            }
+            catch (ArrayIndexOutOfBoundsException exception)
+            {
+            	System.out.println("entra en la excepcion");
+            	habTemp.setEstado(false);
+            }
     		habilidadesTemp.add(habTemp);
 			posInicial += 1;
 			cont += 1;
@@ -129,11 +145,19 @@ public class Curso
         Alumno alumnoTemp = new Alumno();
         ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
         int cont = 0;
-        while(posInicial < textoSeparado.length)
+        while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
         {
             Habilidades habTemp = new Habilidades();
             habTemp.setNombre(nombreHabilidades.get(cont));
-            habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+            try
+            {
+            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+            }
+            catch (ArrayIndexOutOfBoundsException exception)
+            {
+            	habTemp.setEstado(false);
+            }
+            
             habilidadesTemp.add(habTemp);
             posInicial += 1;
             cont += 1;
@@ -171,7 +195,7 @@ public class Curso
     		printWriter.write(habilidadesTemp.get(contHab).getNombre());
     	}
     	printWriter.write("\n");
-    	//esto se podría meter en un procedimiento
+    	
     	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
     	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
     	{
@@ -182,12 +206,14 @@ public class Curso
         while (enu.hasMoreElements())
         {
         	alumnoTemp = this.buscarAlumno(enu.nextElement());
+        	habilidadesTemp = alumnoTemp.getHabilidades();
         	printWriter.write("\n");
         	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
         	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
         	{
         		printWriter.write(",");
         		printWriter.write(String.valueOf(habilidadesTemp.get(contHab).getEstado()));
+        		System.out.println("se lee: "+habilidadesTemp.get(contHab).getEstado()+"\ny se escribe en el doc: "+ String.valueOf(habilidadesTemp.get(contHab).getEstado()));
         	}
         }
     }

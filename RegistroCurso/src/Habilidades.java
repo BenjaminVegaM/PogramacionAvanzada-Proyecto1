@@ -25,11 +25,11 @@ public class Habilidades
     /*getters*/
     public String getNombre() 
     {
-        return nombre;
+        return this.nombre;
     }
     public boolean getEstado() 
     {
-        return estado;
+        return this.estado;
     }
 
     /*setters*/
