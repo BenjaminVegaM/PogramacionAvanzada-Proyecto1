@@ -1,25 +1,24 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 4,21111111,true,false,false,false
-nombre alumno 1,3021291,true,true,false,true
-nombre alumno 3,31111330,true,false,false,false
-nombre alumno 2,21373170,false,true,false,true
+Aya Shameimaru,21111111,true,false,false,false
+Reimu Hakurei,3021291,true,true,false,true
+Marisa Kirisame,31111330,true,true,true,true
+Kasen Ibara,21373170,true,true,true,true
 *****
-Reimu,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 4,21111111,true,false,false,false
-nombre alumno 1,3021291,true,true,false,true
-nombre alumno 3,31111330,true,false,false,false
-nombre alumno 2,21373170,false,true,false,true
+Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
+Sanae Moriya,3021291,true,true,true,true
+Kanako Yasaka,31111330,true,false,false,false
+Suwako Moriya,21373170,false,true,false,true
 *****
-Kasen,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 4,21111111,true,false,false,false
-nombre alumno 1,3021291,true,true,false,true
-nombre alumno 3,31111330,true,false,false,false
-nombre alumno 2,21373170,false,true,false,true
+Oni,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
+Ibara Douji,3021291,true,true,true,true
+Yuugi Hoshiguma,31111330,true,false,false,false
+Suika Ibuki,21373170,false,true,false,true
 *****
 UWU,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 4,21111111,true,false,false,false
-nombre alumno 1,3021291,true,true,false,true
-nombre alumno 3,31111330,true,false,false,false
-nombre alumno 2,21373170,false,true,false,true
+Clownpiece,3021291,true,true,true,true
+Junko,31111330,true,true,true,true
+Hecatia Lapislázuli,21373170,true,true,true,true
+*****
+Tengu
 *****
 —————

@@ -17,21 +17,88 @@ public class RegistroCurso
     public static void main (String arg[]) throws IOException 
     {
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-    	/*CUANDO SE APRIETA 1 DOS VECES SEGUIDAS LA APLICACION SE CAE*/
-		File file = new File(".\\src\\curso1.txt");
-		BufferedReader lectorTxt = new BufferedReader(new FileReader(file));
-		String lineText = null;
-		
-        int opcion = -1;
+    	int opcion = 177013;
         String inputUsuario;
         Boolean encontrado = false;
-        
-        int plibre, capacidadCursos; // cantidad de cursos
-        capacidadCursos = 5;
-        plibre = 0;
+
         ArrayList<Curso> cursos = new ArrayList<>();
+    	
+    	System.out.println("Importando archivo del instituto");
+    	File instituto = new File("EjemploInstituto.txt");
+    	BufferedReader lectorInstituto = new BufferedReader(new FileReader(instituto));
+    	
+    	String linea = lectorInstituto.readLine();
+		String[] lineaDividida = linea.split(",");
+		String endOfFile = "—————";
+		String endOfCurso = "*****";
+		boolean repetido = false;
+    	
+    	while (linea.equals(endOfFile) != true)
+    	{
+    		//Se revisa si ya existe un curso con el mismo nombre
+    		if (cursos.size() >= 1)
+    		{
+    			for (int cont = 0; cont < cursos.size(); cont += 1)
+    			{
+    				//System.out.println("se comparan: "+lineaDividida[0]+" y "+cursos.get(cont).getNombreCurso());
+    				if (lineaDividida[0].equals(cursos.get(cont).getNombreCurso()) == true)
+    				{
+    					System.out.println("Se ha descubierto que uno de los nombres está repetido, pasando al siguiente curso");
+    					repetido = true;
+    					
+    					linea = lectorInstituto.readLine();
+    					while (linea.equals(endOfCurso) != true)
+    					{
+    						linea = lectorInstituto.readLine();
+    					}
+    					linea = lectorInstituto.readLine();
+    					lineaDividida = linea.split(",");
+    					break;
+    				}
+    			}
+    		}
+    		
+    		if (repetido == true)
+			{
+				repetido = false;
+				continue;
+			}
+    		
+    		Curso cursoAImportar = new Curso();
+    		cursoAImportar.setNombre(lineaDividida[0]);
+    		System.out.println("\nEl nombre del curso es: " + cursoAImportar.getNombreCurso());
+    		
+    		//Se importan las habilidades desde la línea de texto empezando desde la posición 1
+    		ArrayList<String> nombreHabilidadesTemp1 = new ArrayList<>();
+    		int posInicial = 1;
+    		while (posInicial < lineaDividida.length)
+    		{
+    			//System.out.println("se ha ingresado la habilidad: " + lineaDividida[posInicial]);
+    			nombreHabilidadesTemp1.add(lineaDividida[posInicial]);
+    			posInicial += 1;
+    		}
+    		
+    		//Se obtienen los alumnos y se colocan en el arreglo que les corresponde
+    		linea = lectorInstituto.readLine();
+    		while(linea.equals(endOfCurso) != true)
+    		{
+    			//System.out.println("Importando alumnos");
+    			lineaDividida = linea.split(",");
+    			cursoAImportar.importarAlumno(lineaDividida, 2, nombreHabilidadesTemp1);
+        		linea = lectorInstituto.readLine();
+    		}
+    		
+    		cursos.add(cursoAImportar);
+    		System.out.println("\n"+cursoAImportar.getNombreCurso()+" ha sido añadido con éxito");
+    		
+    		linea = lectorInstituto.readLine();
+    		lineaDividida = linea.split(",");
+    	}
+    	
+    	System.out.println("Se ha terminado de importar el instituto");
+    	lectorInstituto.close();
         
-        // MENU
+        //MENU
         while (opcion != 0)
         {
         	
@@ -45,7 +112,6 @@ public class RegistroCurso
             System.out.println("7. Mostrar a todos los alumnos que cumplan ciertas características del instituto");
             System.out.println("0. Salir");
 
-            /*ingresar cosas*/
             inputUsuario = lector.readLine();
             /*igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo*/
             opcion = Integer.parseInt(inputUsuario);
@@ -55,10 +121,11 @@ public class RegistroCurso
             	//importar un curso desde un .txt
                 case 1:
                 {
+                	/*
                 	System.out.println("Leer txt");
                 	if(plibre < capacidadCursos)
                 	{
-                		/*Se crea el curso y se le asigna el nombre*/
+                		//Se crea el curso y se le asigna el nombre
                 		lineText = lectorTxt.readLine();
                 		String[] lineaLeida = lineText.split(",");
                 		
@@ -66,7 +133,7 @@ public class RegistroCurso
                 		cursoTemp.setNombre(lineaLeida[0]);
                 		System.out.println("\nEl nombre del curso es: " + cursoTemp.getNombreCurso());
                 		
-                		/*Se importan las habilidades desde la línea de texto empezando desde la posición 1*/
+                		//Se importan las habilidades desde la línea de texto empezando desde la posición 1
                 		
                 		ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
                 		int posInicial = 1;
@@ -77,7 +144,7 @@ public class RegistroCurso
                 			posInicial += 1;
                 		}
                 		
-                		/*Se obtienen los alumnos y se colocan en el arreglo que les corresponde*/
+                		//Se obtienen los alumnos y se colocan en el arreglo que les corresponde
                 		while((lineText = lectorTxt.readLine()) != null)
                 		{
                     		lineaLeida = lineText.split(",");
@@ -88,12 +155,14 @@ public class RegistroCurso
                 		cursos.add(cursoTemp);
                 		System.out.println("\nListo!");
                 		break;
-                	}
+                	}*/
+                	System.out.println("que ya no existe tonto");
+                	break;
                 }
                 //agregar alumno a un curso
                 case 2:
                 {
-                	/*podríamos cambiar esto para que sea una wea de objeto y tal*/
+                	//podríamos cambiar esto para que sea una wea de objeto y tal
                 	//hay que evitar que se pongan de nombres el fin de curso y el fin de archivo
                     System.out.println("Agregar Alumno a un Curso");
                     System.out.println("Ingrese el nombre del Curso al que quiere agregar este Alumno: ");
@@ -109,7 +178,7 @@ public class RegistroCurso
                             System.out.println("(en caso de que se incluyan más habilidades de las que admite el curso, se ignorarán las que sobren. Si se agregan menos, el resto serán iniciadas en reprobado)");
                             inputUsuario = lector.readLine();
                             String[] lineaLeida = inputUsuario.split(",");
-                            cursos.get(cont).importarAlumno(2, lineaLeida, cursos.get(capacidadCursos).getNombreHabilidades());
+                            cursos.get(cont).importarAlumno(2, lineaLeida, cursos.get(cont).getNombreHabilidades());
                             
                     		encontrado = true;
                     		break;
@@ -125,16 +194,11 @@ public class RegistroCurso
                     encontrado = false;
                     break;
                 }
-                /*crear curso*/
+                //crear curso
                 //hay que evitar que se pongan de nombres el fin de curso y el fin de archivo
                 case 3:
                 {
                     System.out.println("Crear un nuevo Curso");
-                    if(plibre >= cursos.size())
-                    {
-                    	System.out.println("Se ha llegado a la cantidad máxima de Cursos.");
-                    	break;
-                    }
                     System.out.println("Ingrese el nombre del nuevo Curso: ");
                     inputUsuario = lector.readLine();
                     encontrado = false;
@@ -154,13 +218,12 @@ public class RegistroCurso
                     	cursoTemp.setNombre(inputUsuario);
                     	cursos.add(cursoTemp);
                     	System.out.println("Nuevo curso "+cursoTemp.getNombreCurso()+" creado correctamente.");
-                    	plibre++;
                     	break;
                     }
                     encontrado = false;
                 	break;
                 }
-                /*cambiar estado de la habilidad de un alumno*/
+                //cambiar estado de la habilidad de un alumno
                 case 4:
                 {
                 	System.out.println("Cambiar estado de la habilidad de un alumno");
@@ -187,7 +250,7 @@ public class RegistroCurso
                     encontrado = false;
                 	break;
                 }
-                /*buscar alumno por RUT*/
+                //buscar alumno por RUT
                 case 5:
                 {
                 	//se busca que exista el curso, luego revisa si el rut recibido existe en el hashtable
@@ -228,7 +291,7 @@ public class RegistroCurso
                     encontrado = false;
                     break;
                 }
-                /*Mostrar todos los alumnos de un curso*/
+                //Mostrar todos los alumnos de un curso
                 case 6:
                 {
                     System.out.println("Se ha escogido Mostrar todos los Alumnos de un Curso");
@@ -262,7 +325,6 @@ public class RegistroCurso
                 }
                 case 7:
                 {
-                	//se asume que opción no puede ser 0 cuando se selecciona esta opción
                 	int opcion2 = 177013;
                 	while (opcion2 != 0)
                 	{
@@ -311,118 +373,23 @@ public class RegistroCurso
                 case 0:
                 {
                     System.out.println("Saliendo y guardando los cambios...");
-                	File testFile = new File("dick.txt");
+                	File testFile = new File("TestGuardadoInstitutoCompleto.txt");
                 	FileWriter testFileWriter = new FileWriter(testFile);
                 	PrintWriter printWriterTestFile = new PrintWriter(testFileWriter);
-                	
-                	/*Hay que hacer esto con la lista completa*/
-                	Curso cursoTemp = cursos.get(0);
-                	Enumeration<Integer> enu = cursos.get(0).getAlumnos().keys();
-                	
-                	cursoTemp.updateFile(testFile,testFileWriter,printWriterTestFile,enu);
-                	System.out.println("Guardado exitoso");
-                	
-                	printWriterTestFile.close();
-                	break;
-                }
-                case 177013: /*Guardar varios cursos a la vez*/
-                {
-                	System.out.println("Guardando cambios:");
-                	File testFile1 = new File("TestGuardadoInstitutoCompleto.txt");
-                	FileWriter testFileWriter1 = new FileWriter(testFile1);
-                	PrintWriter printWriterTestFile1 = new PrintWriter(testFileWriter1);
                 	
                 	for (int cont = 0; cont < cursos.size(); cont += 1)
                 	{
                 		Curso cursoTemp1 = cursos.get(cont);
                     	Enumeration<Integer> enu1 = cursos.get(cont).getAlumnos().keys();
-                    	cursoTemp1.updateFile(testFile1,testFileWriter1,printWriterTestFile1,enu1);
-                    	printWriterTestFile1.write("\n*****\n");
+                    	cursoTemp1.updateFile(testFile,testFileWriter,printWriterTestFile,enu1);
+                    	printWriterTestFile.write("\n*****\n");
                 	}
                 	
-                	printWriterTestFile1.write("—————");
-                	printWriterTestFile1.close();
+                	printWriterTestFile.write("—————");
+                	printWriterTestFile.close();
+                	System.out.println("Guardado realizado con éxito");
                 	break;
                 }
-                case 182290: /*Importar Varios cursos a la vez*/
-                {
-                	/*Requiere mas testeo probablemente... no toma en cuenta alumnos de distinto curso pero mismo rut*/
-                	System.out.println("Importando archivo del instituto");
-                	File instituto = new File("EjemploInstituto.txt");
-                	BufferedReader lectorInstituto = new BufferedReader(new FileReader(instituto));
-                	
-                	String linea = lectorInstituto.readLine();
-            		String[] lineaDividida = linea.split(",");
-            		String endOfFile = "—————";
-            		String endOfCurso = "*****";
-            		boolean repetido = false;
-                	
-                	while (linea.equals(endOfFile) != true)
-                	{
-                		//Se revisa si ya existe un curso con el mismo nombre
-                		if (cursos.size() >= 1)
-                		{
-                			for (int cont = 0; cont < cursos.size(); cont += 1)
-                			{
-                				//System.out.println("se comparan: "+lineaDividida[0]+" y "+cursos.get(cont).getNombreCurso());
-                				if (lineaDividida[0].equals(cursos.get(cont).getNombreCurso()) == true)
-                				{
-                					System.out.println("Se ha descubierto que uno de los nombres está repetido, pasando al siguiente curso");
-                					repetido = true;
-                					
-                					linea = lectorInstituto.readLine();
-                					while (linea.equals(endOfCurso) != true)
-                					{
-                						linea = lectorInstituto.readLine();
-                					}
-                					linea = lectorInstituto.readLine();
-                					lineaDividida = linea.split(",");
-                					break;
-                				}
-                			}
-                		}
-                		
-                		if (repetido == true)
-            			{
-            				repetido = false;
-            				continue;
-            			}
-                		
-                		Curso cursoTemp2 = new Curso();
-                		cursoTemp2.setNombre(lineaDividida[0]);
-                		//System.out.println("\nEl nombre del curso es: " + cursoTemp2.getNombreCurso());
-                		
-                		/*Se importan las habilidades desde la línea de texto empezando desde la posición 1*/
-                		ArrayList<String> nombreHabilidadesTemp1 = new ArrayList<>();
-                		int posInicial = 1;
-                		while (posInicial < lineaDividida.length)
-                		{
-                			//System.out.println("se ha ingresado la habilidad: " + lineaDividida[posInicial]);
-                			nombreHabilidadesTemp1.add(lineaDividida[posInicial]);
-                			posInicial += 1;
-                		}
-                		
-                		/*Se obtienen los alumnos y se colocan en el arreglo que les corresponde*/
-                		linea = lectorInstituto.readLine();
-                		while(linea.equals(endOfCurso) != true)
-                		{
-                			//System.out.println("Importando alumnos");
-                			lineaDividida = linea.split(",");
-                    		cursoTemp2.importarAlumno(lineaDividida, 2, nombreHabilidadesTemp1);
-                    		linea = lectorInstituto.readLine();
-                		}
-                		
-                		cursos.add(cursoTemp2);
-                		System.out.println("\n"+cursoTemp2.getNombreCurso()+" ha sido añadido con éxito");
-                		
-                		linea = lectorInstituto.readLine();
-                		lineaDividida = linea.split(",");
-                	}
-                	
-                	System.out.println("Se ha terminado de importar el curso");
-                	lectorInstituto.close();
-                	break;
-                }	
                 default:
                 {
                     System.out.println("input inválido");
@@ -431,6 +398,6 @@ public class RegistroCurso
             }
         }
         
-        lectorTxt.close();
+        //lectorTxt.close();
     }
 }

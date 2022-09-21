@@ -1,8 +1,8 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 1,3021291,True,True,False,True
-nombre alumno 2,21373170,False,True,False,True
-nombre alumno 3,31111330,True,False,False,False
-nombre alumno 4,21111111,True,False,False,False
+Reimu Hakurei,3021291,True,True,False,True
+Kasen Ibara,21373170,True,True,True,True
+Marisa Kirisame,31111330,True,True,True,True
+Aya Shameimaru,21111111,True,False,False,False
 *****
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
 nombre alumno 1,3021291,True,True,False,True
@@ -10,22 +10,21 @@ nombre alumno 2,21373170,False,True,False,True
 nombre alumno 3,31111330,True,False,False,False
 nombre alumno 4,21111111,True,False,False,False
 *****
-Reimu,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 1,3021291,True,True,False,True
-nombre alumno 2,21373170,False,True,False,True
-nombre alumno 3,31111330,True,False,False,False
-nombre alumno 4,21111111,True,False,False,False
+Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
+Sanae Moriya,3021291,True,True,True,True
+Suwako Moriya,21373170,False,True,False,True
+Kanako Yasaka,31111330,True,False,False,False
 *****
-Kasen,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 1,3021291,True,True,False,True
-nombre alumno 2,21373170,False,True,False,True
-nombre alumno 3,31111330,True,False,False,False
-nombre alumno 4,21111111,True,False,False,False
+Oni,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
+Ibara Douji,3021291,True,True,True,True
+Suika Ibuki,21373170,False,True,False,True
+Yuugi Hoshiguma,31111330,True,False,False,False
 *****
 UWU,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 1,3021291,True,True,False,True
-nombre alumno 2,21373170,False,True,False,True
-nombre alumno 3,31111330,True,False,False,False
-nombre alumno 4,21111111,True,False,False,False
+Clownpiece,3021291,True,True,True,True
+Hecatia Lapislázuli,21373170,True,True,True,True
+Junko,31111330,True,True,True,True
+*****
+Tengu
 *****
 —————

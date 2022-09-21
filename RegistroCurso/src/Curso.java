@@ -179,14 +179,26 @@ public class Curso
         System.out.println("Importación realizada con éxito\n");
     }
     
-    /**/
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter,
     						Enumeration<Integer> enu)
     {
-    	Alumno alumnoTemp = this.buscarAlumno(enu.nextElement());
+    	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
+    	//vaya solución más fea tio...
+    	int rutPrueba;
+    	try
+		{
+    		rutPrueba = enu.nextElement();
+		}
+		catch (NoSuchElementException exception)
+		{
+			printWriter.write(this.getNombreCurso());
+			return;
+		}
+    	
+    	Alumno alumnoTemp = this.buscarAlumno(rutPrueba);
     	ArrayList<Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
     	
-    	/*asumiendo que las habilidades en todos son iguales se usan los nombres que tenga el primero para la primera linea*/
+    	//asumiendo que las habilidades en todos son iguales se usan los nombres que tenga el primero para la primera linea
     	printWriter.write(this.getNombreCurso());
     	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
     	{
