@@ -263,18 +263,20 @@ public class RegistroCurso
                 	printWriterTestFile.close();
                 	break;
                 case 177013: /*Guardar varios cursos a la vez*/
-                	/*se crea un archivo de texto de prueba para probar la actualizacion de .txt*/
-                	/*eso si, mas que actualizar, crea uno aparte para un curso específico*/
                 	System.out.println("Guardando cambios:");
                 	File testFile1 = new File("TestGuardadoInstitutoCompleto.txt");
                 	FileWriter testFileWriter1 = new FileWriter(testFile1);
                 	PrintWriter printWriterTestFile1 = new PrintWriter(testFileWriter1);
                 	
-                	//Hay que hacer esto con la lista completa
-                	Curso cursoTemp1 = cursos.get(0);
-                	Enumeration<Integer> enu1 = cursos.get(0).getAlumnos().keys();
+                	for (int cont = 0; cont < cursos.size(); cont += 1)
+                	{
+                		Curso cursoTemp1 = cursos.get(cont);
+                    	Enumeration<Integer> enu1 = cursos.get(cont).getAlumnos().keys();
+                    	cursoTemp1.updateFile(testFile1,testFileWriter1,printWriterTestFile1,enu1);
+                    	printWriterTestFile1.write("\n*****\n");
+                	}
                 	
-                	cursoTemp1.updateFile(testFile1,testFileWriter1,printWriterTestFile1,enu1);
+                	printWriterTestFile1.write("—————");
                 	printWriterTestFile1.close();
                 	break;
                 	
@@ -354,7 +356,6 @@ public class RegistroCurso
                 	
                 	System.out.println("Se ha terminado de importar el curso");
                 	break;
-                	
                 	
                 default:
                     System.out.println("input inválido");
