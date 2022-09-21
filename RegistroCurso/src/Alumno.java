@@ -16,7 +16,7 @@ public class Alumno
     private String nombre;
     private int run;           						 /*asegurarse que el run sea válido, pero que no rompa con el proceso de agregar alumnos*/
     private ArrayList<Habilidades> habilidades;
-    
+    private boolean aprobado;
     
     /*numero de habilidades aprendidas y numero de habilidades requeridas*/
     
@@ -29,6 +29,7 @@ public class Alumno
         this.nombre = "José Antonio";
         this.run = 0;
         this.habilidades = new ArrayList<>();
+        this.aprobado = false;
     }
     /*hay que hacer una wea para que los runs sean válidos
     * revisar casos en los que sean el último dígito sea k
@@ -58,6 +59,29 @@ public class Alumno
     	}
     	return nombreHabilidades;
     }
+    public boolean getAprobado()
+    {
+    	boolean reprobado = false;
+    	for (int cont = 0; cont < this.getHabilidades().size(); cont += 1)
+		{
+			if (this.getHabilidades().get(cont).getEstado() == false)
+			{
+				reprobado = true;
+				break;
+			}
+		}
+    	
+    	if (reprobado == true)
+    	{
+    		this.aprobado = false;
+    	}
+    	else
+    	{
+    		this.aprobado = true;
+    	}
+    	
+    	return this.aprobado;
+    }
     
     // Setters
     public void setNombre(String nombre)
@@ -71,6 +95,10 @@ public class Alumno
     public void setHabilidades(ArrayList<Habilidades> habilidades)
     {
         this.habilidades = habilidades;
+    }
+    public void setAprobado (boolean aprobado)
+    {
+    	this.aprobado = aprobado;
     }
     //toggleHabilidad -> cambie una habilidad i entre True y False
     
