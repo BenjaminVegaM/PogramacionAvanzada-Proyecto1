@@ -17,6 +17,7 @@ public class Alumno
     private int run;           						 /*asegurarse que el run sea válido, pero que no rompa con el proceso de agregar alumnos*/
     private ArrayList<Habilidades> habilidades;
     
+    
     /*numero de habilidades aprendidas y numero de habilidades requeridas*/
     
     /*igual poner asignaturas para ver cuantas se van a aprovar, o tipo que asignaturas tengan las habiliades dentro*/

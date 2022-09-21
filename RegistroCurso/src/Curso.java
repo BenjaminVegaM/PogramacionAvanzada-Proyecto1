@@ -234,4 +234,42 @@ public class Curso
     		habilidadTemp.setEstado(true);
     	}
     }
+    
+    public ArrayList<Alumno> alumnosAprobados ()
+    {
+    	ArrayList<Alumno> aprobados = new ArrayList<>();
+    	Enumeration<Integer> enu = this.getAlumnos().keys();
+    	Alumno alumnoTemp = this.buscarAlumno(enu.nextElement());
+    	boolean reprobado = false;
+    	
+    	//lo ideal sería chequear el estado del alumno, pero como me da lata poner eso ahora, iteramos y ya
+    	while (alumnoTemp != null)
+    	{
+    		for (int cont = 0; cont < alumnoTemp.getHabilidades().size(); cont += 1)
+    		{
+    			if (alumnoTemp.getHabilidades().get(cont).getEstado() == false)
+    			{
+    				reprobado = true;
+    				break;
+    			}
+    		}
+    		
+    		if (reprobado == false)
+    		{
+    			aprobados.add(alumnoTemp);
+    		}
+    		reprobado = false;
+    		
+    		try
+    		{
+    			alumnoTemp = this.buscarAlumno(enu.nextElement());
+    		}
+    		catch (NoSuchElementException exception)
+    		{
+    			break;
+    		}
+    	}
+    	
+    	return aprobados;
+    }
 }
