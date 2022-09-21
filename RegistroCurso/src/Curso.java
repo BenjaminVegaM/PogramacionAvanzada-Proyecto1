@@ -243,6 +243,7 @@ public class Curso
 
     	while (alumnoTemp != null)
     	{
+    		//creo que esta línea de acá no importa... pero me da miedo sacarla
     		alumnoTemp.getAprobado();
     		
     		if (alumnoTemp.getAprobado() == true)

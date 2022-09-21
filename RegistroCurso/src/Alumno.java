@@ -18,11 +18,6 @@ public class Alumno
     private ArrayList<Habilidades> habilidades;
     private boolean aprobado;
     
-    /*numero de habilidades aprendidas y numero de habilidades requeridas*/
-    
-    /*igual poner asignaturas para ver cuantas se van a aprovar, o tipo que asignaturas tengan las habiliades dentro*/
-    /*ni cagando eso funciona*/
-    
     /*constructores: igual lo cambiamos luego*/
     public Alumno() 
     {
@@ -31,11 +26,6 @@ public class Alumno
         this.habilidades = new ArrayList<>();
         this.aprobado = false;
     }
-    /*hay que hacer una wea para que los runs sean válidos
-    * revisar casos en los que sean el último dígito sea k
-    * (podríamos aplicar la fórmula también)
-    * (o podemos no pedir dígito verificador uwu)
-    */
    
     /*getters*/
     public String getNombre() 
