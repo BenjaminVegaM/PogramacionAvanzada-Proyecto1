@@ -236,6 +236,11 @@ public class Curso
     public void cambiarEstadoHabilidadesAlumno (int rut, String inputUsuario, BufferedReader lector) throws IOException
     {
     	Alumno alumnoTemp = this.alumnos.get(rut);
+    	if (alumnoTemp == null)
+    	{
+    		System.out.println("No se ha encontrado un alumno con el RUT especificado");
+    		return;
+    	}
     	alumnoTemp.mostrarHabilidades();
     	System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
     	inputUsuario = lector.readLine();
@@ -257,6 +262,10 @@ public class Curso
     public ArrayList<Alumno> alumnosAprobados ()
     {
     	ArrayList<Alumno> aprobados = new ArrayList<>();
+    	if (this.alumnos.size() < 1)
+    	{
+    		return aprobados;
+    	}
     	Enumeration<Integer> enu = this.getAlumnos().keys();
     	Alumno alumnoTemp = this.buscarAlumno(enu.nextElement());
 

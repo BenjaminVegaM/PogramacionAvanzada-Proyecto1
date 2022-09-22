@@ -105,10 +105,10 @@ public class RegistroCurso
         	System.out.println("Seleccione lo que quiere hacer:");
             System.out.println("1. Agregar un Alumno a un Curso");
             System.out.println("2. Crear un nuevo Curso");
-            System.out.println("3. Cambiar estado de la habilidad de un alumno");	//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
-            System.out.println("4. Buscar un Alumno por RUT");						//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
-            System.out.println("5. Mostrar todos los Alumnos de un Curso");			//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
-            System.out.println("6. Mostrar a todos los alumnos que cumplan ciertas características del instituto");		//HAY QUE VER QUE PASA CUANDO HAY UN CURSO VACÍO
+            System.out.println("3. Cambiar estado de la habilidad de un alumno");
+            System.out.println("4. Buscar un Alumno por RUT");
+            System.out.println("5. Mostrar todos los Alumnos de un Curso");
+            System.out.println("6. Mostrar a todos los alumnos que cumplan ciertas características del instituto");
             System.out.println("0. Salir");
 
             inputUsuario = lector.readLine();
@@ -269,6 +269,10 @@ public class RegistroCurso
                     	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
                     	{
                     		System.out.println("Se ha encontrado el curso");
+                    		if (cursos.get(cont).getAlumnos().size() < 1)
+                    		{
+                    			System.out.println("Pero este se encuentra vacío, inténtelo con otro");
+                    		}
                             Enumeration<Integer> enu = cursos.get(cont).getAlumnos().keys();
                             while (enu.hasMoreElements())
                             {
@@ -296,7 +300,7 @@ public class RegistroCurso
                 		System.out.println("1. Todos los que cumplan las condiciones de aprobación");
                         System.out.println("2. Todos los que reprueben");
                         System.out.println("3. no tengo ni idea de que poner acá");
-                        System.out.println("0. Salir");
+                        System.out.println("0. Volver al menú principal");
                 	
 		            	inputUsuario = lector.readLine();
 		            	//posible excepción
