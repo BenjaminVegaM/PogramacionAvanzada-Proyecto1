@@ -103,64 +103,22 @@ public class RegistroCurso
         {
         	
         	System.out.println("Seleccione lo que quiere hacer:");
-            System.out.println("1. Importar Curso a través de un .txt");
-            System.out.println("2. Agregar un Alumno a un Curso");
-            System.out.println("3. Crear un nuevo Curso");
-            System.out.println("4. Cambiar estado de la habilidad de un alumno");
-            System.out.println("5. Buscar un Alumno por RUT");
-            System.out.println("6. Mostrar todos los Alumnos de un Curso");
-            System.out.println("7. Mostrar a todos los alumnos que cumplan ciertas características del instituto");
+            System.out.println("1. Agregar un Alumno a un Curso");
+            System.out.println("2. Crear un nuevo Curso");
+            System.out.println("3. Cambiar estado de la habilidad de un alumno");	//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
+            System.out.println("4. Buscar un Alumno por RUT");						//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
+            System.out.println("5. Mostrar todos los Alumnos de un Curso");			//HAY QUE VER QUE PASA CUANDO ESTÁ VACÍO
+            System.out.println("6. Mostrar a todos los alumnos que cumplan ciertas características del instituto");		//HAY QUE VER QUE PASA CUANDO HAY UN CURSO VACÍO
             System.out.println("0. Salir");
 
             inputUsuario = lector.readLine();
-            /*igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo*/
+            //igual deberíamos dejarlo como strings porque así podríamos tener más control de lo que estamos haciendo
             opcion = Integer.parseInt(inputUsuario);
 
             switch (opcion)
             {
-            	//importar un curso desde un .txt
-                case 1:
-                {
-                	/*
-                	System.out.println("Leer txt");
-                	if(plibre < capacidadCursos)
-                	{
-                		//Se crea el curso y se le asigna el nombre
-                		lineText = lectorTxt.readLine();
-                		String[] lineaLeida = lineText.split(",");
-                		
-                		Curso cursoTemp = new Curso();
-                		cursoTemp.setNombre(lineaLeida[0]);
-                		System.out.println("\nEl nombre del curso es: " + cursoTemp.getNombreCurso());
-                		
-                		//Se importan las habilidades desde la línea de texto empezando desde la posición 1
-                		
-                		ArrayList<String> nombreHabilidadesTemp = new ArrayList<>();
-                		int posInicial = 1;
-                		while (posInicial < lineaLeida.length)
-                		{
-                			System.out.println("se ha ingresado la habilidad: " + lineaLeida[posInicial]);
-                			nombreHabilidadesTemp.add(lineaLeida[posInicial]);
-                			posInicial += 1;
-                		}
-                		
-                		//Se obtienen los alumnos y se colocan en el arreglo que les corresponde
-                		while((lineText = lectorTxt.readLine()) != null)
-                		{
-                    		lineaLeida = lineText.split(",");
-                    		cursoTemp.importarAlumno(lineaLeida, 2, nombreHabilidadesTemp);
-                		}
-                		
-                		plibre++;
-                		cursos.add(cursoTemp);
-                		System.out.println("\nListo!");
-                		break;
-                	}*/
-                	System.out.println("que ya no existe tonto");
-                	break;
-                }
                 //agregar alumno a un curso
-                case 2:
+                case 1:
                 {
                 	//podríamos cambiar esto para que sea una wea de objeto y tal
                 	//hay que evitar que se pongan de nombres el fin de curso y el fin de archivo
@@ -196,14 +154,21 @@ public class RegistroCurso
                 }
                 //crear curso
                 //hay que evitar que se pongan de nombres el fin de curso y el fin de archivo
-                case 3:
+                case 2:
                 {
                     System.out.println("Crear un nuevo Curso");
                     System.out.println("Ingrese el nombre del nuevo Curso: ");
                     inputUsuario = lector.readLine();
                     encontrado = false;
+                    
+                    while (Objects.equals(inputUsuario, endOfCurso) || Objects.equals(inputUsuario, endOfFile))
+                	{
+                		System.out.println("Nombre inválido, inténtelo de nuevo");
+                	}
+                    
                     for (int cont = 0; cont < cursos.size() ; cont++)
                     {
+                    	//podríamos cambiar esto para que se repita hasta que se indique un nombre válido o se quiera salir???
                     	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
                     	{
                     		System.out.println("Un curso con ese nombre ya existe."); 
@@ -224,7 +189,7 @@ public class RegistroCurso
                 	break;
                 }
                 //cambiar estado de la habilidad de un alumno
-                case 4:
+                case 3:
                 {
                 	System.out.println("Cambiar estado de la habilidad de un alumno");
                 	System.out.println("Ingrese el curso: ");
@@ -251,7 +216,7 @@ public class RegistroCurso
                 	break;
                 }
                 //buscar alumno por RUT
-                case 5:
+                case 4:
                 {
                 	//se busca que exista el curso, luego revisa si el rut recibido existe en el hashtable
                     System.out.println("Buscar alumno en un curso");
@@ -292,7 +257,7 @@ public class RegistroCurso
                     break;
                 }
                 //Mostrar todos los alumnos de un curso
-                case 6:
+                case 5:
                 {
                     System.out.println("Se ha escogido Mostrar todos los Alumnos de un Curso");
                     //se busca que exista el curso, luego revisa si el run recibido existe en el hashtable
@@ -323,7 +288,7 @@ public class RegistroCurso
                     encontrado = false;
                     break;
                 }
-                case 7:
+                case 6:
                 {
                 	int opcion2 = 177013;
                 	while (opcion2 != 0)
@@ -397,7 +362,5 @@ public class RegistroCurso
                 }
             }
         }
-        
-        //lectorTxt.close();
     }
 }

@@ -123,6 +123,11 @@ public class Curso
 		}
 		alumnoTemp.setHabilidades(habilidadesTemp);
 		alumnoTemp.setNombre(textoSeparado[0]);
+		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
+		{
+			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
+			//igual este no es lugar para ponerlo pero bueno
+		}
 		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
 
 		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
@@ -247,6 +252,8 @@ public class Curso
     	}
     }
     
+    //podríamos pasarle un número a la mierda esta para indicar si queremos que retorne los aprobados o los reprobados
+    //solo habría que hacer otra lista más y guardar los reprobados en ella y retornar la indicada
     public ArrayList<Alumno> alumnosAprobados ()
     {
     	ArrayList<Alumno> aprobados = new ArrayList<>();
