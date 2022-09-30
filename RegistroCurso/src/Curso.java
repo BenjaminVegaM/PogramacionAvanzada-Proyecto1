@@ -29,12 +29,38 @@ public class Curso
         this.cantAlumnos = 0;
         //this.nombreHabilidades = new ArrayList<>();
     }
+    
+    /*Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters*/
+    public void setNombre (String nombre)
+    {
+    	this.nombre = nombre;
+    }
+    public void setCantAlumnos (int cantidad)
+    {
+    	this.cantAlumnos = cantidad;
+    }
 
-    /*getters*/
+    /*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
     public Hashtable<Integer,Alumno> getAlumnos()
     {
         return alumnos;
     }
+    public String getNombreAlumno_RUN(int run)
+    {
+    	Alumno alumno = this.alumnos.get(run);
+    	return alumno.getNombre();
+    }
+    // getNombreAlumno_Nombre(String nombre)
+    // getNombreAlumno_Posicion(int indice)
+    
+    public String getHabilidadesAlumno_RUN(int run)
+    {
+    	Alumno alumno = this.alumnos.get(run);
+    	alumno.getHabilidades()
+    	alumno.mostrarHabilidades();//cambiar para Habilidades.java
+    	return
+    }
+    
     public int getCantAlumnos() 
     {
         return cantAlumnos;
@@ -51,16 +77,6 @@ public class Curso
     	return alumnoTemp.getNombreHabilidades();
     }
     
-    //Setters
-    public void setNombre (String nombre)
-    {
-    	this.nombre = nombre;
-    }
-    public void setCantAlumnos (int cantidad)
-    {
-    	this.cantAlumnos = cantidad;
-    }
-    
     // Métodos (funciones)
     /*para agrergar un alumno con los datos separados, puede que no queramos esto*/
     public void agregarAlumno (String nombre, int run, ArrayList<Habilidades> habilidades)
@@ -75,9 +91,9 @@ public class Curso
     /*para cuando se quiera agregar un objeto alumno al hashtable*/
     public void agregarAlumno (Alumno alumno)
     {
-    	System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
     	alumno.mostrarHabilidades();
-    	System.out.println("\n");
+    	//System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
     }
     
@@ -89,12 +105,13 @@ public class Curso
     }
     
     /*cuando se quiera mostrar los datos de un alumno buscándolo por run*/
+    /*
     public void mostrarDatosAlumno (int run)
     {
     	Alumno alumno = this.alumnos.get(run);
     	System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
     	alumno.mostrarHabilidades();//cambiar para Habilidades.java
-    }
+    }*/
     
     //funciones de importacion
     
@@ -114,7 +131,7 @@ public class Curso
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
-            	System.out.println("entra en la excepcion");
+            	//System.out.println("entra en la excepcion");
             	habTemp.setEstado(false);
             }
     		habilidadesTemp.add(habTemp);
@@ -131,17 +148,18 @@ public class Curso
 		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
 
 		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
+		/*Pasar a Try Catch
 		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
 		{
 			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
 			return;
 		}
-		
+		*/
 		alumnoTemp.mostrarDatos();
 		alumnoTemp.mostrarHabilidades();
 		
 		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
-		System.out.println("Importación realizada con éxito\n");
+		//System.out.println("Importación realizada con éxito\n");
     }
     //parametros de entrada invertido
     public void importarAlumno (int posInicial, String[] textoSeparado, ArrayList<String> nombreHabilidades)
@@ -171,17 +189,18 @@ public class Curso
         alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
 
         //se asegura que el run sea válido, el proceso se corta en caso de no ser así
+        /* pasar a try catch
         if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
         {
             System.out.println("RUN inválido o repetido, cancelando la importación del alumno");
             return;
         }
-        
+        */
         alumnoTemp.mostrarDatos();
         alumnoTemp.mostrarHabilidades();
         
         this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
-        System.out.println("Importación realizada con éxito\n");
+        //System.out.println("Importación realizada con éxito\n");
     }
     
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter,
@@ -233,16 +252,20 @@ public class Curso
         }
     }
     
+    // Boolean, True si lo encuentra y false sino
     public void cambiarEstadoHabilidadesAlumno (int rut, String inputUsuario, BufferedReader lector) throws IOException
     {
     	Alumno alumnoTemp = this.alumnos.get(rut);
+    	
+    	/* pasar al main
     	if (alumnoTemp == null)
     	{
     		System.out.println("No se ha encontrado un alumno con el RUT especificado");
     		return;
-    	}
+    	}*/
     	alumnoTemp.mostrarHabilidades();
-    	System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
+    	// Pasar al main la pregunta, el método debe recibir el número
+    	//System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
     	inputUsuario = lector.readLine();
     	
     	Habilidades habilidadTemp = alumnoTemp.getHabilidades().get(Integer.parseInt(inputUsuario));

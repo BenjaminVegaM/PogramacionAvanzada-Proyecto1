@@ -32,7 +32,11 @@ public class RegistroCurso
 		String endOfFile = "—————";
 		String endOfCurso = "*****";
 		boolean repetido = false;
-    	
+		
+		// Prueba Ventana
+		VentanaPrueba ventana = new VentanaPrueba();
+    	ventana.setVisible(true);
+    	/*
     	while (linea.equals(endOfFile) != true)
     	{
     		//Se revisa si ya existe un curso con el mismo nombre
@@ -239,6 +243,7 @@ public class RegistroCurso
                             {
                             	System.out.println("Se ha encontrado el alumno");
                             	int runtesteo = alumnoBuscado.getRUN();
+                            	// mostrar no es un método, debe ser parte del main
                             	cursos.get(cont).mostrarDatosAlumno(runtesteo);
                             }
                             
@@ -276,6 +281,7 @@ public class RegistroCurso
                             Enumeration<Integer> enu = cursos.get(cont).getAlumnos().keys();
                             while (enu.hasMoreElements())
                             {
+                            	// mostrar no es un método, debe ser parte del main
                             	cursos.get(cont).mostrarDatosAlumno(enu.nextElement());
                             }
                     		encontrado = true;
@@ -329,6 +335,7 @@ public class RegistroCurso
 			            		System.out.println("Los alumnos que aprueban son: ");
 			            		for (int cont = 0; cont < aprobados.size(); cont += 1)
 			            		{
+			            			// mostrar no es un método, debe ser parte del main
 			            			aprobados.get(cont).mostrarDatos();
 			            		}
 			            		
@@ -365,6 +372,6 @@ public class RegistroCurso
                     break;
                 }
             }
-        }
+        }*/
     }
 }

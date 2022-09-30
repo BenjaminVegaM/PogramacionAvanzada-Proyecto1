@@ -38,6 +38,8 @@ public class Alumno
     }
     public ArrayList<Habilidades> getHabilidades() 
     {
+    	ArrayList<Habilidades> copia = new ArrayList();
+    	while(this.habilidades.)
         return habilidades;
     }
     public ArrayList<String> getNombreHabilidades()
@@ -94,7 +96,9 @@ public class Alumno
     
     //funciones
     /*para mostrar el estado de las habilidades de un alumno*/
-    public void mostrarHabilidades()
+    
+    // solo MAIN debe tener System IO----------------------------------------------------------
+    /*public void mostrarHabilidades()
     {
     	String estadoHab = "a";
     	for (int index = 0 ; index < this.habilidades.size() ; index += 1)
@@ -112,14 +116,15 @@ public class Alumno
     	}
     	
     	System.out.println("\n");
-    }
+    }*/
     
     /*muestra el nombre y el run de un alumno*/
+    /*
     public void mostrarDatos()
     {
     	System.out.println("\nNombre: "+ this.nombre);
     	System.out.println("RUN: "+ this.run);
-    }
+    }*/
     public Alumno crearAlumno(String nombre, int run)
     {
     	Alumno nuevoAlumno = new Alumno();
