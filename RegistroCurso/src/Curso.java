@@ -53,12 +53,12 @@ public class Curso
     // getNombreAlumno_Nombre(String nombre)
     // getNombreAlumno_Posicion(int indice)
     
-    public String getHabilidadesAlumno_RUN(int run)
+    public ArrayList<Habilidades> getHabilidadesAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
-    	alumno.getHabilidades()
+    	alumno.getHabilidades();
     	alumno.mostrarHabilidades();//cambiar para Habilidades.java
-    	return
+    	return alumno.getHabilidades();
     }
     
     public int getCantAlumnos() 
@@ -92,7 +92,7 @@ public class Curso
     public void agregarAlumno (Alumno alumno)
     {
     	//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
-    	alumno.mostrarHabilidades();
+    	//alumno.mostrarHabilidades();
     	//System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
     }
@@ -105,13 +105,14 @@ public class Curso
     }
     
     /*cuando se quiera mostrar los datos de un alumno buscándolo por run*/
-    /*
-    public void mostrarDatosAlumno (int run)
+    
+    public Alumno mostrarDatosAlumno (int run)
     {
     	Alumno alumno = this.alumnos.get(run);
-    	System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
-    	alumno.mostrarHabilidades();//cambiar para Habilidades.java
-    }*/
+    	return alumno;
+    			//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
+    	//alumno.mostrarHabilidades();//cambiar para Habilidades.java
+    }
     
     //funciones de importacion
     
@@ -156,7 +157,7 @@ public class Curso
 		}
 		*/
 		alumnoTemp.mostrarDatos();
-		alumnoTemp.mostrarHabilidades();
+		//alumnoTemp.mostrarHabilidades(); 
 		
 		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
 		//System.out.println("Importación realizada con éxito\n");

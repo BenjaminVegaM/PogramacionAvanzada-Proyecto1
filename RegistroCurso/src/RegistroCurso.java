@@ -36,7 +36,7 @@ public class RegistroCurso
 		// Prueba Ventana
 		VentanaPrueba ventana = new VentanaPrueba();
     	ventana.setVisible(true);
-    	/*
+    	
     	while (linea.equals(endOfFile) != true)
     	{
     		//Se revisa si ya existe un curso con el mismo nombre
@@ -244,7 +244,17 @@ public class RegistroCurso
                             	System.out.println("Se ha encontrado el alumno");
                             	int runtesteo = alumnoBuscado.getRUN();
                             	// mostrar no es un método, debe ser parte del main
-                            	cursos.get(cont).mostrarDatosAlumno(runtesteo);
+                            	//cursos.get(cont).mostrarDatosAlumno(runtesteo);
+                            	Alumno alumnoMostrar = cursos.get(cont).mostrarDatosAlumno(runtesteo);
+                            	System.out.println("Nombre: " + alumnoMostrar.getNombre() + "\nRun: "+alumnoMostrar.getRUN()+"\nEstado Habilidades: ");
+                            	for(int index = 0 ; index < alumnoMostrar.getHabilidades().size() ; index += 1  ) 
+                            	{
+                            		//alumnoMostrar.mostrarHabilidades(index);
+                            		System.out.println(alumnoMostrar.getHabilidades().get(index).getNombre()+": "+ alumnoMostrar.mostrarHabilidades(index));
+                            		//System.out.println(getHabilidades().get(index).getNombre()+": "+ estadoHab);
+                            	}
+                            		
+                            	System.out.println();
                             }
                             
                     		encontrado = true;
@@ -372,6 +382,6 @@ public class RegistroCurso
                     break;
                 }
             }
-        }*/
+        }
     }
 }
