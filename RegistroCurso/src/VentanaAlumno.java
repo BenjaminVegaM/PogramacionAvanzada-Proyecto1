@@ -3,8 +3,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -58,49 +61,58 @@ public class VentanaAlumno extends JFrame {
 		
 		JLabel lblHabilidades = new JLabel("Habilidades:");
 		lblHabilidades.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblHabilidades.setBounds(10, 126, 111, 14);
+		lblHabilidades.setBounds(10, 133, 111, 14);
 		contentPane.add(lblHabilidades);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(131, 122, 293, 22);
-		contentPane.add(comboBox);
+		ArrayList<String> nombreHabilidades = instituto.getNombreHabilidadesCurso(indiceCurso); 
+		String [] arregloHabilidades = new String [nombreHabilidades.size()+1];
+		arregloHabilidades[0] = "";
+	    for(int index = 1 ; index <= nombreHabilidades.size();index++) 
+    	{
+	    	arregloHabilidades[index] = nombreHabilidades.get(index-1);
+        }
+		
+		JComboBox comboBox_Habilidades = new JComboBox();
+		comboBox_Habilidades.setModel(new DefaultComboBoxModel(arregloHabilidades));
+		comboBox_Habilidades.setBounds(131, 129, 293, 22);
+		contentPane.add(comboBox_Habilidades);
 		
 		JButton btnAadirHabilidad = new JButton("Cambiar Estado Habilidad");
 		btnAadirHabilidad.setBounds(131, 227, 179, 23);
 		contentPane.add(btnAadirHabilidad);
 		
-		JLabel lblNombreHabilidad = new JLabel("Nombre Habilidad:");
-		lblNombreHabilidad.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNombreHabilidad.setBounds(10, 155, 111, 14);
-		contentPane.add(lblNombreHabilidad);
-		
 		JLabel lblEstadoHabilidad = new JLabel("Estado Habilidad:");
 		lblEstadoHabilidad.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblEstadoHabilidad.setBounds(10, 180, 111, 14);
+		lblEstadoHabilidad.setBounds(10, 162, 111, 14);
 		contentPane.add(lblEstadoHabilidad);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		int runAux;
+		Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
+	    for(int index = 0 ; index < indiceAlumno;index++) 
+    	{
+        	// Deberiamos poner un break si enu.hasMoreElements() == null
+        	enu.nextElement();
+        }
+	    Alumno alumnoAux = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement());
+		
+		JLabel lblNewLabel_1 = new JLabel(alumnoAux.getNombre());
 		lblNewLabel_1.setBounds(131, 11, 293, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		JLabel lblNewLabel_1_1 = new JLabel(Integer.toString(alumnoAux.getRUN()));
 		lblNewLabel_1_1.setBounds(131, 36, 293, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("New label");
+		JLabel lblNewLabel_1_2 = new JLabel(Integer.toString(alumnoAux.getEdad()));
 		lblNewLabel_1_2.setBounds(131, 61, 293, 14);
 		contentPane.add(lblNewLabel_1_2);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("New label");
+		JLabel lblNewLabel_1_3 = new JLabel(Boolean.toString(alumnoAux.getAprovacion()));
 		lblNewLabel_1_3.setBounds(131, 86, 293, 14);
 		contentPane.add(lblNewLabel_1_3);
 		
-		JLabel lblNewLabel_1_4 = new JLabel("New label");
-		lblNewLabel_1_4.setBounds(131, 155, 293, 14);
-		contentPane.add(lblNewLabel_1_4);
-		
-		JLabel lblNewLabel_1_5 = new JLabel("New label");
-		lblNewLabel_1_5.setBounds(131, 180, 293, 14);
+		JLabel lblNewLabel_1_5 = new JLabel(Boolean.toString(alumnoAux.getAprobado()));
+		lblNewLabel_1_5.setBounds(131, 162, 293, 14);
 		contentPane.add(lblNewLabel_1_5);
 		
 		JSeparator separator = new JSeparator();
