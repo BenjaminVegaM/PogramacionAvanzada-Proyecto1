@@ -1,24 +1,26 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Aya Shameimaru,21111111,true,false,false,false
-Reimu Hakurei,3021291,true,true,false,true
-Marisa Kirisame,31111330,true,true,true,true
-Kasen Ibara,21373170,true,true,true,true
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Aya Shameimaru,21111111,1000,true,false,false,false
+Reimu Hakurei,3021291,20,true,true,false,true
+Marisa Kirisame,31111330,19,true,true,true,true
+Kasen Ibara,21373170,1000,true,true,true,true
 *****
 Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Sanae Moriya,3021291,true,true,true,true
-Kanako Yasaka,31111330,true,false,false,false
-Suwako Moriya,21373170,false,true,false,true
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Sanae Moriya,3021291,25,true,true,true,true
+Kanako Yasaka,31111330,2000,true,false,false,false
+Suwako Moriya,21373170,2300,false,true,false,true
 *****
 Oni,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Ibara Douji,3021291,true,true,true,true
-Yuugi Hoshiguma,31111330,true,false,false,false
-Suika Ibuki,21373170,false,true,false,true
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Ibara Douji,3021291,500,true,true,true,true
+Yuugi Hoshiguma,31111330,500,true,false,false,false
+Suika Ibuki,21373170,500,false,true,false,true
 *****
 UWU,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Clownpiece,3021291,true,true,true,true
-Junko,31111330,true,true,true,true
-Hecatia Lapislázuli,21373170,true,true,true,true
-*****
-Tengu
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Clownpiece,3021291,500,true,true,true,true
+Junko,31111330,10000,true,true,true,true
+Hecatia Lapislázuli,500,21373170,true,true,true,true
 *****
 —————

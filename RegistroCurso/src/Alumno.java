@@ -41,7 +41,7 @@ public class Alumno extends Persona
     public ArrayList<Habilidades> getHabilidades() 
     {
     	//REVISAR
-    	ArrayList<Habilidades> copiaHabilidades = (ArrayList) habilidades.clone();
+    	ArrayList<Habilidades> copiaHabilidades = this.habilidades;
         return copiaHabilidades;
     }
     public ArrayList<String> getNombreHabilidades()
@@ -102,6 +102,18 @@ public class Alumno extends Persona
     	//}
     	return estadoHab;
     	//System.out.println("\n");
+    }
+    
+    public void cambiarEstadoHabilidad (int index)
+    {
+    	if (this.habilidades.get(index).getEstado() == true)
+    	{
+    		this.habilidades.get(index).setEstado(false);
+    	}
+    	else
+    	{
+    		this.habilidades.get(index).setEstado(true);
+    	}
     }
     
     /*muestra el nombre y el run de un alumno*/

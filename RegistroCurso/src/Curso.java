@@ -118,7 +118,7 @@ public class Curso
     
     /*para retornar un alumno del hashtable cuando se le da un run*/
     /*lo podríamos usar para alterar datos de un alumno específico, requiere experimentación*/
-    //IGUAL ESTO DEBERÍA LLAMARSE getAlumno SOLO DIGO EH????
+    //IGUAL ESTO DEBERÍA LLAMARSE getCopiaAlumno SOLO DIGO EH????
     public Alumno buscarAlumno(int run)
     {
     	Alumno copiaAlumno = this.alumnos.get(run);
@@ -139,7 +139,7 @@ public class Curso
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
     	int cont = 0;
-    	int posInicial = 2;
+    	int posInicial = 3;
     	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
 		{
     		Habilidades habTemp = new Habilidades();
@@ -165,6 +165,7 @@ public class Curso
 			//igual este no es lugar para ponerlo pero bueno
 		}
 		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+		alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
 
 		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
 		/*Pasar a Try Catch
@@ -203,52 +204,59 @@ public class Curso
     //parametros de entrada invertido
     public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades)
     {
-        Alumno alumnoTemp = new Alumno();
-        ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
-        int cont = 0;
-        int posInicial = 2;
-        while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
-        {
-            Habilidades habTemp = new Habilidades();
-            habTemp.setNombre(nombreHabilidades.get(cont));
-            try
+    	Alumno alumnoTemp = new Alumno();
+    	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
+    	int cont = 0;
+    	int posInicial = 3;
+    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
+		{
+    		Habilidades habTemp = new Habilidades();
+    		habTemp.setNombre(nombreHabilidades.get(cont));
+    		try
             {
             	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
+            	//System.out.println("entra en la excepcion");
             	habTemp.setEstado(false);
             }
-            
-            habilidadesTemp.add(habTemp);
-            posInicial += 1;
-            cont += 1;
-        }
-        alumnoTemp.setHabilidades(habilidadesTemp);
-        alumnoTemp.setNombre(textoSeparado[0]);
-        alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+    		habilidadesTemp.add(habTemp);
+			posInicial += 1;
+			cont += 1;
+		}
+		alumnoTemp.setHabilidades(habilidadesTemp);
+		alumnoTemp.setNombre(textoSeparado[0]);
+		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
+		{
+			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
+			//igual este no es lugar para ponerlo pero bueno
+		}
+		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+		alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
 
-        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
-        /* pasar a try catch
-        if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
-        {
-            System.out.println("RUN inválido o repetido, cancelando la importación del alumno");
-            return;
-        }
-        */
-        //alumnoTemp.mostrarDatos();
+		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
+		/*Pasar a Try Catch
+		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+		{
+			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
+			return;
+		}
+		*/
+		//alumnoTemp.mostrarDatos();
         //alumnoTemp.mostrarHabilidades();
         
         this.agregarAlumno(alumnoTemp);
         this.cantAlumnos += 1;
-        //System.out.println("Importación realizada con éxito\n");
-        return true;
+		//System.out.println("Importación realizada con éxito\n");
+		return true;
     }
     
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
     	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
     	//vaya solución más fea tio...
+    	//QUE FALTAN LAS HABILIDADES ME CAGO EN LA PUTA, QUE NO SE SABE SI LAS TIENE O NO
     	int rutPrueba;
     	try
 		{
@@ -272,7 +280,13 @@ public class Curso
     	}
     	printWriter.write("\n");
     	
-    	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
+    	//Se asume que el profesor existe, ya que no hay forma de importar un curso sin profesor
+    	printWriter.write(this.profesor.getNombre()+","+this.profesor.getRUN()+","+this.profesor.getEdad()+
+    					","+this.profesor.getMateriaPrincipal()+","+this.profesor.getAnyosEnsenyando()+","
+    					+this.profesor.getCalidad());
+    	printWriter.write("\n");
+    	
+    	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN()+","+alumnoTemp.getEdad());
     	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
     	{
     		printWriter.write(",");
@@ -284,7 +298,7 @@ public class Curso
         	alumnoTemp = this.buscarAlumno(enu.nextElement());
         	habilidadesTemp = alumnoTemp.getHabilidades();
         	printWriter.write("\n");
-        	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN());
+        	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN()+","+alumnoTemp.getEdad());
         	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
         	{
         		printWriter.write(",");
@@ -298,31 +312,9 @@ public class Curso
      * Posibilidad posibiladosa: que en el main se busque todo, y que esto solo reciba el rut y la habilidad que se quiera
      * cambiar, para que así esta función no imprima nada y solo cambie el estado, el main mostrará las habilidades y tal
      * */
-    public void cambiarEstadoHabilidadesAlumno (int rut, String inputUsuario, BufferedReader lector) throws IOException
+    public void cambiarEstadoHabilidadesAlumno (int rut, int inputUsuario)
     {
-    	Alumno alumnoTemp = this.alumnos.get(rut);
-    	
-    	/* pasar al main
-    	if (alumnoTemp == null)
-    	{
-    		System.out.println("No se ha encontrado un alumno con el RUT especificado");
-    		return;
-    	}*/
-    	//alumnoTemp.mostrarHabilidades();
-    	// Pasar al main la pregunta, el método debe recibir el número
-    	//System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
-    	inputUsuario = lector.readLine();
-    	
-    	Habilidades habilidadTemp = alumnoTemp.getHabilidades().get(Integer.parseInt(inputUsuario));
-    	
-    	if (habilidadTemp.getEstado() == true)
-    	{
-    		habilidadTemp.setEstado(false);
-    	}
-    	else
-    	{
-    		habilidadTemp.setEstado(true);
-    	}
+    	this.alumnos.get(rut).cambiarEstadoHabilidad(inputUsuario);
     }
     
     //podríamos pasarle un número a la mierda esta para indicar si queremos que retorne los aprobados o los reprobados

@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -75,9 +73,9 @@ public class Instituto
 		return cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
 	}
 	
-	public void cambiarEstadoHabilidadesAlumno (int index, int rut, String inputUsuario, BufferedReader lector) throws IOException
+	public void cambiarEstadoHabilidadesAlumno (int index, int rut, int inputUsuario)
 	{
-		cursos.get(index).cambiarEstadoHabilidadesAlumno(rut, inputUsuario, lector);
+		cursos.get(index).cambiarEstadoHabilidadesAlumno(rut, inputUsuario);
 	}
 	public Alumno buscarAlumno (int index, int rut)
 	{

@@ -86,6 +86,8 @@ public class RegistroCurso
     		if (linea.equals(endOfCurso) == true)
     		{
     			System.out.println("Se ha encontrado el fin del curso antes de llegar al profesor, cancelando la importación de este curso");
+    			linea = lectorInstituto.readLine();
+        		lineaDividida = linea.split(",");
     			continue;
     		}
     		lineaDividida = linea.split(",");
@@ -213,7 +215,32 @@ public class RegistroCurso
                     		encontrado = true;
                     		System.out.println("Se ha encontrado el curso, ahora ingrese el RUT del alumno: ");
                     		inputUsuario = lector.readLine();
-                    		instituto.cambiarEstadoHabilidadesAlumno(cont, Integer.parseInt(inputUsuario), inputUsuario, lector);
+                    		/* Esto se va a cambiar por: buscar el alumno y mostrar los datos de la copia
+                    		 * Escoger la mierda, y luego llamar a la funciond de cambiar el estado y tal
+                    		 **/
+                    		Alumno alumnoTemp = instituto.buscarAlumno(cont, Integer.parseInt(inputUsuario));
+                    		if (alumnoTemp == null)
+                    		{
+                    			System.out.println("No se ha encontrado un alumno con el RUT especificado");
+                    		}
+                    		ArrayList <Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
+                    		
+                    		System.out.println("¿Cuál de estas habilidades desea cambiar?");
+                    		for (int indexHab = 0; indexHab < habilidadesTemp.size(); indexHab += 1)
+                    		{
+                    			System.out.println((indexHab+1)+". Nombre: "+habilidadesTemp.get(indexHab).getNombre());
+                    			if (habilidadesTemp.get(indexHab).getEstado() == true)
+                    			{
+                    				System.out.println("   Estado: Aprobada");
+                    			}
+                    			else
+                    			{
+                    				System.out.println("   Estado: Reprobada");
+                    			}
+                    		}
+                        	inputUsuario = lector.readLine();
+                    		
+                    		instituto.cambiarEstadoHabilidadesAlumno(cont, alumnoTemp.getRUN(),Integer.parseInt(inputUsuario)-1);
                     		break;
                     	}
                     }
@@ -245,7 +272,7 @@ public class RegistroCurso
                             else
                             {
                             	System.out.println("Se ha encontrado el alumno");
-                            	int runtesteo = alumnoBuscado.getRUN();
+                            	//int runtesteo = alumnoBuscado.getRUN();
                             	// mostrar no es un método, debe ser parte del main
                             	//cursos.get(cont).mostrarDatosAlumno(runtesteo);
                             	System.out.println("Nombre: " + alumnoBuscado.getNombre() + "\nRun: "+alumnoBuscado.getRUN()+"\nEstado Habilidades: ");
@@ -294,6 +321,8 @@ public class RegistroCurso
                             while (enu.hasMoreElements())
                             {
                             	Alumno alumnoAux = instituto.getCopiaAlumnoCurso(cont, enu.nextElement());
+                            	System.out.println("Nombre: "+alumnoAux.getNombre());
+                            	System.out.println("Edad: "+alumnoAux.getEdad());
                             	//AQUÍ SE SUPONE QUE SE TIENEN QUE MOSTRAR SUS DATOS
                             }
                     		encontrado = true;
@@ -367,6 +396,7 @@ public class RegistroCurso
                 	
                 	for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
                 	{
+                		//creo que ni siquiera es necesario crear el cursoTemp1
                 		Curso cursoTemp1 = instituto.getCopiaCurso(cont);
                     	Enumeration<Integer> enu1 = instituto.getKeysAlumnosCurso(cont);
                     	cursoTemp1.updateFile(testFile,testFileWriter,printWriterTestFile,enu1);

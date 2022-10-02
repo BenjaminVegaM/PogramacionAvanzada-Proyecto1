@@ -1,29 +1,34 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Reimu Hakurei,3021291,True,True,False,True
-Kasen Ibara,21373170,True,True,True,True
-Marisa Kirisame,31111330,True,True,True,True
-Aya Shameimaru,21111111,True,False,False,False
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Reimu Hakurei,3021291,20,True,True,False,True
+Kasen Ibara,21373170,1000,True,True,True,True
+Marisa Kirisame,31111330,19,True,True,True,True
+Aya Shameimaru,21111111,1000,True,False,False,False
 *****
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
+Yukari Yakumo,23498738,1200,Old Hag,10,100
 nombre alumno 1,3021291,True,True,False,True
 nombre alumno 2,21373170,False,True,False,True
 nombre alumno 3,31111330,True,False,False,False
 nombre alumno 4,21111111,True,False,False,False
 *****
 Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Sanae Moriya,3021291,True,True,True,True
-Suwako Moriya,21373170,False,True,False,True
-Kanako Yasaka,31111330,True,False,False,False
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Sanae Moriya,3021291,25,True,True,True,True
+Suwako Moriya,21373170,2300,False,True,False,True
+Kanako Yasaka,31111330,2000,True,False,False,False
 *****
 Oni,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Ibara Douji,3021291,True,True,True,True
-Suika Ibuki,21373170,False,True,False,True
-Yuugi Hoshiguma,31111330,True,False,False,False
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Ibara Douji,3021291,500,True,True,True,True
+Suika Ibuki,21373170,500,False,True,False,True
+Yuugi Hoshiguma,31111330,500,True,False,False,False
 *****
 UWU,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Clownpiece,3021291,True,True,True,True
-Hecatia Lapislázuli,21373170,True,True,True,True
-Junko,31111330,True,True,True,True
+Yukari Yakumo,23498738,1200,Old Hag,10,100
+Clownpiece,3021291,500,True,True,True,True
+Hecatia Lapislázuli,500,21373170,True,True,True,True
+Junko,31111330,10000,True,True,True,True
 *****
 Tengu
 *****
