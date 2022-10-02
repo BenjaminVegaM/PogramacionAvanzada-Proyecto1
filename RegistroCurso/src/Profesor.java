@@ -1,10 +1,11 @@
-
-public class Profesor extends Persona {
+public class Profesor extends Persona
+{
 	private String materiaPrincipal;
 	private int anyosEnsenyando;
 	private int calidad;
 
-	public Profesor() {
+	public Profesor()
+	{
 		super();
 		this.materiaPrincipal = "";
 		this.anyosEnsenyando = 0;

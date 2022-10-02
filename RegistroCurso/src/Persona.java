@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Persona {
+public class Persona
+{
 	private String nombre;
 	private int run;           						 /*asegurarse que el run sea válido, pero que no rompa con el proceso de agregar alumnos*/
 	private int edad;
@@ -12,17 +13,17 @@ public class Persona {
 	}
 	
 	// Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters
-		public void setNombre(String s)
+		public void setNombre(String newNombre)
 		{
-			this.nombre = s;
+			this.nombre = newNombre;
 		}
-		public void setRUN(int i)
+		public void setRUN(int newRUT)
 		{
-			this.run = i;
+			this.run = newRUT;
 		}
-		public void setEdad(int i)
+		public void setEdad(int newEdad)
 		{
-			this.edad = i;
+			this.edad = newEdad;
 		}
 		
 		// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters

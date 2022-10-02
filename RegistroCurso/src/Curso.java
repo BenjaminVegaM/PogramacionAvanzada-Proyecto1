@@ -15,6 +15,7 @@ import java.io.*;
 public class Curso 
 {
    private String nombre;
+   private Profesor profesor;
    private Hashtable<Integer,Alumno> alumnos;
    private int cantAlumnos;
    /*hay que ver si lo usamos o que, porque si no hay algo que no funciona aquí*/
@@ -25,15 +26,20 @@ public class Curso
     public Curso() 
     {
         this.nombre = "Nombre";
+        this.profesor = new Profesor();
         this.alumnos = new Hashtable<>();
         this.cantAlumnos = 0;
         //this.nombreHabilidades = new ArrayList<>();
     }
     
     /*Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters*/
-    public void setNombre (String nombre)
+    public void setNombre (String newNombre)
     {
-    	this.nombre = nombre;
+    	this.nombre = newNombre;
+    }
+    public void setProfesor (Profesor newProfesor)
+    {
+    	this.profesor = newProfesor;
     }
     public void setCantAlumnos (int cantidad)
     {
@@ -43,25 +49,30 @@ public class Curso
     /*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
     public Hashtable<Integer,Alumno> getAlumnos()
     {
-        return alumnos;
+    	Hashtable<Integer,Alumno> copiaAlumnos = this.alumnos;
+        return copiaAlumnos;
     }
     public String getNombre()
     {
     	return nombre;
+    }
+    public Profesor getProfesor()
+    {
+    	Profesor copiaProfesor = this.profesor;
+    	return copiaProfesor;
     }
     public String getNombreAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
     	return alumno.getNombre();
     }
-    // getNombreAlumno_Nombre(String nombre)
-    // getNombreAlumno_Posicion(int indice)
     
     public ArrayList<Habilidades> getHabilidadesAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
     	alumno.getHabilidades();
-    	alumno.mostrarHabilidades();//cambiar para Habilidades.java
+    	//mira, lo comentado de abajo... no se por qué está ahí, así que lo voy a comentar y de ahí lo veo
+    	//alumno.mostrarHabilidades();//cambiar para Habilidades.java
     	return alumno.getHabilidades();
     }
     
@@ -90,6 +101,7 @@ public class Curso
     	nuevo.setRUN(run);
     	nuevo.setHabilidades(habilidades);
     	this.alumnos.put(run, nuevo);
+    	this.cantAlumnos += 1;
     	return true;
     }
     
@@ -100,24 +112,23 @@ public class Curso
     	//alumno.mostrarHabilidades();
     	//System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
+    	this.cantAlumnos += 1;
     	return true;
     }
     
     /*para retornar un alumno del hashtable cuando se le da un run*/
     /*lo podríamos usar para alterar datos de un alumno específico, requiere experimentación*/
+    //IGUAL ESTO DEBERÍA LLAMARSE getAlumno SOLO DIGO EH????
     public Alumno buscarAlumno(int run)
     {
-    	return this.alumnos.get(run);
+    	Alumno copiaAlumno = this.alumnos.get(run);
+    	return copiaAlumno;
     }
-    
-    /*cuando se quiera mostrar los datos de un alumno buscándolo por run*/
     
     public Alumno mostrarDatosAlumno (int run)
     {
     	Alumno alumno = this.alumnos.get(run);
     	return alumno;
-    			//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
-    	//alumno.mostrarHabilidades();//cambiar para Habilidades.java
     }
     
     //funciones de importacion
@@ -167,9 +178,28 @@ public class Curso
         //alumnoTemp.mostrarHabilidades();
         
         this.agregarAlumno(alumnoTemp);
+        this.cantAlumnos += 1;
 		//System.out.println("Importación realizada con éxito\n");
 		return true;
     }
+    
+    //HAY QUE HACER LAS EXCEPCIONES DE ESTO
+    public void importarProfesor (String[] textoSeparado)
+    {
+    	Profesor newProfesor = new Profesor();
+    	
+    	//EXCEPCIONES
+    	newProfesor.setNombre(textoSeparado[0]);
+    	newProfesor.setRUN(Integer.parseInt(textoSeparado[1]));
+    	newProfesor.setEdad(Integer.parseInt(textoSeparado[2]));
+    	newProfesor.setMateriaPrincipal(textoSeparado[3]);
+    	newProfesor.setAnyosEnsenyando(Integer.parseInt(textoSeparado[4]));
+    	newProfesor.setCalidad(Integer.parseInt(textoSeparado[5]));
+    	//ACUERDATE ME CAGO EN DIOS
+    	
+    	this.setProfesor(newProfesor);
+    }
+    
     //parametros de entrada invertido
     public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades)
     {
@@ -210,6 +240,7 @@ public class Curso
         //alumnoTemp.mostrarHabilidades();
         
         this.agregarAlumno(alumnoTemp);
+        this.cantAlumnos += 1;
         //System.out.println("Importación realizada con éxito\n");
         return true;
     }
@@ -263,6 +294,10 @@ public class Curso
     }
     
     // Boolean, True si lo encuentra y false sino
+    /* A ver, hay que hacer cosas aquí,
+     * Posibilidad posibiladosa: que en el main se busque todo, y que esto solo reciba el rut y la habilidad que se quiera
+     * cambiar, para que así esta función no imprima nada y solo cambie el estado, el main mostrará las habilidades y tal
+     * */
     public void cambiarEstadoHabilidadesAlumno (int rut, String inputUsuario, BufferedReader lector) throws IOException
     {
     	Alumno alumnoTemp = this.alumnos.get(rut);
@@ -273,7 +308,7 @@ public class Curso
     		System.out.println("No se ha encontrado un alumno con el RUT especificado");
     		return;
     	}*/
-    	alumnoTemp.mostrarHabilidades();
+    	//alumnoTemp.mostrarHabilidades();
     	// Pasar al main la pregunta, el método debe recibir el número
     	//System.out.println("¿Cuál de estas habilidades desea cambiar? (ingrese un número asumiendo que la primera es 0)");
     	inputUsuario = lector.readLine();

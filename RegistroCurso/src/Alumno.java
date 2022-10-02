@@ -40,8 +40,9 @@ public class Alumno extends Persona
     }
     public ArrayList<Habilidades> getHabilidades() 
     {
-    	ArrayList<Habilidades> copia = (ArrayList) habilidades.clone();
-        return copia;
+    	//REVISAR
+    	ArrayList<Habilidades> copiaHabilidades = (ArrayList) habilidades.clone();
+        return copiaHabilidades;
     }
     public ArrayList<String> getNombreHabilidades()
     {
@@ -107,8 +108,8 @@ public class Alumno extends Persona
     
     public void mostrarDatos()
     {
-    	System.out.println("\nNombre: "+ this.nombre);
-    	System.out.println("RUN: "+ this.run);
+    	System.out.println("\nNombre: "+ this.getNombre());
+    	System.out.println("RUN: "+ this.getRUN());
     }
     public Alumno crearAlumno(String nombre, int run)
     {
@@ -120,15 +121,15 @@ public class Alumno extends Persona
     public Alumno crearAlumno(int run, String nombre)
     {
     	Alumno nuevoAlumno = new Alumno();
-    	this.nombre = nombre;
-    	this.run = run;
+    	this.setNombre(nombre);
+    	this.setRUN(run);
     	return nuevoAlumno;
     }
     public Alumno crearAlumno(String nombre, int run, ArrayList<Habilidades> habilidades)
     {
     	Alumno nuevoAlumno = new Alumno();
-    	this.nombre = nombre;
-    	this.run = run;
+    	this.setNombre(nombre);
+    	this.setRUN(run);
     	this.habilidades = habilidades;
     	return nuevoAlumno;
     }

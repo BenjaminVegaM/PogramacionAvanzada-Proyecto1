@@ -42,12 +42,12 @@ public class RegistroCurso
     		//Se revisa si ya existe un curso con el mismo nombre
     		if (instituto.getNumeroCursos() >= 1)
     		{
-    			for (int cont = 0; cont < instituto.getNumeroCursos(); cont ++)
+    			for (int cont = 0; cont < instituto.getNumeroCursos(); cont += 1)
     			{
     				//System.out.println("se comparan: "+lineaDividida[0]+" y "+cursos.get(cont).getNombreCurso());
     				if (lineaDividida[0].equals(instituto.getNombreCurso(cont)) == true)
     				{
-    					System.out.println("Se ha descubierto que uno de los nombres está repetido, pasando al siguiente curso");
+    					System.out.println("Se ha descubierto que el nombre '"+instituto.getNombreCurso(cont)+"' está repetido, pasando al siguiente curso");
     					repetido = true;
     					
     					linea = lectorInstituto.readLine();
@@ -72,21 +72,29 @@ public class RegistroCurso
     		cursoAImportar.setNombre(lineaDividida[0]);
     		System.out.println("\nEl nombre del curso es: " + cursoAImportar.getNombreCurso());
     		
-    		//Se importan las habilidades desde la línea de texto empezando desde la posición 1
+    		//Se importan las habilidades
     		ArrayList<String> nombreHabilidadesTemp1 = new ArrayList<>();
     		int posInicial = 1;
     		while (posInicial < lineaDividida.length)
     		{
-    			//System.out.println("se ha ingresado la habilidad: " + lineaDividida[posInicial]);
     			nombreHabilidadesTemp1.add(lineaDividida[posInicial]);
     			posInicial += 1;
     		}
     		
-    		//Se obtienen los alumnos y se colocan en el arreglo que les corresponde
+    		//Importación de profesor
+    		linea = lectorInstituto.readLine();
+    		if (linea.equals(endOfCurso) == true)
+    		{
+    			System.out.println("Se ha encontrado el fin del curso antes de llegar al profesor, cancelando la importación de este curso");
+    			continue;
+    		}
+    		lineaDividida = linea.split(",");
+    		cursoAImportar.importarProfesor(lineaDividida);
+    		
+    		//Importación de alumnos
     		linea = lectorInstituto.readLine();
     		while(linea.equals(endOfCurso) != true)
     		{
-    			//System.out.println("Importando alumnos");
     			lineaDividida = linea.split(",");
     			cursoAImportar.importarAlumno(lineaDividida, nombreHabilidadesTemp1);
         		linea = lectorInstituto.readLine();
@@ -168,10 +176,10 @@ public class RegistroCurso
                 		System.out.println("Nombre inválido, inténtelo de nuevo");
                 	}
                     
-                    for (int cont = 0; cont < cursos.size() ; cont++)
+                    for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                     {
                     	//podríamos cambiar esto para que se repita hasta que se indique un nombre válido o se quiera salir???
-                    	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
+                    	if (Objects.equals(inputUsuario,instituto.getNombreCurso(cont)))
                     	{
                     		System.out.println("Un curso con ese nombre ya existe."); 
                     		encontrado = true;
@@ -183,7 +191,7 @@ public class RegistroCurso
                     {
                     	Curso cursoTemp = new Curso();
                     	cursoTemp.setNombre(inputUsuario);
-                    	cursos.add(cursoTemp);
+                    	instituto.addCurso(cursoTemp);
                     	System.out.println("Nuevo curso "+cursoTemp.getNombreCurso()+" creado correctamente.");
                     	break;
                     }
@@ -198,14 +206,14 @@ public class RegistroCurso
                 	inputUsuario = lector.readLine();
                 	
                 	encontrado = false;
-                    for (int cont = 0; cont < cursos.size() ; cont++)
+                    for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                     {
-                    	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
+                    	if (Objects.equals(inputUsuario,instituto.getNombreCurso(cont)))
                     	{
                     		encontrado = true;
                     		System.out.println("Se ha encontrado el curso, ahora ingrese el RUT del alumno: ");
                     		inputUsuario = lector.readLine();
-                    		cursos.get(cont).cambiarEstadoHabilidadesAlumno(Integer.parseInt(inputUsuario), inputUsuario, lector);
+                    		instituto.cambiarEstadoHabilidadesAlumno(cont, Integer.parseInt(inputUsuario), inputUsuario, lector);
                     		break;
                     	}
                     }
@@ -221,15 +229,15 @@ public class RegistroCurso
                     System.out.println("Buscar alumno en un curso");
                     System.out.println("Ingrese el nombre del curso en el que quiere hacer la búsqueda: ");
                     inputUsuario = lector.readLine();
-                    for (int cont = 0; cont < cursos.size() ; cont++)
+                    for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                     {
-                    	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
+                    	if (Objects.equals(inputUsuario,instituto.getNombreCurso(cont)))
                     	{
                     		System.out.println("Se ha encontrado el curso");
                     		System.out.println("Ingrese el RUN del alumno: ");
                     		
                             inputUsuario = lector.readLine();
-                            Alumno alumnoBuscado = cursos.get(cont).buscarAlumno(Integer.parseInt(inputUsuario));
+                            Alumno alumnoBuscado = instituto.buscarAlumno(cont, Integer.parseInt(inputUsuario));
                             if (alumnoBuscado == null)
                             {
                             	System.out.println("No se ha encontrado el alumno");
@@ -240,12 +248,11 @@ public class RegistroCurso
                             	int runtesteo = alumnoBuscado.getRUN();
                             	// mostrar no es un método, debe ser parte del main
                             	//cursos.get(cont).mostrarDatosAlumno(runtesteo);
-                            	Alumno alumnoMostrar = cursos.get(cont).mostrarDatosAlumno(runtesteo);
-                            	System.out.println("Nombre: " + alumnoMostrar.getNombre() + "\nRun: "+alumnoMostrar.getRUN()+"\nEstado Habilidades: ");
-                            	for(int index = 0 ; index < alumnoMostrar.getHabilidades().size() ; index += 1  ) 
+                            	System.out.println("Nombre: " + alumnoBuscado.getNombre() + "\nRun: "+alumnoBuscado.getRUN()+"\nEstado Habilidades: ");
+                            	for(int index = 0 ; index < alumnoBuscado.getHabilidades().size() ; index += 1  ) 
                             	{
                             		//alumnoMostrar.mostrarHabilidades(index);
-                            		System.out.println(alumnoMostrar.getHabilidades().get(index).getNombre()+": "+ alumnoMostrar.mostrarHabilidades(index));
+                            		System.out.println(alumnoBuscado.getHabilidades().get(index).getNombre()+": "+ alumnoBuscado.mostrarHabilidades(index));
                             		//System.out.println(getHabilidades().get(index).getNombre()+": "+ estadoHab);
                             	}
                             		
@@ -274,20 +281,20 @@ public class RegistroCurso
                     System.out.println("Ingrese el nombre del curso que quiere mostrar: ");
                     encontrado = false;
                     inputUsuario = lector.readLine();
-                    for (int cont = 0; cont < cursos.size() ; cont++)
+                    for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                     {
-                    	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
+                    	if (Objects.equals(inputUsuario,instituto.getNombreCurso(cont)))
                     	{
                     		System.out.println("Se ha encontrado el curso");
-                    		if (cursos.get(cont).getAlumnos().size() < 1)
+                    		if (instituto.getCantAlumnosCurso(cont) < 1)
                     		{
                     			System.out.println("Pero este se encuentra vacío, inténtelo con otro");
                     		}
-                            Enumeration<Integer> enu = cursos.get(cont).getAlumnos().keys();
+                            Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(cont);
                             while (enu.hasMoreElements())
                             {
-                            	// mostrar no es un método, debe ser parte del main
-                            	cursos.get(cont).mostrarDatosAlumno(enu.nextElement());
+                            	Alumno alumnoAux = instituto.getCopiaAlumnoCurso(cont, enu.nextElement());
+                            	//AQUÍ SE SUPONE QUE SE TIENEN QUE MOSTRAR SUS DATOS
                             }
                     		encontrado = true;
                     		break;
@@ -322,9 +329,9 @@ public class RegistroCurso
 			            	{
 			            		//me da lata editar los cursos ahora, así que tienen que tener todo aprobado para pasar
 			            		ArrayList<Alumno> aprobados = new ArrayList<>();
-			            		for (int cont = 0; cont < cursos.size(); cont += 1)
+			            		for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
 			            		{
-			            			ArrayList<Alumno> aprobadosCursoActual = cursos.get(cont).alumnosAprobados();
+			            			ArrayList<Alumno> aprobadosCursoActual = instituto.getAlumnosAprobadosCurso(cont);
 			            			for (int contAprobados = 0; contAprobados < aprobadosCursoActual.size(); contAprobados += 1)
 			            			{
 			            				aprobados.add(aprobadosCursoActual.get(contAprobados));
@@ -358,10 +365,10 @@ public class RegistroCurso
                 	FileWriter testFileWriter = new FileWriter(testFile);
                 	PrintWriter printWriterTestFile = new PrintWriter(testFileWriter);
                 	
-                	for (int cont = 0; cont < cursos.size(); cont += 1)
+                	for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
                 	{
-                		Curso cursoTemp1 = cursos.get(cont);
-                    	Enumeration<Integer> enu1 = cursos.get(cont).getAlumnos().keys();
+                		Curso cursoTemp1 = instituto.getCopiaCurso(cont);
+                    	Enumeration<Integer> enu1 = instituto.getKeysAlumnosCurso(cont);
                     	cursoTemp1.updateFile(testFile,testFileWriter,printWriterTestFile,enu1);
                     	printWriterTestFile.write("\n*****\n");
                 	}
