@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,7 +44,17 @@ public class VentanaCurso extends JFrame {
         contentPane.add(lblSeleccionarAlumno);
         
         JComboBox comboBox_Alumnos = new JComboBox();
-        comboBox_Alumnos.setModel(new DefaultComboBoxModel(new String[] {"asbflkj", "asfgjuknaslf", "asjklfnblkas"}));
+        String [] arrayAlumnos= new String [instituto.getCantAlumnosCurso(indiceCurso)+1];
+        arrayAlumnos[0] = "";
+        // Puede ser que el curso este vacio, eso puede dar un error
+        Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
+        for(int index = 1 ; index-1 < instituto.getCantAlumnosCurso(indiceCurso);index++) 
+        {
+        	// Deberiamos poner un break si enu.hasMoreElements() == null
+        	arrayAlumnos[index] = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement()).getNombre();
+        }
+        
+        comboBox_Alumnos.setModel(new DefaultComboBoxModel(arrayAlumnos));
         comboBox_Alumnos.setToolTipText("Lista de Cursos");
         comboBox_Alumnos.setBounds(137, 168, 208, 22);
         contentPane.add(comboBox_Alumnos);
@@ -82,7 +93,7 @@ public class VentanaCurso extends JFrame {
         lblNombreProfesor.setBounds(137, 96, 287, 14);
         contentPane.add(lblNombreProfesor);
         
-        JLabel lblCantidadAlumnos = new JLabel("CantidadAlumnos");
+        JLabel lblCantidadAlumnos = new JLabel(Integer.toString(instituto.getCantAlumnosCurso(indiceCurso)));
         lblCantidadAlumnos.setBounds(137, 46, 287, 14);
         contentPane.add(lblCantidadAlumnos);
         
