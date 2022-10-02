@@ -3,27 +3,16 @@ import java.util.Enumeration;
 
 public class Instituto
 {
-	private String nombre;
 	private ArrayList<Curso> cursos;
 	
 	public Instituto()
 	{
-		this.nombre = "Nombre";
 		this.cursos = new ArrayList<>();
-		
 	}
 	
     /*Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters*/
-	public void setNombre(String nombre)
-	{
-		this.nombre = nombre;
-	}
 	
 	/*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
-	public String getNombre()
-	{
-		return this.nombre;
-	}
 	public int getNumeroCursos()
 	{
 		return this.cursos.size();
@@ -64,9 +53,17 @@ public class Instituto
 	}
 	
 	/*métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos*/
-	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades)
+	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
-		return cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
+		boolean resultado = cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
+		if (resultado == true)
+		{
+			return resultado;
+		}
+		else
+		{
+			throw new ImportarAlumnosException();
+		}
 	}
 	
 	public void cambiarEstadoHabilidadesAlumno (int index, int rut, int inputUsuario)

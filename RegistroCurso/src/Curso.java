@@ -127,7 +127,7 @@ public class Curso
     //funciones de importacion
     
     /*importa un alumno de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
-    public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado)
+    public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
@@ -156,23 +156,27 @@ public class Curso
 			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
 			//igual este no es lugar para ponerlo pero bueno
 		}
-		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
-		alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+		
 
 		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
-		/*Pasar a Try Catch
+		try
+		{
+			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+		}
+		catch (NumberFormatException exception)
+		{
+			throw new ImportarAlumnosException();
+		}
+		
 		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
 		{
 			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
-			return;
+			return false;
 		}
-		*/
-		//alumnoTemp.mostrarDatos();
-        //alumnoTemp.mostrarHabilidades();
         
         this.agregarAlumno(alumnoTemp);
         this.cantAlumnos += 1;
-		//System.out.println("Importación realizada con éxito\n");
 		return true;
     }
     
