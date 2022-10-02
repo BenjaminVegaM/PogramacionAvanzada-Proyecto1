@@ -320,14 +320,38 @@ public class RegistroCurso
                     		{
                     			System.out.println("Pero este se encuentra vacío, inténtelo con otro");
                     		}
+                    		
+                    		System.out.println("Mostrando sus alumnos...\n");
                             Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(cont);
+                            int contAlumnos = 1;
+                            
                             while (enu.hasMoreElements())
                             {
                             	Alumno alumnoAux = instituto.getCopiaAlumnoCurso(cont, enu.nextElement());
-                            	System.out.println("Nombre: "+alumnoAux.getNombre());
-                            	System.out.println("Edad: "+alumnoAux.getEdad());
-                            	//AQUÍ SE SUPONE QUE SE TIENEN QUE MOSTRAR SUS DATOS
+                            	ArrayList<Habilidades> habilidadesTemp = alumnoAux.getHabilidades();
+                            	
+                            	System.out.println(contAlumnos+".Nombre: "+alumnoAux.getNombre());
+                            	System.out.println("  Edad: "+alumnoAux.getEdad());
+                            	System.out.println("  RUT: "+alumnoAux.getRUN());
+                            	System.out.println("  Habilidades:");
+                            	
+                            	for (int indexHab = 0; indexHab < habilidadesTemp.size(); indexHab += 1)
+                        		{
+                        			System.out.println("    Nombre: "+habilidadesTemp.get(indexHab).getNombre());
+                        			if (habilidadesTemp.get(indexHab).getEstado() == true)
+                        			{
+                        				System.out.println("    Estado: Aprobada");
+                        			}
+                        			else
+                        			{
+                        				System.out.println("    Estado: Reprobada");
+                        			}
+                        		}
+                            	
+                            	System.out.println("\n");
+                            	contAlumnos += 1;
                             }
+                            
                     		encontrado = true;
                     		break;
                     	}
@@ -377,9 +401,10 @@ public class RegistroCurso
 			            		System.out.println("Los alumnos que aprueban son: ");
 			            		for (int cont = 0; cont < aprobados.size(); cont += 1)
 			            		{
-			            			System.out.println("Nombre: "+aprobados.get(cont).getNombre());
-	                            	System.out.println("Edad: "+aprobados.get(cont).getEdad());
-	                            	System.out.println("RUT: "+aprobados.get(cont).getRUN());
+			            			//si el cont es de dos dígitos, la estética se va al carajo, pero bueno
+			            			System.out.println((cont+1)+".Nombre: "+aprobados.get(cont).getNombre());
+	                            	System.out.println("  Edad: "+aprobados.get(cont).getEdad());
+	                            	System.out.println("  RUT: "+aprobados.get(cont).getRUN());
 			            		}
 			            		
 			            		break;
