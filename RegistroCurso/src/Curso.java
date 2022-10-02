@@ -88,6 +88,12 @@ public class Curso
     	Alumno alumnoTemp = this.alumnos.get(enu.nextElement());
     	return alumnoTemp.getNombreHabilidades();
     }
+    public int getPorcentajeAprobacion()
+    {
+        int cantAprobados = this.alumnosAprobados().size();  
+        int resultado = (cantAprobados*100)/(this.alumnos.size());
+        return resultado;
+    }
     
     // Métodos (funciones)
     /*para agrergar un alumno con los datos separados, puede que no queramos esto*/
@@ -347,4 +353,5 @@ public class Curso
     	
     	return aprobados;
     }
+    
 }

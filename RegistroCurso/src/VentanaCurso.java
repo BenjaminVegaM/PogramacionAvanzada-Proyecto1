@@ -89,7 +89,7 @@ public class VentanaCurso extends JFrame {
         lblNewLabel_1.setBounds(10, 96, 117, 14);
         contentPane.add(lblNewLabel_1);
         
-        JLabel lblNombreProfesor = new JLabel("NombreProfesor");
+        JLabel lblNombreProfesor = new JLabel(instituto.getProfesorCurso(indiceCurso).getNombre());
         lblNombreProfesor.setBounds(137, 96, 287, 14);
         contentPane.add(lblNombreProfesor);
         
@@ -107,7 +107,7 @@ public class VentanaCurso extends JFrame {
         lblNewLabel_2_1.setBounds(10, 71, 117, 14);
         contentPane.add(lblNewLabel_2_1);
         
-        JLabel lblPorcentajeAprovacion = new JLabel("Estado");
+        JLabel lblPorcentajeAprovacion = new JLabel(Integer.toString(instituto.getPorcentajeAprobacionCurso(indiceCurso)));
         lblPorcentajeAprovacion.setBounds(137, 71, 287, 14);
         contentPane.add(lblPorcentajeAprovacion);
         
@@ -116,7 +116,7 @@ public class VentanaCurso extends JFrame {
         lblNewLabel_1_1.setBounds(10, 118, 117, 14);
         contentPane.add(lblNewLabel_1_1);
         
-        JLabel lblRunProfesor = new JLabel("RunProfesor");
+        JLabel lblRunProfesor = new JLabel(Integer.toString(instituto.getProfesorCurso(indiceCurso).getRUN()));
         lblRunProfesor.setBounds(137, 118, 287, 14);
         contentPane.add(lblRunProfesor);
         
@@ -125,7 +125,7 @@ public class VentanaCurso extends JFrame {
         lblNewLabel_1_2.setBounds(10, 143, 117, 14);
         contentPane.add(lblNewLabel_1_2);
         
-        JLabel lblAsignaturaProfesor = new JLabel("AsignaturaProfesor");
+        JLabel lblAsignaturaProfesor = new JLabel(instituto.getProfesorCurso(indiceCurso).getMateriaPrincipal());
         lblAsignaturaProfesor.setBounds(137, 143, 287, 14);
         contentPane.add(lblAsignaturaProfesor);
         

@@ -51,7 +51,14 @@ public class Instituto
 	{
 		return cursos.size();
 	}
-	
+	public Profesor getProfesorCurso (int i)
+	{
+	  return cursos.get(i).getProfesor();
+	}
+	public int getPorcentajeAprobacionCurso (int i)
+	{
+	    return this.cursos.get(i).getPorcentajeAprobacion();
+	}
 	/*métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos*/
 	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
