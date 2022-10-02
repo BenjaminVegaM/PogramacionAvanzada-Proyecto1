@@ -54,10 +54,6 @@ public class Instituto
 	{
 		return this.cursos.get(i).alumnosAprobados();
 	}
-	public boolean addCurso(Curso curso)
-	{
-		return this.cursos.add(curso);
-	}
 	public ArrayList<String> getNombreHabilidadesCurso(int i)
     {
     	return cursos.get(i).getNombreHabilidades();
@@ -81,7 +77,9 @@ public class Instituto
 	{
 		return this.cursos.get(index).buscarAlumno(rut);
 	}
-	
+	public boolean addCurso(Curso curso)
+	{
+		return this.cursos.add(curso);
+	}
 	//cursos.get(cont).importarAlumno(2, lineaLeida, cursos.get(cont).getNombreHabilidades());
-	
 }

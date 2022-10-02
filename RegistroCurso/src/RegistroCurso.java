@@ -191,6 +191,7 @@ public class RegistroCurso
                     
                     if (encontrado == false)
                     {
+                    	//EDITAR PARA QUE TENGA QUE METER PROFESOR Y HABILIDADES
                     	Curso cursoTemp = new Curso();
                     	cursoTemp.setNombre(inputUsuario);
                     	instituto.addCurso(cursoTemp);
@@ -215,16 +216,14 @@ public class RegistroCurso
                     		encontrado = true;
                     		System.out.println("Se ha encontrado el curso, ahora ingrese el RUT del alumno: ");
                     		inputUsuario = lector.readLine();
-                    		/* Esto se va a cambiar por: buscar el alumno y mostrar los datos de la copia
-                    		 * Escoger la mierda, y luego llamar a la funciond de cambiar el estado y tal
-                    		 **/
+                    		
                     		Alumno alumnoTemp = instituto.buscarAlumno(cont, Integer.parseInt(inputUsuario));
                     		if (alumnoTemp == null)
                     		{
                     			System.out.println("No se ha encontrado un alumno con el RUT especificado");
                     		}
-                    		ArrayList <Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
                     		
+                    		ArrayList <Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
                     		System.out.println("¿Cuál de estas habilidades desea cambiar?");
                     		for (int indexHab = 0; indexHab < habilidadesTemp.size(); indexHab += 1)
                     		{
@@ -272,16 +271,21 @@ public class RegistroCurso
                             else
                             {
                             	System.out.println("Se ha encontrado el alumno");
-                            	//int runtesteo = alumnoBuscado.getRUN();
-                            	// mostrar no es un método, debe ser parte del main
-                            	//cursos.get(cont).mostrarDatosAlumno(runtesteo);
-                            	System.out.println("Nombre: " + alumnoBuscado.getNombre() + "\nRun: "+alumnoBuscado.getRUN()+"\nEstado Habilidades: ");
-                            	for(int index = 0 ; index < alumnoBuscado.getHabilidades().size() ; index += 1  ) 
-                            	{
-                            		//alumnoMostrar.mostrarHabilidades(index);
-                            		System.out.println(alumnoBuscado.getHabilidades().get(index).getNombre()+": "+ alumnoBuscado.mostrarHabilidades(index));
-                            		//System.out.println(getHabilidades().get(index).getNombre()+": "+ estadoHab);
-                            	}
+                            	
+                            	ArrayList<Habilidades> habilidadesTemp = alumnoBuscado.getHabilidades();
+                            	System.out.println("Nombre: " + alumnoBuscado.getNombre() + "\nRun: "+alumnoBuscado.getRUN()+"\nHabilidades: ");
+                            	for (int indexHab = 0; indexHab < habilidadesTemp.size(); indexHab += 1)
+                        		{
+                        			System.out.println("  "+(indexHab+1)+". Nombre: "+habilidadesTemp.get(indexHab).getNombre());
+                        			if (habilidadesTemp.get(indexHab).getEstado() == true)
+                        			{
+                        				System.out.println("     Estado: Aprobada");
+                        			}
+                        			else
+                        			{
+                        				System.out.println("     Estado: Reprobada");
+                        			}
+                        		}
                             		
                             	System.out.println();
                             }
@@ -293,7 +297,6 @@ public class RegistroCurso
                     
                     if (encontrado == false)
                     {
-                    	//igual podría crear otra variable para pedirle al usuario si quiere ir al menú o lo quiere intentar de nuevo
                     	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
                     	break;
                     }
@@ -332,7 +335,6 @@ public class RegistroCurso
                     
                     if (encontrado == false)
                     {
-                    	//igual podría crear otra variable para pedirle al usuario si quiere ir al menú o lo quiere intentar de nuevo
                     	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
                     	break;
                     }
@@ -356,7 +358,6 @@ public class RegistroCurso
 		            	{
 			            	case 1:
 			            	{
-			            		//me da lata editar los cursos ahora, así que tienen que tener todo aprobado para pasar
 			            		ArrayList<Alumno> aprobados = new ArrayList<>();
 			            		for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
 			            		{
@@ -376,8 +377,9 @@ public class RegistroCurso
 			            		System.out.println("Los alumnos que aprueban son: ");
 			            		for (int cont = 0; cont < aprobados.size(); cont += 1)
 			            		{
-			            			// mostrar no es un método, debe ser parte del main
-			            			aprobados.get(cont).mostrarDatos();
+			            			System.out.println("Nombre: "+aprobados.get(cont).getNombre());
+	                            	System.out.println("Edad: "+aprobados.get(cont).getEdad());
+	                            	System.out.println("RUT: "+aprobados.get(cont).getRUN());
 			            		}
 			            		
 			            		break;

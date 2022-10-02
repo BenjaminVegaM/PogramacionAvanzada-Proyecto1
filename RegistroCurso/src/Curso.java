@@ -18,9 +18,6 @@ public class Curso
    private Profesor profesor;
    private Hashtable<Integer,Alumno> alumnos;
    private int cantAlumnos;
-   /*hay que ver si lo usamos o que, porque si no hay algo que no funciona aquí*/
-   //private ArrayList<String> nombreHabilidades;
-   //private int cantHabilidades
 
     /*constructores: igual lo cambiamos luego*/
     public Curso() 
@@ -66,16 +63,13 @@ public class Curso
     	Alumno alumno = this.alumnos.get(run);
     	return alumno.getNombre();
     }
-    
+    //no se que es esto
     public ArrayList<Habilidades> getHabilidadesAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
     	alumno.getHabilidades();
-    	//mira, lo comentado de abajo... no se por qué está ahí, así que lo voy a comentar y de ahí lo veo
-    	//alumno.mostrarHabilidades();//cambiar para Habilidades.java
     	return alumno.getHabilidades();
     }
-    
     public int getCantAlumnos() 
     {
         return cantAlumnos;
@@ -108,16 +102,11 @@ public class Curso
     /*para cuando se quiera agregar un objeto alumno al hashtable*/
     public boolean agregarAlumno (Alumno alumno)
     {
-    	//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
-    	//alumno.mostrarHabilidades();
-    	//System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
     	this.cantAlumnos += 1;
     	return true;
     }
     
-    /*para retornar un alumno del hashtable cuando se le da un run*/
-    /*lo podríamos usar para alterar datos de un alumno específico, requiere experimentación*/
     //IGUAL ESTO DEBERÍA LLAMARSE getCopiaAlumno SOLO DIGO EH????
     public Alumno buscarAlumno(int run)
     {
@@ -150,7 +139,6 @@ public class Curso
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
-            	//System.out.println("entra en la excepcion");
             	habTemp.setEstado(false);
             }
     		habilidadesTemp.add(habTemp);
@@ -218,7 +206,6 @@ public class Curso
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
-            	//System.out.println("entra en la excepcion");
             	habTemp.setEstado(false);
             }
     		habilidadesTemp.add(habTemp);
@@ -307,11 +294,6 @@ public class Curso
         }
     }
     
-    // Boolean, True si lo encuentra y false sino
-    /* A ver, hay que hacer cosas aquí,
-     * Posibilidad posibiladosa: que en el main se busque todo, y que esto solo reciba el rut y la habilidad que se quiera
-     * cambiar, para que así esta función no imprima nada y solo cambie el estado, el main mostrará las habilidades y tal
-     * */
     public void cambiarEstadoHabilidadesAlumno (int rut, int inputUsuario)
     {
     	this.alumnos.get(rut).cambiarEstadoHabilidad(inputUsuario);

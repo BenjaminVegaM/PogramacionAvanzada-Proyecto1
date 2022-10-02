@@ -76,34 +76,8 @@ public class Alumno extends Persona
     	
     	return this.aprobado;
     }
-
-    //toggleHabilidad -> cambie una habilidad i entre True y False
     
     //funciones
-    /*para mostrar el estado de las habilidades de un alumno*/
-    
-    // solo MAIN debe tener System IO----------------------------------------------------------
-    public String mostrarHabilidades(int index)
-    {
-    	String estadoHab = "a"; 
-    	
-    	//for (int index = 0 ; index < this.habilidades.size() ; index += 1)
-    	//{
-    		if  (this.habilidades.get(index).getEstado() == true)
-			{
-				estadoHab = "Conseguido";
-    		}
-    		else 
-    		{
-    			estadoHab = "Pendiente";
-    		}
-    		
-    		//System.out.println(this.habilidades.get(index).getNombre()+": "+ estadoHab);
-    	//}
-    	return estadoHab;
-    	//System.out.println("\n");
-    }
-    
     public void cambiarEstadoHabilidad (int index)
     {
     	if (this.habilidades.get(index).getEstado() == true)
@@ -115,14 +89,7 @@ public class Alumno extends Persona
     		this.habilidades.get(index).setEstado(true);
     	}
     }
-    
-    /*muestra el nombre y el run de un alumno*/
-    
-    public void mostrarDatos()
-    {
-    	System.out.println("\nNombre: "+ this.getNombre());
-    	System.out.println("RUN: "+ this.getRUN());
-    }
+
     public Alumno crearAlumno(String nombre, int run)
     {
     	Alumno nuevoAlumno = new Alumno();
