@@ -78,4 +78,13 @@ public class Instituto
 	{
 		return this.cursos.add(curso);
 	}
+	public int cantidadAlumnosTotal()
+	{
+		int cantAlumnos = 0;
+		for(int i = 0 ; i < this.getTamaño() ; i++)
+		{
+			cantAlumnos += this.getCantAlumnosCurso(i);
+		}
+		return cantAlumnos;
+	}
 }

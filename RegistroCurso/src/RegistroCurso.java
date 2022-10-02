@@ -16,11 +16,13 @@ public class RegistroCurso
 {
     public static void main (String arg[]) throws IOException 
     {
+    	/*
     	BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     	int opcion = 177013;
         String inputUsuario;
         Boolean encontrado = false;
-        
+        */
+
         Instituto instituto = new Instituto();
    	
     	System.out.println("Importando archivo del instituto");
@@ -32,17 +34,13 @@ public class RegistroCurso
 		String endOfFile = "—————";
 		String endOfCurso = "*****";
 		boolean repetido = false;
-		
-		// Prueba Ventana
-		VentanaInicio ventanaInicio = new VentanaInicio();
-    	ventanaInicio.setVisible(true);
     	
     	while (linea.equals(endOfFile) != true)
     	{
     		//Se revisa si ya existe un curso con el mismo nombre
-    		if (instituto.getNumeroCursos() >= 1)
+    		if (instituto.getTamaño() >= 1)
     		{
-    			for (int cont = 0; cont < instituto.getNumeroCursos(); cont += 1)
+    			for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
     			{
     				//System.out.println("se comparan: "+lineaDividida[0]+" y "+cursos.get(cont).getNombreCurso());
     				if (lineaDividida[0].equals(instituto.getNombreCurso(cont)) == true)
@@ -110,7 +108,13 @@ public class RegistroCurso
     	
     	System.out.println("Se ha terminado de importar el instituto");
     	lectorInstituto.close();
+    	
+    	
+    	// Prueba Ventana
+    	VentanaInicio ventanaInicio = new VentanaInicio(instituto);
+		ventanaInicio.setVisible(true);
         
+		/*
         //MENU---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         while (opcion != 0)
         {
@@ -139,7 +143,7 @@ public class RegistroCurso
                     System.out.println("Ingrese el nombre del Curso al que quiere agregar este Alumno: ");
                     inputUsuario = lector.readLine();
                     encontrado = false;
-                    for (int cont = 0; cont < instituto.getNumeroCursos() ; cont++)
+                    for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                     {
                     	if (Objects.equals(inputUsuario, instituto.getNombreCurso(cont)))
                     	{
@@ -149,7 +153,11 @@ public class RegistroCurso
                             System.out.println("(en caso de que se incluyan más habilidades de las que admite el curso, se ignorarán las que sobren. Si se agregan menos, el resto serán iniciadas en reprobado)");
                             inputUsuario = lector.readLine();
                             String[] lineaLeida = inputUsuario.split(",");
-                            instituto.importarAlumno(cont, lineaLeida, instituto.getNombreHabilidadesCurso(cont));
+                            try {
+								instituto.importarAlumno(cont, lineaLeida, instituto.getNombreHabilidadesCurso(cont));
+							} catch (ImportarAlumnosException e){
+								e.printStackTrace();
+							}
                     		encontrado = true;
                     		break;
                     	}
@@ -441,6 +449,6 @@ public class RegistroCurso
                     break;
                 }
             }
-        }
+        }*/
     }
 }
