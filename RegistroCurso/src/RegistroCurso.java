@@ -20,12 +20,12 @@ public class RegistroCurso
     	int opcion = 177013;
         String inputUsuario;
         Boolean encontrado = false;
-
-        ArrayList<Curso> cursos = new ArrayList<>();
-    	
+        
+        Instituto instituto = new Instituto();
+   	
     	System.out.println("Importando archivo del instituto");
-    	File instituto = new File("EjemploInstituto.txt");
-    	BufferedReader lectorInstituto = new BufferedReader(new FileReader(instituto));
+    	File institutotxt = new File("EjemploInstituto.txt");
+    	BufferedReader lectorInstituto = new BufferedReader(new FileReader(institutotxt));
     	
     	String linea = lectorInstituto.readLine();
 		String[] lineaDividida = linea.split(",");
@@ -34,18 +34,18 @@ public class RegistroCurso
 		boolean repetido = false;
 		
 		// Prueba Ventana
-		VentanaPrueba ventana = new VentanaPrueba();
-    	ventana.setVisible(true);
+		VentanaInicio ventanaInicio = new VentanaInicio();
+    	ventanaInicio.setVisible(true);
     	
     	while (linea.equals(endOfFile) != true)
     	{
     		//Se revisa si ya existe un curso con el mismo nombre
-    		if (cursos.size() >= 1)
+    		if (instituto.getNumeroCursos() >= 1)
     		{
-    			for (int cont = 0; cont < cursos.size(); cont += 1)
+    			for (int cont = 0; cont < instituto.getNumeroCursos(); cont ++)
     			{
     				//System.out.println("se comparan: "+lineaDividida[0]+" y "+cursos.get(cont).getNombreCurso());
-    				if (lineaDividida[0].equals(cursos.get(cont).getNombreCurso()) == true)
+    				if (lineaDividida[0].equals(instituto.getNombreCurso(cont)) == true)
     				{
     					System.out.println("Se ha descubierto que uno de los nombres está repetido, pasando al siguiente curso");
     					repetido = true;
@@ -88,12 +88,11 @@ public class RegistroCurso
     		{
     			//System.out.println("Importando alumnos");
     			lineaDividida = linea.split(",");
-    			cursoAImportar.importarAlumno(lineaDividida, 2, nombreHabilidadesTemp1);
+    			cursoAImportar.importarAlumno(lineaDividida, nombreHabilidadesTemp1);
         		linea = lectorInstituto.readLine();
     		}
     		
-    		cursos.add(cursoAImportar);
-    		System.out.println("\n"+cursoAImportar.getNombreCurso()+" ha sido añadido con éxito");
+    		if(instituto.addCurso(cursoAImportar)) System.out.println("\n"+cursoAImportar.getNombreCurso()+" ha sido añadido con éxito");
     		
     		linea = lectorInstituto.readLine();
     		lineaDividida = linea.split(",");
@@ -102,7 +101,7 @@ public class RegistroCurso
     	System.out.println("Se ha terminado de importar el instituto");
     	lectorInstituto.close();
         
-        //MENU
+        //MENU---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         while (opcion != 0)
         {
         	
@@ -130,9 +129,9 @@ public class RegistroCurso
                     System.out.println("Ingrese el nombre del Curso al que quiere agregar este Alumno: ");
                     inputUsuario = lector.readLine();
                     encontrado = false;
-                    for (int cont = 0; cont < cursos.size() ; cont++)
+                    for (int cont = 0; cont < instituto.getNumeroCursos() ; cont++)
                     {
-                    	if (Objects.equals(inputUsuario,cursos.get(cont).getNombreCurso()))
+                    	if (Objects.equals(inputUsuario, instituto.getNombreCurso(cont)))
                     	{
                     		System.out.println("Se ha encontrado el curso");
 
@@ -140,8 +139,7 @@ public class RegistroCurso
                             System.out.println("(en caso de que se incluyan más habilidades de las que admite el curso, se ignorarán las que sobren. Si se agregan menos, el resto serán iniciadas en reprobado)");
                             inputUsuario = lector.readLine();
                             String[] lineaLeida = inputUsuario.split(",");
-                            cursos.get(cont).importarAlumno(2, lineaLeida, cursos.get(cont).getNombreHabilidades());
-                            
+                            instituto.importarAlumno(cont, lineaLeida, instituto.getNombreHabilidadesCurso(cont));
                     		encontrado = true;
                     		break;
                     	}
@@ -212,10 +210,7 @@ public class RegistroCurso
                     	}
                     }
                     
-                    if (encontrado == false)
-                    {
-                    	System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
-                    }
+                    if (encontrado == false) System.out.println("No se ha encontrado el curso, inténtelo de nuevo");
                     encontrado = false;
                 	break;
                 }

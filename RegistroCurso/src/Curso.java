@@ -45,6 +45,10 @@ public class Curso
     {
         return alumnos;
     }
+    public String getNombre()
+    {
+    	return nombre;
+    }
     public String getNombreAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
@@ -79,22 +83,24 @@ public class Curso
     
     // Métodos (funciones)
     /*para agrergar un alumno con los datos separados, puede que no queramos esto*/
-    public void agregarAlumno (String nombre, int run, ArrayList<Habilidades> habilidades)
+    public boolean agregarAlumno (String nombre, int run, ArrayList<Habilidades> habilidades)
     {
     	Alumno nuevo = new Alumno();
     	nuevo.setNombre(nombre);
     	nuevo.setRUN(run);
     	nuevo.setHabilidades(habilidades);
     	this.alumnos.put(run, nuevo);
+    	return true;
     }
     
     /*para cuando se quiera agregar un objeto alumno al hashtable*/
-    public void agregarAlumno (Alumno alumno)
+    public boolean agregarAlumno (Alumno alumno)
     {
     	//System.out.println("Nombre: " + alumno.getNombre() + "\nRun: "+alumno.getRUN()+"\nEstado Habilidades: ");
     	//alumno.mostrarHabilidades();
     	//System.out.println("\n");
     	this.alumnos.put(alumno.getRUN(), alumno);
+    	return true;
     }
     
     /*para retornar un alumno del hashtable cuando se le da un run*/
@@ -117,11 +123,12 @@ public class Curso
     //funciones de importacion
     
     /*importa un alumno de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
-    public void importarAlumno (String[] textoSeparado, int posInicial, ArrayList<String> nombreHabilidades)
+    public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado)
     {
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
     	int cont = 0;
+    	int posInicial = 2;
     	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
 		{
     		Habilidades habTemp = new Habilidades();
@@ -156,18 +163,20 @@ public class Curso
 			return;
 		}
 		*/
-		alumnoTemp.mostrarDatos();
-		//alumnoTemp.mostrarHabilidades(); 
-		
-		this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
+		//alumnoTemp.mostrarDatos();
+        //alumnoTemp.mostrarHabilidades();
+        
+        this.agregarAlumno(alumnoTemp);
 		//System.out.println("Importación realizada con éxito\n");
+		return true;
     }
     //parametros de entrada invertido
-    public void importarAlumno (int posInicial, String[] textoSeparado, ArrayList<String> nombreHabilidades)
+    public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades)
     {
         Alumno alumnoTemp = new Alumno();
         ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
         int cont = 0;
+        int posInicial = 2;
         while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
         {
             Habilidades habTemp = new Habilidades();
@@ -197,15 +206,15 @@ public class Curso
             return;
         }
         */
-        alumnoTemp.mostrarDatos();
-        alumnoTemp.mostrarHabilidades();
+        //alumnoTemp.mostrarDatos();
+        //alumnoTemp.mostrarHabilidades();
         
-        this.alumnos.put(alumnoTemp.getRUN(),alumnoTemp);
+        this.agregarAlumno(alumnoTemp);
         //System.out.println("Importación realizada con éxito\n");
+        return true;
     }
     
-    public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter,
-    						Enumeration<Integer> enu)
+    public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
     	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
     	//vaya solución más fea tio...

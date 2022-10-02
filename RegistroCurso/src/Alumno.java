@@ -11,30 +11,32 @@ import java.util.*;
  * @author Diego Truyol
  * @author Pablo Paillalef Avendaño
  */
-public class Alumno 
+public class Alumno extends Persona
 {
-    private String nombre;
-    private int run;           						 /*asegurarse que el run sea válido, pero que no rompa con el proceso de agregar alumnos*/
     private ArrayList<Habilidades> habilidades;
     private boolean aprobado;
-    
-    /*constructores: igual lo cambiamos luego*/
+
     public Alumno() 
     {
-        this.nombre = "José Antonio";
-        this.run = 0;
+        super();
         this.habilidades = new ArrayList<>();
         this.aprobado = false;
     }
-   
-    /*getters*/
-    public String getNombre() 
+    
+	// Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters
+    public void setHabilidades(ArrayList<Habilidades> habilidades)
     {
-        return nombre;
+        this.habilidades = habilidades;
     }
-    public int getRUN() 
+    public void setAprobado (boolean aprobado)
     {
-        return run;
+    	this.aprobado = aprobado;
+    }
+    
+	// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters
+    public boolean getAprovacion()
+    {
+    	return this.aprobado;
     }
     public ArrayList<Habilidades> getHabilidades() 
     {
@@ -73,24 +75,7 @@ public class Alumno
     	
     	return this.aprobado;
     }
-    
-    // Setters
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
-    public void setRUN(int run)
-    {
-        this.run = run;
-    }
-    public void setHabilidades(ArrayList<Habilidades> habilidades)
-    {
-        this.habilidades = habilidades;
-    }
-    public void setAprobado (boolean aprobado)
-    {
-    	this.aprobado = aprobado;
-    }
+
     //toggleHabilidad -> cambie una habilidad i entre True y False
     
     //funciones
@@ -128,8 +113,8 @@ public class Alumno
     public Alumno crearAlumno(String nombre, int run)
     {
     	Alumno nuevoAlumno = new Alumno();
-    	this.nombre = nombre;
-    	this.run = run;
+    	this.setNombre(nombre);
+    	this.setRUN(run);
     	return nuevoAlumno;
     }
     public Alumno crearAlumno(int run, String nombre)
