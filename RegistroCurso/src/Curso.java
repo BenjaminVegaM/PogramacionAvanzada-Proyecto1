@@ -17,6 +17,7 @@ public class Curso
    private String nombre;
    private Profesor profesor;
    private Hashtable<Integer,Alumno> alumnos;
+ //posiblemente se elimine cantAlumnos
    private int cantAlumnos;
 
     /*constructores: igual lo cambiamos luego*/
@@ -46,12 +47,13 @@ public class Curso
     /*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
     public Hashtable<Integer,Alumno> getAlumnos()
     {
+    	//CAMBIAR A COPIA
     	Hashtable<Integer,Alumno> copiaAlumnos = this.alumnos;
         return copiaAlumnos;
     }
     public String getNombre()
     {
-    	return nombre;
+    	return this.nombre;
     }
     public Profesor getProfesor()
     {
@@ -72,16 +74,17 @@ public class Curso
     }
     public int getCantAlumnos() 
     {
-        return cantAlumnos;
+        return this.cantAlumnos;
     }
     public String getNombreCurso() 
     {
-        return nombre;
+        return this.nombre;
     }
     public ArrayList<String> getNombreHabilidades()
     {
     	/*esto asume que todos los alumnos tienen los mismos nombres en las habilidades, por tanto esto se saca del primero que encuentre*/
     	Enumeration<Integer> enu = this.getAlumnos().keys();
+    	//Agregar Try Catch
     	Alumno alumnoTemp = this.alumnos.get(enu.nextElement());
     	return alumnoTemp.getNombreHabilidades();
     }
@@ -110,6 +113,7 @@ public class Curso
     //IGUAL ESTO DEBERÍA LLAMARSE getCopiaAlumno SOLO DIGO EH????
     public Alumno buscarAlumno(int run)
     {
+    	//CAMBIAR A COPIA
     	Alumno copiaAlumno = this.alumnos.get(run);
     	return copiaAlumno;
     }
@@ -309,13 +313,19 @@ public class Curso
     		return aprobados;
     	}
     	Enumeration<Integer> enu = this.getAlumnos().keys();
-    	Alumno alumnoTemp = this.buscarAlumno(enu.nextElement());
+    	
+    	Alumno alumnoTemp;
+    	try
+		{
+    		alumnoTemp = this.buscarAlumno(enu.nextElement());
+		}
+		catch (NoSuchElementException exception)
+		{
+			return null;
+		}
 
     	while (alumnoTemp != null)
     	{
-    		//creo que esta línea de acá no importa... pero me da miedo sacarla
-    		alumnoTemp.getAprobado();
-    		
     		if (alumnoTemp.getAprobado() == true)
     		{
     			aprobados.add(alumnoTemp);
