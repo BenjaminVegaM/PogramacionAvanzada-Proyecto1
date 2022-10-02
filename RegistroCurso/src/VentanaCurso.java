@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -66,9 +67,18 @@ public class VentanaCurso extends JFrame {
         JButton btnVerAlumno = new JButton("Ver Alumno");
         btnVerAlumno.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, comboBox_Alumnos.getSelectedIndex()-1);
-        		ventanaAlumno.setVisible(true);
-        		dispose();
+        		
+        		if(comboBox_Alumnos.getSelectedIndex() == 0)
+				{
+        			
+					JOptionPane.showMessageDialog(null, "Por favor seleccione un alumno.");
+				}
+				else
+				{
+					VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, comboBox_Alumnos.getSelectedIndex()-1);
+	        		ventanaAlumno.setVisible(true);
+	        		dispose();
+				}
         	}
         });
         btnVerAlumno.setToolTipText("Ver el curso seleccionado.");
