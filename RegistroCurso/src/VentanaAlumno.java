@@ -19,7 +19,7 @@ public class VentanaAlumno extends JFrame {
 
 	private JPanel contentPane;
 
-	public VentanaAlumno(Instituto instituto, int indiceCurso, int indiceAlumno) {
+	public VentanaAlumno(Instituto instituto, int indiceCurso, String nombreAlumno) {
 		setTitle("Información Alumno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -93,9 +93,9 @@ public class VentanaAlumno extends JFrame {
                 }
                 else
                 {
-                    instituto.cambiarEstadoHabilidadesAlumnoIndice(indiceCurso, indiceAlumno, comboBox_Habilidades.getSelectedIndex()-1);
-                    JOptionPane.showMessageDialog(null, "Habilidad cambiada a "+instituto.getEstadoHabilidad(indiceCurso, indiceAlumno, comboBox_Habilidades.getSelectedIndex()-1));
-                    if (instituto.getEstadoHabilidad(indiceCurso, indiceAlumno, comboBox_Habilidades.getSelectedIndex()-1) == true)
+                    instituto.cambiarEstadoHabilidadesAlumnoNombre(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1);
+                    JOptionPane.showMessageDialog(null, "Habilidad cambiada a "+instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1));
+                    if (instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1) == true)
                     {
                     	lblEstadoH.setText("Aprobado");
                     }
@@ -114,16 +114,11 @@ public class VentanaAlumno extends JFrame {
 		lblEstadoHabilidad.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblEstadoHabilidad.setBounds(10, 162, 111, 14);
 		contentPane.add(lblEstadoHabilidad);
-		
-		Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
-	    for(int index = 0 ; index < indiceAlumno;index++) 
-    	{
-        	// Deberiamos poner un break si enu.hasMoreElements() == null??????
-        	enu.nextElement();
-        }
-	    Alumno alumnoAux = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement());
+
+	    Alumno alumnoAux = instituto.getCopiaCurso(indiceCurso).getAlumnoNombre(nombreAlumno);
 		
 		JLabel lblNewLabel_1 = new JLabel(alumnoAux.getNombre());
+		lblNewLabel_1.setToolTipText("uwu");
 		lblNewLabel_1.setBounds(131, 11, 293, 14);
 		contentPane.add(lblNewLabel_1);
 		

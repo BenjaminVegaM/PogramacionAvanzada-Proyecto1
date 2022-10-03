@@ -27,6 +27,10 @@ public class Profesor extends Persona
 	}
 	
 	// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters
+	public String getInfo()
+    {
+        return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un profesor que tiene "+ this.getEdad() +" años y ha enseñado "+ materiaPrincipal +" por "+ this.anyosEnsenyando +".";
+    }
 	public String getMateriaPrincipal()
 	{
 		return this.materiaPrincipal;

@@ -25,6 +25,10 @@ public class Persona
 		}
 		
 		// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters
+		public String getInfo()
+        {
+            return nombre +"de R.U.N. "+ run +" tiene "+edad+"años.";
+        }
 		public String getNombre()
 		{
 			return this.nombre;

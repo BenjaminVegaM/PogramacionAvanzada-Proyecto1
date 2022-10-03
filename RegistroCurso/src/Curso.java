@@ -127,17 +127,66 @@ public class Curso
     	Alumno copiaAlumno = this.alumnos.get(run);
     	return copiaAlumno;
     }
-    
-    public Alumno mostrarDatosAlumno (int run)
-    {
-    	Alumno alumno = this.alumnos.get(run);
-    	return alumno;
-    }
+
     
     //funciones de importacion
     
     /*importa un alumno de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
     public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado) throws ImportarAlumnosException
+    {
+    	Alumno alumnoTemp = new Alumno();
+    	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
+    	int cont = 0;
+    	int posInicial = 3;
+    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
+		{
+    		Habilidades habTemp = new Habilidades();
+    		habTemp.setNombre(nombreHabilidades.get(cont));
+    		try
+            {
+            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+            }
+            catch (ArrayIndexOutOfBoundsException exception)
+            {
+            	habTemp.setEstado(false);
+            }
+    		habilidadesTemp.add(habTemp);
+			posInicial += 1;
+			cont += 1;
+		}
+		alumnoTemp.setHabilidades(habilidadesTemp);
+		alumnoTemp.setNombre(textoSeparado[0]);
+		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
+		{
+			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
+			//igual este no es lugar para ponerlo pero bueno
+		}
+		
+
+		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
+		try
+		{
+			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+		}
+		catch (NumberFormatException exception)
+		{
+			throw new ImportarAlumnosException();
+		}
+		
+		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+		{
+			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
+			return false;
+		}
+        
+        this.agregarAlumno(alumnoTemp);
+        this.cantAlumnos += 1;
+		return true;
+    }
+    
+    //parametros de entrada invertido
+    public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
@@ -207,60 +256,6 @@ public class Curso
     	this.setProfesor(newProfesor);
     }
     
-    //parametros de entrada invertido
-    public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
-    {
-    	Alumno alumnoTemp = new Alumno();
-    	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
-    	int cont = 0;
-    	int posInicial = 3;
-    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
-		{
-    		Habilidades habTemp = new Habilidades();
-    		habTemp.setNombre(nombreHabilidades.get(cont));
-    		try
-            {
-            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
-            }
-            catch (ArrayIndexOutOfBoundsException exception)
-            {
-            	habTemp.setEstado(false);
-            }
-    		habilidadesTemp.add(habTemp);
-			posInicial += 1;
-			cont += 1;
-		}
-		alumnoTemp.setHabilidades(habilidadesTemp);
-		alumnoTemp.setNombre(textoSeparado[0]);
-		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
-		{
-			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
-			//igual este no es lugar para ponerlo pero bueno
-		}
-		
-
-		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
-		try
-		{
-			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
-			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
-		}
-		catch (NumberFormatException exception)
-		{
-			throw new ImportarAlumnosException();
-		}
-		
-		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
-		{
-			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
-			return false;
-		}
-        
-        this.agregarAlumno(alumnoTemp);
-        this.cantAlumnos += 1;
-		return true;
-    }
-    
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
     	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
@@ -274,6 +269,10 @@ public class Curso
 		catch (NoSuchElementException exception)
 		{
 			printWriter.write(this.getNombreCurso());
+			printWriter.write("\n");
+			printWriter.write(this.profesor.getNombre()+","+this.profesor.getRUN()+","+this.profesor.getEdad()+
+					","+this.profesor.getMateriaPrincipal()+","+this.profesor.getAnyosEnsenyando()+","
+					+this.profesor.getCalidad());
 			return;
 		}
     	
@@ -362,23 +361,32 @@ public class Curso
     	return aprobados;
     }
     
-    private Alumno getAlumnoIndice (int indiceAlumno)
+    public Alumno getAlumnoNombre (String nombreAlumno)
     {
         Enumeration<Integer> enu = this.getAlumnos().keys();
         Alumno alumnoAux = new Alumno();
         for(int i = 0 ; i < this.alumnos.size() && alumnoAux != null ; i++)
         {
             alumnoAux = this.alumnos.get(enu.nextElement());
+            if (alumnoAux.getNombre().equals(nombreAlumno) == true)
+            {
+            	System.out.println("Se ha encontrado al alumno de rut: "+ alumnoAux.getRUN());
+            	return alumnoAux;
+            }
         }
-        return alumnoAux;
+        return null;
     }
-    public void cambiarEstadoHabilidadesAlumnoIndice (int indiceAlumno, int indiceHabilidad)
+    public void cambiarEstadoHabilidadesAlumnoIndice (String nombreAlumno, int indiceHabilidad)
     {
-        this.getAlumnoIndice(indiceAlumno).cambiarEstadoHabilidad(indiceHabilidad);
+        this.getAlumnoNombre(nombreAlumno).cambiarEstadoHabilidad(indiceHabilidad);
     }
-    public boolean getEstadoHabilidad(int indiceAlumno, int indiceHabilidad)
+    public boolean getEstadoHabilidad(String nombreAlumno, int indiceHabilidad)
     {
-        return this.getAlumnoIndice(indiceAlumno).getEstadoHabilidad(indiceHabilidad);
-    } 
+        return this.getAlumnoNombre(nombreAlumno).getEstadoHabilidad(indiceHabilidad);
+    }
+    public void eliminarAlumnoNombre (String nombreAlumno)
+    {
+    	this.alumnos.remove(this.getAlumnoNombre(nombreAlumno).getRUN());
+    }
     
 }

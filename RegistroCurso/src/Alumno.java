@@ -34,6 +34,19 @@ public class Alumno extends Persona
     }
     
 	// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters
+    public String getInfo()
+    {
+        String aprovado;
+        if(this.aprobado)
+        {
+            aprovado = "aprovado";
+        }
+        else
+        {
+            aprovado = "repitiendo";
+        }
+        return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un alumno que tiene "+ this.getEdad() +" años y está "+ aprovado +".";
+    }
     public boolean getAprovacion()
     {
     	return this.aprobado;

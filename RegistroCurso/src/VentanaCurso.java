@@ -18,7 +18,8 @@ public class VentanaCurso extends JFrame {
 
     private JPanel contentPane;
 
-    public VentanaCurso(Instituto instituto, int indiceCurso) {
+    public VentanaCurso(Instituto instituto, int indiceCurso)
+    {
     	setTitle("Información Curso");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -45,7 +46,7 @@ public class VentanaCurso extends JFrame {
         contentPane.add(lblSeleccionarAlumno);
         
         JComboBox<String[]> comboBox_Alumnos = new JComboBox<>();
-        String [] arrayAlumnos= new String [instituto.getCantAlumnosCurso(indiceCurso)+1];
+        String [] arrayAlumnos = new String [instituto.getCantAlumnosCurso(indiceCurso)+1];
         arrayAlumnos[0] = "";
         // Puede ser que el curso este vacio, eso puede dar un error
         Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
@@ -91,7 +92,7 @@ public class VentanaCurso extends JFrame {
 				}
 				else
 				{
-					VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, comboBox_Alumnos.getSelectedIndex()-1);
+					VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, arrayAlumnos[comboBox_Alumnos.getSelectedIndex()]);
 	        		ventanaAlumno.setVisible(true);
 	        		dispose();
 				}
@@ -101,9 +102,25 @@ public class VentanaCurso extends JFrame {
         btnVerAlumno.setBounds(335, 227, 89, 23);
         contentPane.add(btnVerAlumno);
         
-        JButton btnNewButton = new JButton("Eliminar");
-        btnNewButton.setBounds(355, 168, 69, 23);
-        contentPane.add(btnNewButton);
+        JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+			{
+				if(comboBox_Alumnos.getSelectedIndex() == 0)
+				{
+					JOptionPane.showMessageDialog(null, "Por favor seleccione un alumno.");
+				}
+				else
+				{
+					VentanaEstaSeguroAlumno ventanaEstaSeguroAlumno = new VentanaEstaSeguroAlumno(instituto, indiceCurso, arrayAlumnos[comboBox_Alumnos.getSelectedIndex()]);
+					ventanaEstaSeguroAlumno.setVisible(true);
+					dispose();
+				}
+			}
+        });
+        btnEliminar.setBounds(355, 168, 69, 23);
+        contentPane.add(btnEliminar);
         
         JLabel lblNombreCurso = new JLabel(instituto.getNombreCurso(indiceCurso));
         lblNombreCurso.setHorizontalAlignment(SwingConstants.CENTER);

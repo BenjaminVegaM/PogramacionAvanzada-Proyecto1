@@ -99,12 +99,16 @@ public class Instituto
 		this.cursos.remove(index);
 		return true;
 	}
-	public void cambiarEstadoHabilidadesAlumnoIndice (int indiceCurso, int indiceAlumno, int indiceHabilidad)
+	public void cambiarEstadoHabilidadesAlumnoNombre (int indiceCurso, String nombreAlumno, int indiceHabilidad)
     {
-        cursos.get(indiceCurso).cambiarEstadoHabilidadesAlumnoIndice(indiceAlumno, indiceHabilidad);
+        cursos.get(indiceCurso).cambiarEstadoHabilidadesAlumnoIndice(nombreAlumno, indiceHabilidad);
     }
-	public boolean getEstadoHabilidad (int indiceCurso, int indiceAlumno, int indiceHabilidad)
+	public boolean getEstadoHabilidad (int indiceCurso, String nombreAlumno, int indiceHabilidad)
     {
-        return cursos.get(indiceCurso).getEstadoHabilidad(indiceAlumno, indiceHabilidad);
+        return cursos.get(indiceCurso).getEstadoHabilidad(nombreAlumno, indiceHabilidad);
     }
+	public void eliminarAlumnoCursoNombre (int indiceCurso, String nombreAlumno)
+	{
+		cursos.get(indiceCurso).eliminarAlumnoNombre(nombreAlumno);
+	}
 }
