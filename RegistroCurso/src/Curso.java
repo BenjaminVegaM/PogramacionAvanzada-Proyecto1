@@ -34,10 +34,21 @@ public class Curso
     {
     	return this.nombre;
     }
-    public Profesor getProfesor()
+    public String getNombreProfesor()
     {
-    	Profesor copiaProfesor = this.profesor;
-    	return copiaProfesor;
+    	return this.profesor.getNombre();
+    }
+    public int getEdadProfesor()
+    {
+    	return this.profesor.getEdad();
+    }
+    public int getRUNProfesor()
+    {
+    	return this.profesor.getRUN();
+    }
+    public String getMateriaProfesor()
+    {
+    	return this.profesor.getMateriaPrincipal();
     }
     public String getNombreAlumno_RUN(int run)
     {
@@ -110,106 +121,108 @@ public class Curso
     public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
-    	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
-    	int cont = 0;
-    	int posInicial = 3;
-    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
-		{
-    		Habilidades habTemp = new Habilidades();
-    		habTemp.setNombre(nombreHabilidades.get(cont));
-    		try
+        ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
+        int cont = 0;
+        int posInicial = 3;
+        while(cont < nombreHabilidades.size())
+        {
+            Habilidades habTemp = new Habilidades();
+            habTemp.setNombre(nombreHabilidades.get(cont));
+            try
             {
-            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+                habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
-            	habTemp.setEstado(false);
+                habTemp.setEstado(false);
             }
-    		habilidadesTemp.add(habTemp);
-			posInicial += 1;
-			cont += 1;
-		}
-		alumnoTemp.setHabilidades(habilidadesTemp);
-		alumnoTemp.setNombre(textoSeparado[0]);
-		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
-		{
-			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
-			return false;
-		}
-		
-
-		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
-		try
-		{
-			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
-			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
-		}
-		catch (NumberFormatException exception)
-		{
-			throw new ImportarAlumnosException();
-		}
-		
-		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
-		{
-			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
-			return false;
-		}
+            habilidadesTemp.add(habTemp);
+            posInicial += 1;
+            cont += 1;
+        }
+        alumnoTemp.setHabilidades(habilidadesTemp);
+        alumnoTemp.setNombre(textoSeparado[0]);
+        if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
+        {
+            //esto es por si ocurre que el nombre es igual al fin de línea o algo así
+            return false;
+        }
         
+
+        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
+        try
+        {
+            alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+            alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+        }
+        catch (NumberFormatException exception)
+        {
+            throw new ImportarAlumnosException();
+        }
+        
+        if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+        {
+            ////System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
+            return false;
+        }
+        
+        //System.out.println("el largo del arreglo de habilidades del nuevo alumno es: "+alumnoTemp.getHabilidades().size());
         this.agregarAlumno(alumnoTemp);
-		return true;
+        return true;
     }
     
     //parametros de entrada invertido
     public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
-    	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
-    	int cont = 0;
-    	int posInicial = 3;
-    	while(posInicial < textoSeparado.length || cont < nombreHabilidades.size())
-		{
-    		Habilidades habTemp = new Habilidades();
-    		habTemp.setNombre(nombreHabilidades.get(cont));
-    		try
+        ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
+        int cont = 0;
+        int posInicial = 3;
+        while(cont < nombreHabilidades.size())
+        {
+            Habilidades habTemp = new Habilidades();
+            habTemp.setNombre(nombreHabilidades.get(cont));
+            try
             {
-            	habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
+                habTemp.setEstado(Boolean.parseBoolean(textoSeparado[posInicial]));
             }
             catch (ArrayIndexOutOfBoundsException exception)
             {
-            	habTemp.setEstado(false);
+                habTemp.setEstado(false);
             }
-    		habilidadesTemp.add(habTemp);
-			posInicial += 1;
-			cont += 1;
-		}
-		alumnoTemp.setHabilidades(habilidadesTemp);
-		alumnoTemp.setNombre(textoSeparado[0]);
-		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
-		{
-			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
-			return false;
-		}
-		
-
-		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
-		try
-		{
-			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
-			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
-		}
-		catch (NumberFormatException exception)
-		{
-			throw new ImportarAlumnosException();
-		}
-		
-		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
-		{
-			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
-			return false;
-		}
+            habilidadesTemp.add(habTemp);
+            posInicial += 1;
+            cont += 1;
+        }
+        alumnoTemp.setHabilidades(habilidadesTemp);
+        alumnoTemp.setNombre(textoSeparado[0]);
+        if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
+        {
+            //esto es por si ocurre que el nombre es igual al fin de línea o algo así
+            return false;
+        }
         
+
+        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
+        try
+        {
+            alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+            alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+        }
+        catch (NumberFormatException exception)
+        {
+            throw new ImportarAlumnosException();
+        }
+        
+        if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
+        {
+            //System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
+            return false;
+        }
+        
+        //System.out.println("el largo del arreglo de habilidades del nuevo alumno es: "+alumnoTemp.getHabilidades().size());
         this.agregarAlumno(alumnoTemp);
-		return true;
+        return true;
     }
     
     //HAY QUE HACER LAS EXCEPCIONES DE ESTO
@@ -339,7 +352,7 @@ public class Curso
             alumnoAux = this.alumnos.get(enu.nextElement());
             if (alumnoAux.getNombre().equals(nombreAlumno) == true)
             {
-            	System.out.println("Se ha encontrado al alumno de rut: "+ alumnoAux.getRUN());
+            	////System.out.println("Se ha encontrado al alumno de rut: "+ alumnoAux.getRUN());
             	return alumnoAux;
             }
         }

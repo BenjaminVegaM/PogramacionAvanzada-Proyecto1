@@ -15,9 +15,9 @@ public class Persona
 	{
 		this.nombre = newNombre;
 	}
-	public void setRUN(int newRUT)
+	public void setRUN(int newRUN)
 	{
-		this.run = newRUT;
+		this.run = newRUN;
 	}
 	public void setEdad(int newEdad)
 	{

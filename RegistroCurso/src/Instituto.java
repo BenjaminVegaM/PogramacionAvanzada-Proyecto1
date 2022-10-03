@@ -49,22 +49,34 @@ public class Instituto
 	}
 	public ArrayList<String> getNombreHabilidadesCurso(int i)
     {
-    	return cursos.get(i).getNombreHabilidades();
+    	return this.cursos.get(i).getNombreHabilidades();
     }
 	public int getTamaño()
 	{
-		return cursos.size();
+		return this.cursos.size();
 	}
-	public Profesor getProfesorCurso (int i)
+	public String getNombreProfesorCurso (int i)
 	{
-	  return cursos.get(i).getProfesor();
+	  return this.cursos.get(i).getNombreProfesor();
 	}
-	public int getPorcentajeAprobacionCurso (int i)
+	public int getEdadProfesorCurso (int i)
 	{
-	    return this.cursos.get(i).getPorcentajeAprobacion();
+	  return this.cursos.get(i).getEdadProfesor();
 	}
+	public int getRUNProfesorCurso (int i)
+	{
+	  return this.cursos.get(i).getRUNProfesor();
+	}
+	public String getMateriaProfesorCurso(int i)
+    {
+    	return this.cursos.get(i).getMateriaProfesor();
+    }
 
 	/*métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos*/
+	public int getPorcentajeAprobacionCurso (int i)
+	{
+		return this.cursos.get(i).getPorcentajeAprobacion();
+	}
 	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
 		boolean resultado = cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
