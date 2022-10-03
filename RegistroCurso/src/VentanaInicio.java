@@ -1,3 +1,8 @@
+/**
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -70,7 +75,6 @@ public class VentanaInicio extends JFrame
 			    	
 			    	for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
 			    	{
-			    		//creo que ni siquiera es necesario crear el cursoTemp1
 			    		Curso cursoTemp1 = instituto.getCopiaCurso(cont);
 			        	Enumeration<Integer> enu1 = instituto.getKeysAlumnosCurso(cont);
 			        	cursoTemp1.updateFile(testFile,testFileWriter,printWriterTestFile,enu1);
@@ -79,7 +83,6 @@ public class VentanaInicio extends JFrame
 			    	printWriterTestFile.write("—————");
 			    	printWriterTestFile.close();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		    	

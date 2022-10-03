@@ -1,3 +1,8 @@
+/**
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,13 +28,13 @@ public class VentanaAnyadirCurso extends JFrame
 	private JButton btnAtras;
 	private JLabel lblTextoNombreCurso;
 	private JLabel lblNombreProfesor;
+	private JLabel lblRUTProfesor;
+	private JLabel lblAsignaturaProfesor;
 	private JTextField txtNombreCurso;
 	private JTextField txtNombreProfesor;
-	private JLabel lblRUTProfesor;
 	private JTextField txtRUTProfesor;
-	private JLabel lblAsignaturaProfesor;
-	private JComboBox comboBoxAsignaturaProfesor;
 	private JTextField txtEdadProfesor;
+	private JComboBox comboBoxAsignaturaProfesor;
 
 	public VentanaAnyadirCurso(Instituto instituto) {
 		setTitle("Añadir Curso");
@@ -114,7 +119,6 @@ public class VentanaAnyadirCurso extends JFrame
                 
                 for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                 {
-                	//podríamos cambiar esto para que se repita hasta que se indique un nombre válido o se quiera salir???
                 	if (Objects.equals(txtNombreCurso.getText(),instituto.getNombreCurso(cont)))
                 	{
                 		encontrado = true;
@@ -124,20 +128,18 @@ public class VentanaAnyadirCurso extends JFrame
                 if (Objects.equals(txtNombreCurso.getText(), endOfCurso) || Objects.equals(txtNombreCurso.getText(), endOfFile))
             	{
                 	//sacar popup
-                	JOptionPane.showMessageDialog(null, "Nombre del curso inválido, inténtelo de nuevo");
+                	JOptionPane.showMessageDialog(null, "Nombre del curso inválido, inténtelo de nuevo.");
             	}
                 else if (encontrado == true)
                 {
-                	JOptionPane.showMessageDialog(null, "El nombre ingresado ya existe, ingrese otro");
+                	JOptionPane.showMessageDialog(null, "El nombre ingresado ya existe, ingrese otro.");
                 	encontrado = false;
                 }
                 else
                 {
-                	//EDITAR PARA QUE TENGA QUE METER PROFESOR Y HABILIDADES
                 	Curso cursoTemp = new Curso();
                 	Profesor profesorAux = new Profesor();
                 	profesorAux.setNombre(txtNombreProfesor.getText());
-                	//PONER TRYCATCH
                 	try
                 	{
                 		profesorAux.setEdad(Integer.parseInt(txtEdadProfesor.getText()));

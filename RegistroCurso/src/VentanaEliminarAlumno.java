@@ -1,3 +1,8 @@
+/**
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

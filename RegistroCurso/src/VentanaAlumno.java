@@ -1,3 +1,8 @@
+/**
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -80,6 +85,25 @@ public class VentanaAlumno extends JFrame {
 		JComboBox comboBox_Habilidades = new JComboBox();
 		comboBox_Habilidades.setModel(new DefaultComboBoxModel(arregloHabilidades));
 		comboBox_Habilidades.setBounds(131, 129, 293, 22);
+		comboBox_Habilidades.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(comboBox_Habilidades.getSelectedIndex() != 0)
+                {
+                    if (instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1) == true)
+                    {
+                    	lblEstadoH.setText("Aprobado");
+                    }
+                    else
+                    {
+                    	lblEstadoH.setText("Reprobado");
+                    }
+                }
+                else
+                {
+                	lblEstadoH.setText("");
+                }
+            }
+        });
 		contentPane.add(comboBox_Habilidades);
 		
 		JButton btnCambiarHabilidad = new JButton("Cambiar Estado Habilidad");

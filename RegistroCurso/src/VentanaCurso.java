@@ -1,3 +1,8 @@
+/**
+ * @author Benjamín Vega
+ * @author Diego Truyol
+ * @author Pablo Paillalef Avendaño
+ */
 import java.awt.EventQueue;
 import java.util.*;
 
@@ -56,7 +61,6 @@ public class VentanaCurso extends JFrame
         {
         	for(int index = 1 ; index-1 < instituto.getCantAlumnosCurso(indiceCurso);index++) 
             {
-            	// Deberiamos poner un break si enu.hasMoreElements() == null
             	arrayAlumnos[index] = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement()).getNombre();
             }
         	comboBox_Alumnos.setModel(new DefaultComboBoxModel(arrayAlumnos));
@@ -115,7 +119,6 @@ public class VentanaCurso extends JFrame
 				}
 				else if (instituto.getCopiaCurso(indiceCurso).getAlumnos().size() <= 1)
         		{
-        			//Porque si no el curso se queda sin habilidades y eso me da miedito
         			JOptionPane.showMessageDialog(null, "No puede dejar al curso sin alumnos");
         		}
 				else
