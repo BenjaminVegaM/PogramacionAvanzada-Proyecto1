@@ -57,7 +57,6 @@ public class Curso
     }
     public Hashtable<Integer,Alumno> getAlumnos()
     {
-    	//CAMBIAR A COPIA
     	Hashtable<Integer,Alumno> copiaAlumnos = this.alumnos;
         return copiaAlumnos;
     }
@@ -79,12 +78,12 @@ public class Curso
     {
     	/*esto asume que todos los alumnos tienen los mismos nombres en las habilidades, por tanto esto se saca del primero que encuentre*/
     	Enumeration<Integer> enu = this.getAlumnos().keys();
-    	//Agregar Try Catch
     	Alumno alumnoTemp = this.alumnos.get(enu.nextElement());
     	return alumnoTemp.getNombreHabilidades();
     }
     public int getPorcentajeAprobacion()
     {
+    	//saca el porcentaje dependiendo de la cantidad de aprobados y la cantidad total de alumnos
     	if (this.alumnos.size() <= 0)
     	{
     		return 0;
@@ -108,10 +107,8 @@ public class Curso
     	return true;
     }
     
-    //IGUAL ESTO DEBERÍA LLAMARSE getCopiaAlumno SOLO DIGO EH????
     public Alumno buscarAlumno(int run)
     {
-    	//CAMBIAR A COPIA
     	Alumno copiaAlumno = this.alumnos.get(run);
     	return copiaAlumno;
     }
@@ -147,9 +144,8 @@ public class Curso
             //esto es por si ocurre que el nombre es igual al fin de línea o algo así
             return false;
         }
-        
 
-        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
+        //se asegura que el run sea válido (o de siquiera es un número), el proceso se corta en caso de no ser así
         try
         {
             alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
@@ -159,14 +155,11 @@ public class Curso
         {
             throw new ImportarAlumnosException();
         }
-        
         if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
         {
-            ////System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
             return false;
         }
-        
-        //System.out.println("el largo del arreglo de habilidades del nuevo alumno es: "+alumnoTemp.getHabilidades().size());
+
         this.agregarAlumno(alumnoTemp);
         return true;
     }
@@ -201,9 +194,8 @@ public class Curso
             //esto es por si ocurre que el nombre es igual al fin de línea o algo así
             return false;
         }
-        
 
-        //se asegura que el run sea válido, el proceso se corta en caso de no ser así
+      //se asegura que el run sea válido (o de siquiera es un número), el proceso se corta en caso de no ser así
         try
         {
             alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
@@ -216,35 +208,33 @@ public class Curso
         
         if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
         {
-            //System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
             return false;
         }
-        
-        //System.out.println("el largo del arreglo de habilidades del nuevo alumno es: "+alumnoTemp.getHabilidades().size());
+
         this.agregarAlumno(alumnoTemp);
         return true;
     }
     
-    //HAY QUE HACER LAS EXCEPCIONES DE ESTO
     public void importarProfesor (String[] textoSeparado)
     {
+    	/* te voy a ser muy sincero, esto confía mucho en que el string tenga las cosas bien,
+    	 * pero gracias a como implementamos las cosas por ventanas, nos pudimos permitir esto
+    	 * programar es bonito
+    	 */
     	Profesor newProfesor = new Profesor();
     	
-    	//EXCEPCIONES
     	newProfesor.setNombre(textoSeparado[0]);
     	newProfesor.setRUN(Integer.parseInt(textoSeparado[1]));
     	newProfesor.setEdad(Integer.parseInt(textoSeparado[2]));
     	newProfesor.setMateriaPrincipal(textoSeparado[3]);
     	newProfesor.setAnyosEnsenyando(Integer.parseInt(textoSeparado[4]));
     	newProfesor.setCalidad(Integer.parseInt(textoSeparado[5]));
-    	//ACUERDATE
     	
     	this.setProfesor(newProfesor);
     }
     
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
-    	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
     	int rutPrueba;
     	try
 		{
@@ -287,6 +277,11 @@ public class Curso
     	
         while (enu.hasMoreElements())
         {
+        	/* Sobre esto, ya se que se ve mal, pero si miras la línea 241, se pilla el primer alumno
+        	 * para sacar el ArrayList de las habilidades y poder ponerlo luego del nombre del curso
+        	 * luego en el proceso de las lineas 271 - 276 se meten los datos de ese mismo alumno
+        	 * y aquí empezamos a seguir con el resto
+        	 * */
         	alumnoTemp = this.buscarAlumno(enu.nextElement());
         	habilidadesTemp = alumnoTemp.getHabilidades();
         	printWriter.write("\n");
@@ -299,9 +294,9 @@ public class Curso
         }
     }
     
+    //Similar al updateFile de arriba, ya que es simplemente una adaptación de este, no tiene mucho misterio
     public void guardarCSVBonito (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
-    	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
     	int rutPrueba;
     	printWriter.write("Curso:,"+this.getNombreCurso());
 		printWriter.write("\n");
@@ -345,7 +340,7 @@ public class Curso
     		
     		printWriter.write(","+aprov);
     	}
-    	
+
         while (enu.hasMoreElements())
         {
         	alumnoTemp = this.buscarAlumno(enu.nextElement());
@@ -370,6 +365,9 @@ public class Curso
     
     public ArrayList<Alumno> alumnosAprobados ()
     {
+    	/* que retorna el arrayList de los que aprueban
+    	 * que está en el nombre
+    	 * */
     	ArrayList<Alumno> aprobados = new ArrayList<>();
     	if (this.alumnos.size() < 1)
     	{
@@ -408,6 +406,9 @@ public class Curso
     }
     public String getNombreAlumno(String nombreAlumno)
     {
+    	/* Ya se que podría parecer que tengo 70 años ahora mismo
+    	 * pero mira, son las 4am, no me vengas con cosas
+    	 * */
     	return this.getAlumnoNombre(nombreAlumno).getNombre();
     }
     public int getEdadAlumno(String nombreAlumno)
@@ -427,7 +428,6 @@ public class Curso
             alumnoAux = this.alumnos.get(enu.nextElement());
             if (alumnoAux.getNombre().equals(nombreAlumno) == true)
             {
-            	////System.out.println("Se ha encontrado al alumno de rut: "+ alumnoAux.getRUN());
             	return alumnoAux;
             }
         }
@@ -449,5 +449,4 @@ public class Curso
     {
     	this.alumnos.remove(this.getAlumnoNombre(nombreAlumno).getRUN());
     }
-    
 }

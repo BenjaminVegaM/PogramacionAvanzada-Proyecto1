@@ -453,6 +453,7 @@ public class RegistroCurso
                 }
             }
         }*/
-		
+		/* Se usó para probar las funciones y el avance
+		 * */
     }
 }

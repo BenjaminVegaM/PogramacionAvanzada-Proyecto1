@@ -40,7 +40,9 @@ public class Instituto
 	}
 	public Alumno getCopiaAlumnoCurso (int i, int key)
 	{
-		//ya retorna una copia en el buscarAlumno
+		/* A ver, creo que en muchas ocasiones pusimos copias cuando realmente no eran
+		 * copias... ehm, perdon?
+		 * */
 		return this.cursos.get(i).buscarAlumno(key);
 	}
 	public ArrayList<Alumno> getAlumnosAprobadosCurso (int i)
@@ -79,6 +81,11 @@ public class Instituto
 	}
 	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
+		/* llama al importarAlumno, y si falla tira la excepcion
+		 * esta es la única función que usa una de las excepciones personalizadas
+		 * te juro que pensamos en hacer la segunda pero al momento de escribir este
+		 * comentario son las 4:17 am, nos cuesta pensar
+		 */
 		boolean resultado = this.cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
 		if (resultado == true)
 		{

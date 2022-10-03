@@ -46,6 +46,7 @@ public class Profesor extends Persona
 	}
 
 	// Métodos
+	//Sobreescribe al getInfo() de la clase Persona
 	public String getInfo()
 	{
 		return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un profesor que tiene "+ this.getEdad() +" años y ha enseñado "+ materiaPrincipal +" por "+ this.anyosEnsenyando +".";

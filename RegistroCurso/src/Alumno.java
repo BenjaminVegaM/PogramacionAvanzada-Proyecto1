@@ -34,22 +34,8 @@ public class Alumno extends Persona
     }
     public ArrayList<Habilidades> getHabilidades() 
     {
-    	//REVISAR
     	ArrayList<Habilidades> copiaHabilidades = this.habilidades;
         return copiaHabilidades;
-    }
-    public String getInfo()
-    {
-    	String aprovado;
-    	if(this.aprobado)
-    	{
-    		aprovado = "aprovado";
-    	}
-    	else
-    	{
-    		aprovado = "repitiendo";
-    	}
-    	return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un alumno que tiene "+ this.getEdad() +" años y está "+ aprovado +".";
     }
     public ArrayList<String> getNombreHabilidades()
     {
@@ -82,6 +68,10 @@ public class Alumno extends Persona
     	}
     	
     	return this.aprobado;
+    }
+    public boolean getEstadoHabilidad (int index)
+    {
+        return this.habilidades.get(index).getEstado();
     }
     
     //Métodos
@@ -119,6 +109,8 @@ public class Alumno extends Persona
     	this.habilidades = habilidades;
     	return nuevoAlumno;
     }
+
+    
     public void agregarHabilidad(String nombre, boolean estado)
     {
     	Habilidades nuevaHabilidad = new Habilidades();
@@ -137,13 +129,25 @@ public class Alumno extends Persona
     {
     	this.habilidades.add(nuevaHabilidad);
     }
-    public boolean getEstadoHabilidad (int index)
-    {
-        return this.habilidades.get(index).getEstado();
-    }
+
     public void editarAlumno (String nuevoNombreAlumno, int nuevaEdad)
 	{
     	this.setNombre(nuevoNombreAlumno);
     	this.setEdad(nuevaEdad);
 	}
+    
+    //Sobreescribe al getInfo() de la clase Persona
+    public String getInfo()
+    {
+    	String aprovado;
+    	if(this.aprobado)
+    	{
+    		aprovado = "aprovado";
+    	}
+    	else
+    	{
+    		aprovado = "repitiendo";
+    	}
+    	return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un alumno que tiene "+ this.getEdad() +" años y está "+ aprovado +".";
+    }
 }
