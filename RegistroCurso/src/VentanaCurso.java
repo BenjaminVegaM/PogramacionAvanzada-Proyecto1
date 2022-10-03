@@ -14,7 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 
-public class VentanaCurso extends JFrame {
+public class VentanaCurso extends JFrame
+{
 
     private JPanel contentPane;
 
@@ -30,8 +31,10 @@ public class VentanaCurso extends JFrame {
         contentPane.setLayout(null);
         
         JButton btnAtras = new JButton("Atrás");
-        btnAtras.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnAtras.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
                 VentanaInstituto ventanaInstituto = new VentanaInstituto(instituto);
                 ventanaInstituto.setVisible(true);
                 dispose();
@@ -48,7 +51,6 @@ public class VentanaCurso extends JFrame {
         JComboBox<String[]> comboBox_Alumnos = new JComboBox<>();
         String [] arrayAlumnos = new String [instituto.getCantAlumnosCurso(indiceCurso)+1];
         arrayAlumnos[0] = "";
-        // Puede ser que el curso este vacio, eso puede dar un error
         Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
         try
         {

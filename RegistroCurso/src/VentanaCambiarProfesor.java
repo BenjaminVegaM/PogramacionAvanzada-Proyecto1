@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 public class VentanaCambiarProfesor extends JFrame
@@ -68,13 +69,25 @@ public class VentanaCambiarProfesor extends JFrame
 		contentPane.add(lblAsignaturaProfesor);
 		
 		JComboBox comboBoxAsignaturaProfesor = new JComboBox();
+		comboBoxAsignaturaProfesor.setModel(new DefaultComboBoxModel(new String[] {"Lenguaje", "Matemáticas", "Historia", "Ciencias", "Inglés"}));
 		comboBoxAsignaturaProfesor.setBounds(186, 112, 160, 22);
 		contentPane.add(comboBoxAsignaturaProfesor);
 		
+		//sabías que este botón es ligeramente mas chico que el crear? ahora lo sabes, y no puedes dejar de verlo
 		JButton btnAtras = new JButton("Cancelar");
+		btnAtras.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				VentanaCurso ventanaCurso = new VentanaCurso(instituto, indiceCurso);
+                ventanaCurso.setVisible(true);
+                dispose();
+			}
+		});
 		btnAtras.setBounds(12, 225, 89, 23);
 		contentPane.add(btnAtras);
 		
+		//FALTA PONER LA SELECCION DE SU ASIGNATURA
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener()
 		{
@@ -84,30 +97,35 @@ public class VentanaCambiarProfesor extends JFrame
                 String endOfFile = "—————";
                 if (Objects.equals(textNombre.getText(), endOfCurso) || Objects.equals(textNombre.getText(), endOfFile))
             	{
-                	//sacar popup
-                	JOptionPane.showMessageDialog(null, "Nombre del curso inválido, inténtelo de nuevo");
+                	JOptionPane.showMessageDialog(null, "Nombre del profesor inválido, inténtelo de nuevo");
             	}
-                
-            	//EDITAR PARA QUE TENGA QUE METER PROFESOR Y HABILIDADES
-            	Curso cursoTemp = new Curso();
-            	Profesor profesorAux = new Profesor();
-            	profesorAux.setNombre(textNombre.getText());
-            	//PONER TRYCATCH
-            	profesorAux.setEdad(Integer.parseInt(textEdad.getText()));
-            	profesorAux.setRUN(Integer.parseInt(textRUT.getText()));
-            	profesorAux.setMateriaPrincipal(comboBoxAsignaturaProfesor.getSelectedItem().toString());
-            	
-            	cursoTemp.setProfesor(profesorAux);
-            	instituto.addCurso(cursoTemp);
-                
-                VentanaInstituto ventanaCursos = new VentanaInstituto(instituto);
-                ventanaCursos.setVisible(true);
-                JOptionPane.showMessageDialog(null, "Nuevo profesor "+textNombre.getText()+" creado correctamente.");
-                dispose();
+                else
+                {
+	            	Curso cursoTemp = new Curso();
+	            	Profesor profesorAux = new Profesor();
+	            	profesorAux.setNombre(textNombre.getText());
+	            	try
+	            	{
+	            		profesorAux.setEdad(Integer.parseInt(textEdad.getText()));
+		            	profesorAux.setRUN(Integer.parseInt(textRUT.getText()));
+	            	}
+	            	catch (NumberFormatException e1)
+	            	{
+	            		JOptionPane.showMessageDialog(null, "Los ingresados no son válidos");
+                		return;
+	            	}
+	            	profesorAux.setMateriaPrincipal(comboBoxAsignaturaProfesor.getSelectedItem().toString());
+	            	
+	            	instituto.setProfesorCurso(indiceCurso, profesorAux);
+	                
+	                VentanaCurso ventanaCursos = new VentanaCurso(instituto, indiceCurso);
+	                ventanaCursos.setVisible(true);
+	                JOptionPane.showMessageDialog(null, "Nuevo profesor "+textNombre.getText()+" creado correctamente.");
+	                dispose();
+                }
 			}
 		});
 		btnCrear.setBounds(325, 226, 97, 25);
 		contentPane.add(btnCrear);
 	}
-
 }

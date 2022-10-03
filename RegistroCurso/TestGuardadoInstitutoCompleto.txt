@@ -1,6 +1,8 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-Yukari Yakumo,23498738,1200,Old Hag,10,100
-Kasen Ibara,21373170,1000,true,true,true,true
+1,1,1,Lenguaje,0,0
+Reimu Hakurei,3021291,20,true,true,true,true
+Marisa Kirisame,31111330,19,true,true,true,true
+Kasen Ibara,21373170,1000,false,false,false,false
 *****
 Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
 Yukari Yakumo,23498738,1200,Old Hag,10,100

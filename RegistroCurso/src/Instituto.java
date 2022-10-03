@@ -11,6 +11,10 @@ public class Instituto
 	}
 	
     /*Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters*/
+	public void setProfesorCurso (int indiceCurso, Profesor newProfesor)
+	{
+		this.cursos.get(indiceCurso).setProfesor(newProfesor);
+	}
 	
 	/*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
 	public int getNumeroCursos()
