@@ -342,7 +342,18 @@ public class Curso
     	
     	return aprobados;
     }
-    
+    public String getNombreAlumno(String nombreAlumno)
+    {
+    	return this.getAlumnoNombre(nombreAlumno).getNombre();
+    }
+    public int getEdadAlumno(String nombreAlumno)
+    {
+    	return this.getAlumnoNombre(nombreAlumno).getEdad();
+    }
+    public int getRUNAlumno(String nombreAlumno)
+    {
+    	return this.getAlumnoNombre(nombreAlumno).getRUN();
+    }
     public Alumno getAlumnoNombre (String nombreAlumno)
     {
         Enumeration<Integer> enu = this.getAlumnos().keys();
@@ -366,6 +377,10 @@ public class Curso
     {
         return this.getAlumnoNombre(nombreAlumno).getEstadoHabilidad(indiceHabilidad);
     }
+    public void editarAlumno (String viejoNombreAlumno, String nuevoNombreAlumno, int nuevaEdad)
+	{
+		this.getAlumnoNombre(viejoNombreAlumno).editarAlumno(nuevoNombreAlumno, nuevaEdad);
+	}
     public void eliminarAlumnoNombre (String nombreAlumno)
     {
     	this.alumnos.remove(this.getAlumnoNombre(nombreAlumno).getRUN());

@@ -22,9 +22,13 @@ import javax.swing.JSeparator;
 
 public class VentanaAlumno extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public VentanaAlumno(Instituto instituto, int indiceCurso, String nombreAlumno) {
+	public VentanaAlumno(Instituto instituto, int indiceCurso, String nombreAlumno, boolean flag, boolean flag2) {
 		setTitle("Información Alumno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -37,9 +41,18 @@ public class VentanaAlumno extends JFrame {
 		JButton btnAtras = new JButton("Atrás");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCurso ventanaCurso = new VentanaCurso(instituto, indiceCurso);
-				ventanaCurso.setVisible(true);
-				dispose();
+				if(flag)
+				{
+					VentanaCurso ventanaCurso = new VentanaCurso(instituto, indiceCurso);
+					ventanaCurso.setVisible(true);
+					dispose();					
+				}
+				else
+				{
+					VentanaListaAprovados ventanaListaAprovados = new VentanaListaAprovados(instituto, flag2);
+					ventanaListaAprovados.setVisible(true);
+					dispose();	
+				}
 			}
 		});
 		btnAtras.setBounds(10, 227, 89, 23);
@@ -82,7 +95,7 @@ public class VentanaAlumno extends JFrame {
 	    	arregloHabilidades[index] = nombreHabilidades.get(index-1);
         }
 		
-		JComboBox comboBox_Habilidades = new JComboBox();
+		JComboBox<String[]> comboBox_Habilidades = new JComboBox<String[]>();
 		comboBox_Habilidades.setModel(new DefaultComboBoxModel(arregloHabilidades));
 		comboBox_Habilidades.setBounds(131, 129, 293, 22);
 		comboBox_Habilidades.addActionListener(new ActionListener() {
@@ -118,7 +131,10 @@ public class VentanaAlumno extends JFrame {
                 else
                 {
                     instituto.cambiarEstadoHabilidadesAlumnoNombre(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1);
-                    JOptionPane.showMessageDialog(null, "Habilidad cambiada a "+instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1));
+                    String mensajeAprovada;
+                    if(instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1)) mensajeAprovada = "Aprovada";
+                    else mensajeAprovada = "Reprovada";
+                    JOptionPane.showMessageDialog(null, "Habilidad cambiada a "+ mensajeAprovada);
                     if (instituto.getEstadoHabilidad(indiceCurso, nombreAlumno, comboBox_Habilidades.getSelectedIndex()-1) == true)
                     {
                     	lblEstadoH.setText("Aprobado");
@@ -153,13 +169,32 @@ public class VentanaAlumno extends JFrame {
 		JLabel lblNewLabel_1_2 = new JLabel(Integer.toString(alumnoAux.getEdad()));
 		lblNewLabel_1_2.setBounds(131, 61, 293, 14);
 		contentPane.add(lblNewLabel_1_2);
-		
-		JLabel lblNewLabel_1_3 = new JLabel(Boolean.toString(alumnoAux.getAprovacion()));
+
+		JLabel lblNewLabel_1_3 = new JLabel();
+		if (alumnoAux.getAprovacion())
+        {
+			lblNewLabel_1_3.setText("Aprobado");
+        }
+        else
+        {
+        	lblNewLabel_1_3.setText("Reprobado");
+        }
 		lblNewLabel_1_3.setBounds(131, 86, 293, 14);
 		contentPane.add(lblNewLabel_1_3);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 111, 414, 2);
 		contentPane.add(separator);
+		
+		JButton btnEditarAlumno = new JButton("Editar Alumno");
+		btnEditarAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaEditarAlumno ventanaEditarAlumno = new VentanaEditarAlumno(instituto, indiceCurso, nombreAlumno, flag, flag2);
+				ventanaEditarAlumno.setVisible(true);
+				dispose();
+			}
+		});
+		btnEditarAlumno.setBounds(326, 42, 99, 23);
+		contentPane.add(btnEditarAlumno);
 	}
 }

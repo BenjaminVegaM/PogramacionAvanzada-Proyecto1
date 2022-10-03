@@ -22,12 +22,13 @@ public class VentanaAnyadirAlumno extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textNombreAlumno;
-	private JTextField textRUT;
+	private JTextField textRUN;
 	private JTextField textEdad;
 
 
 	public VentanaAnyadirAlumno(Instituto instituto, int indiceCurso)
 	{
+		setTitle("Añadir Alumno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,23 +39,23 @@ public class VentanaAnyadirAlumno extends JFrame {
 		
 		JLabel lblNombreAlumno = new JLabel("Nombre Alumno:");
 		lblNombreAlumno.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNombreAlumno.setBounds(74, 26, 117, 14);
+		lblNombreAlumno.setBounds(74, 34, 117, 14);
 		contentPane.add(lblNombreAlumno);
 		
 		textNombreAlumno = new JTextField();
 		textNombreAlumno.setColumns(10);
-		textNombreAlumno.setBounds(201, 23, 160, 20);
+		textNombreAlumno.setBounds(201, 31, 160, 20);
 		contentPane.add(textNombreAlumno);
 		
-		JLabel lblRutr = new JLabel("RUT:");
-		lblRutr.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblRutr.setBounds(74, 62, 117, 14);
-		contentPane.add(lblRutr);
+		JLabel lblRUN = new JLabel("R.U.N.:");
+		lblRUN.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblRUN.setBounds(74, 62, 117, 14);
+		contentPane.add(lblRUN);
 		
-		textRUT = new JTextField();
-		textRUT.setColumns(10);
-		textRUT.setBounds(201, 59, 160, 20);
-		contentPane.add(textRUT);
+		textRUN = new JTextField();
+		textRUN.setColumns(10);
+		textRUN.setBounds(201, 59, 160, 20);
+		contentPane.add(textRUN);
 		
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -79,14 +80,14 @@ public class VentanaAnyadirAlumno extends JFrame {
 		btnCancelar.setBounds(24, 211, 97, 25);
 		contentPane.add(btnCancelar);
 		
-		JButton btnAñadir = new JButton("Añadir");
-		btnAñadir.addActionListener(new ActionListener()
+		JButton btnAnyadir = new JButton("Añadir");
+		btnAnyadir.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				String[] lineaAlumno = new String[3];
 				lineaAlumno[0] = textNombreAlumno.getText();
-				lineaAlumno[1] = textRUT.getText();
+				lineaAlumno[1] = textRUN.getText();
 				lineaAlumno[2] = textEdad.getText();
 				
 				try
@@ -104,8 +105,8 @@ public class VentanaAnyadirAlumno extends JFrame {
                 dispose();
 			}
 		});
-		btnAñadir.setBounds(314, 211, 97, 25);
-		contentPane.add(btnAñadir);
+		btnAnyadir.setBounds(314, 211, 97, 25);
+		contentPane.add(btnAnyadir);
 		
 		JLabel lblAvisoElEstado = new JLabel("Aviso: El estado de las habilidades del alumno que va a ingresar");
 		lblAvisoElEstado.setVerticalAlignment(SwingConstants.TOP);

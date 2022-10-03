@@ -73,8 +73,8 @@ public class VentanaInstituto extends JFrame {
 				}
 				else
 				{
-					VentanaCurso ventanaAlumnos = new VentanaCurso(instituto, comboBox_Cursos.getSelectedIndex()-1);
-					ventanaAlumnos.setVisible(true);
+					VentanaCurso ventanaCurso = new VentanaCurso(instituto, comboBox_Cursos.getSelectedIndex()-1);
+					ventanaCurso.setVisible(true);
 					dispose();
 				}
 			}
@@ -137,5 +137,27 @@ public class VentanaInstituto extends JFrame {
 		JLabel lblCantAlumnos = new JLabel(Integer.toString(instituto.cantidadAlumnosTotal()));
 		lblCantAlumnos.setBounds(137, 63, 287, 14);
 		contentPane.add(lblCantAlumnos);
+		
+		JButton btnMostrarAprovados = new JButton("Mostrar Aprovados");
+		btnMostrarAprovados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaListaAprovados ventanaListaAprovados = new VentanaListaAprovados(instituto, true);
+				ventanaListaAprovados.setVisible(true);
+				dispose();
+			}
+		});
+		btnMostrarAprovados.setBounds(281, 34, 143, 23);
+		contentPane.add(btnMostrarAprovados);
+		
+		JButton btnMostrarReprovados = new JButton("Mostrar Reprovados");
+		btnMostrarReprovados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaListaAprovados ventanaListaAprovados = new VentanaListaAprovados(instituto, false);
+				ventanaListaAprovados.setVisible(true);
+				dispose();
+			}
+		});
+		btnMostrarReprovados.setBounds(281, 63, 143, 23);
+		contentPane.add(btnMostrarReprovados);
 	}
 }

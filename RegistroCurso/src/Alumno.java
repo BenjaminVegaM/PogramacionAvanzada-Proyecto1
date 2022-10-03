@@ -140,5 +140,10 @@ public class Alumno extends Persona
     public boolean getEstadoHabilidad (int index)
     {
         return this.habilidades.get(index).getEstado();
-    } 
+    }
+    public void editarAlumno (String nuevoNombreAlumno, int nuevaEdad)
+	{
+    	this.setNombre(nuevoNombreAlumno);
+    	this.setEdad(nuevaEdad);
+	}
 }

@@ -22,7 +22,11 @@ import javax.swing.JSeparator;
 public class VentanaCurso extends JFrame
 {
 
-    private JPanel contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 
     public VentanaCurso(Instituto instituto, int indiceCurso)
     {
@@ -98,7 +102,7 @@ public class VentanaCurso extends JFrame
 				}
 				else
 				{
-					VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, arrayAlumnos[comboBox_Alumnos.getSelectedIndex()]);
+					VentanaAlumno ventanaAlumno = new VentanaAlumno(instituto, indiceCurso, arrayAlumnos[comboBox_Alumnos.getSelectedIndex()], true, true);
 	        		ventanaAlumno.setVisible(true);
 	        		dispose();
 				}
@@ -202,5 +206,16 @@ public class VentanaCurso extends JFrame
         JSeparator separator_1 = new JSeparator();
         separator_1.setBounds(10, 159, 414, 2);
         contentPane.add(separator_1);
+        
+        JButton btnCambiarNombre = new JButton("Cambiar Nombre");
+        btnCambiarNombre.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		VentanaEditarCurso ventanaEditarCurso = new VentanaEditarCurso(instituto, indiceCurso);
+        		ventanaEditarCurso.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnCambiarNombre.setBounds(307, 42, 117, 23);
+        contentPane.add(btnCambiarNombre);
     }
 }

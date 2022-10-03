@@ -79,7 +79,7 @@ public class Instituto
 	}
 	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
-		boolean resultado = cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
+		boolean resultado = this.cursos.get(i).importarAlumno(textoSeparado, nombreHabilidades);
 		if (resultado == true)
 		{
 			return resultado;
@@ -91,7 +91,7 @@ public class Instituto
 	}
 	public void cambiarEstadoHabilidadesAlumno (int index, int rut, int inputUsuario)
 	{
-		cursos.get(index).cambiarEstadoHabilidadesAlumno(rut, inputUsuario);
+		this.cursos.get(index).cambiarEstadoHabilidadesAlumno(rut, inputUsuario);
 	}
 	public Alumno buscarAlumno (int index, int rut)
 	{
@@ -117,14 +117,34 @@ public class Instituto
 	}
 	public void cambiarEstadoHabilidadesAlumnoNombre (int indiceCurso, String nombreAlumno, int indiceHabilidad)
     {
-        cursos.get(indiceCurso).cambiarEstadoHabilidadesAlumnoIndice(nombreAlumno, indiceHabilidad);
+		this.cursos.get(indiceCurso).cambiarEstadoHabilidadesAlumnoIndice(nombreAlumno, indiceHabilidad);
     }
 	public boolean getEstadoHabilidad (int indiceCurso, String nombreAlumno, int indiceHabilidad)
     {
-        return cursos.get(indiceCurso).getEstadoHabilidad(nombreAlumno, indiceHabilidad);
+        return this.cursos.get(indiceCurso).getEstadoHabilidad(nombreAlumno, indiceHabilidad);
     }
+	public String getNombreAlumno(int indiceCurso, String nombreAlumno)
+	{
+		return this.cursos.get(indiceCurso).getNombreAlumno(nombreAlumno);
+	}
+	public int getEdadAlumno(int indiceCurso, String nombreAlumno)
+	{
+		return this.cursos.get(indiceCurso).getEdadAlumno(nombreAlumno);
+	}
+	public int getRUNAlumno(int indiceCurso, String nombreAlumno)
+	{
+		return this.cursos.get(indiceCurso).getRUNAlumno(nombreAlumno);
+	}
+	public void editarAlumno (int indiceCurso, String viejoNombreAlumno, String nuevoNombreAlumno, int nuevaEdad)
+	{
+		this.cursos.get(indiceCurso).editarAlumno(viejoNombreAlumno, nuevoNombreAlumno, nuevaEdad);
+	}
+	public void editarNombreCurso(int indiceCurso, String nuevoNombre)
+	{
+		this.cursos.get(indiceCurso).setNombre(nuevoNombre);
+	}
 	public void eliminarAlumnoCursoNombre (int indiceCurso, String nombreAlumno)
 	{
-		cursos.get(indiceCurso).eliminarAlumnoNombre(nombreAlumno);
+		this.cursos.get(indiceCurso).eliminarAlumnoNombre(nombreAlumno);
 	}
 }

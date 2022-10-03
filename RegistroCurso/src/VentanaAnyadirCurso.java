@@ -24,6 +24,10 @@ import javax.swing.JTextArea;
 public class VentanaAnyadirCurso extends JFrame
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAtras;
 	private JLabel lblTextoNombreCurso;
@@ -34,7 +38,7 @@ public class VentanaAnyadirCurso extends JFrame
 	private JTextField txtNombreProfesor;
 	private JTextField txtRUTProfesor;
 	private JTextField txtEdadProfesor;
-	private JComboBox comboBoxAsignaturaProfesor;
+	private JComboBox<String[]> comboBoxAsignaturaProfesor;
 
 	public VentanaAnyadirCurso(Instituto instituto) {
 		setTitle("Añadir Curso");
@@ -92,7 +96,7 @@ public class VentanaAnyadirCurso extends JFrame
 		lblAsignaturaProfesor.setBounds(57, 157, 117, 14);
 		contentPane.add(lblAsignaturaProfesor);
 		
-		comboBoxAsignaturaProfesor = new JComboBox();
+		comboBoxAsignaturaProfesor = new JComboBox<String[]>();
 		comboBoxAsignaturaProfesor.setModel(new DefaultComboBoxModel(new String[] {"Lenguaje", "Matemáticas", "Historia", "Ciencias", "Inglés"}));
 		comboBoxAsignaturaProfesor.setBounds(184, 153, 160, 22);
 		contentPane.add(comboBoxAsignaturaProfesor);
