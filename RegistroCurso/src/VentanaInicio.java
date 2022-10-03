@@ -65,13 +65,14 @@ public class VentanaInicio extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("Saliendo y guardando los cambios...");
-		    	File testFile = new File("TestGuardadoInstitutoCompleto.txt");
+		    	File testFile = new File("Guardado.txt");
 		    	FileWriter testFileWriter;
+		    	PrintWriter printWriterTestFile;
+		    	//Guardando para Cargar
 				try
 				{
 					testFileWriter = new FileWriter(testFile);
-					PrintWriter printWriterTestFile = new PrintWriter(testFileWriter);
+					printWriterTestFile = new PrintWriter(testFileWriter);
 			    	
 			    	for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
 			    	{
@@ -85,8 +86,28 @@ public class VentanaInicio extends JFrame
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				
+				//Guardando csv bonito
+				testFile = new File("DatosInstituto.csv");
+				try
+				{
+					testFileWriter = new FileWriter(testFile);
+					printWriterTestFile = new PrintWriter(testFileWriter);
+			    	
+			    	for (int cont = 0; cont < instituto.getTamaño(); cont += 1)
+			    	{
+			    		Curso cursoTemp1 = instituto.getCopiaCurso(cont);
+			        	Enumeration<Integer> enu1 = instituto.getKeysAlumnosCurso(cont);
+			        	cursoTemp1.guardarCSVBonito(testFile, testFileWriter,  printWriterTestFile, enu1);
+			        	printWriterTestFile.write("\n\n");
+			    	}
+			    	printWriterTestFile.write("");
+			    	printWriterTestFile.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 		    	
-				dispose();
+				System.exit(0);
 			}
 		});
 		//Pido disculpas por el hecho de no dejarlo centrado

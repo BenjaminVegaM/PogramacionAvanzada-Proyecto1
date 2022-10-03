@@ -8,7 +8,7 @@ Kasen Ibara,21373170,1000,true,true,true,true
 Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
 Yukari Yakumo,23498738,1200,Old Hag,10,100
 Sanae Moriya,3021291,25,true,true,true,true
-Kanako Yasaka,31111330,2000,true,false,true,true
+Kanako Yasaka,31111330,2000,true,false,false,false
 Suwako Moriya,21373170,2300,false,true,false,true
 *****
 Oni,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)

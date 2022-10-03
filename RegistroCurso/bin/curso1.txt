@@ -1,5 +1,0 @@
-Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
-nombre alumno 1,3021291,True,True,False,True
-nombre alumno 2,21373170,False,True,False,True
-nombre alumno 3,31111330,True,False,False,False
-nombre alumno 4,21111111,True,False,False,False

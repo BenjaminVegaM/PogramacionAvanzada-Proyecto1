@@ -299,6 +299,70 @@ public class Curso
         }
     }
     
+    public void guardarCSVBonito (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
+    {
+    	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
+    	int rutPrueba;
+    	printWriter.write("Curso:,"+this.getNombreCurso());
+		printWriter.write("\n");
+    	try
+		{
+    		rutPrueba = enu.nextElement();
+		}
+		catch (NoSuchElementException exception)
+		{
+			printWriter.write("Nombre Profesor, R.U.N. Profesor, Edad Profesor, Asignatura Profesor, Años Enseñando, Calidad\n");
+			printWriter.write(this.profesor.getNombre()+","+this.profesor.getRUN()+","+this.profesor.getEdad()+
+					","+this.profesor.getMateriaPrincipal()+","+this.profesor.getAnyosEnsenyando()+","
+					+this.profesor.getCalidad());
+			return;
+		}
+    	
+    	Alumno alumnoTemp = this.buscarAlumno(rutPrueba);
+    	ArrayList<Habilidades> habilidadesTemp = alumnoTemp.getHabilidades();
+
+    	//Se asume que el profesor existe, ya que no hay forma de importar un curso sin profesor
+    	printWriter.write("Nombre Profesor, R.U.N. Profesor, Edad Profesor, Asignatura Profesor, Años Enseñando, Calidad\n");
+    	printWriter.write(this.profesor.getNombre()+","+this.profesor.getRUN()+","+this.profesor.getEdad()+
+    					","+this.profesor.getMateriaPrincipal()+","+this.profesor.getAnyosEnsenyando()+","
+    					+this.profesor.getCalidad());
+    	printWriter.write("\n");
+    	
+    	printWriter.write("Alumnos,,,,,Habilidades\nNombre, R.U.N., Edad");
+    	//asumiendo que las habilidades en todos son iguales se usan los nombres que tenga el primero para la primera linea
+    	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+    	{
+    		printWriter.write(","+habilidadesTemp.get(contHab).getNombre());
+    	}
+    	printWriter.write("\n");
+
+    	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN()+","+alumnoTemp.getEdad());
+    	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+    	{
+    		String aprov;
+    		if(habilidadesTemp.get(contHab).getEstado()) aprov = "Conseguida";
+    		else aprov = "No Conseguida";
+    		
+    		printWriter.write(","+aprov);
+    	}
+    	
+        while (enu.hasMoreElements())
+        {
+        	alumnoTemp = this.buscarAlumno(enu.nextElement());
+        	habilidadesTemp = alumnoTemp.getHabilidades();
+        	printWriter.write("\n");
+        	printWriter.write(alumnoTemp.getNombre()+","+alumnoTemp.getRUN()+","+alumnoTemp.getEdad());
+        	for (int contHab = 0 ; contHab < habilidadesTemp.size() ; contHab += 1)
+        	{
+        		String aprov;
+        		if(habilidadesTemp.get(contHab).getEstado()) aprov = "Conseguida";
+        		else aprov = "No Conseguida";
+        		
+        		printWriter.write(","+aprov);
+        	}
+        }
+    }
+    
     public void cambiarEstadoHabilidadesAlumno (int rut, int inputUsuario)
     {
     	this.alumnos.get(rut).cambiarEstadoHabilidad(inputUsuario);
