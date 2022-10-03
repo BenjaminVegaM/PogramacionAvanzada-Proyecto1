@@ -1,6 +1,5 @@
 Curso 1,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)
 Yukari Yakumo,23498738,1200,Old Hag,10,100
-Aya Shameimaru,21111111,1000,true,false,false,false
 Kasen Ibara,21373170,1000,true,true,true,true
 *****
 Moriya Shrine,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglés)

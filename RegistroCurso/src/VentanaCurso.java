@@ -111,6 +111,11 @@ public class VentanaCurso extends JFrame {
 				{
 					JOptionPane.showMessageDialog(null, "Por favor seleccione un alumno.");
 				}
+				else if (instituto.getCopiaCurso(indiceCurso).getAlumnos().size() <= 1)
+        		{
+        			//Porque si no el curso se queda sin habilidades y eso me da miedito
+        			JOptionPane.showMessageDialog(null, "No puede dejar al curso sin alumnos");
+        		}
 				else
 				{
 					VentanaEstaSeguroAlumno ventanaEstaSeguroAlumno = new VentanaEstaSeguroAlumno(instituto, indiceCurso, arrayAlumnos[comboBox_Alumnos.getSelectedIndex()]);
@@ -160,7 +165,7 @@ public class VentanaCurso extends JFrame {
         contentPane.add(lblNewLabel_1_1);
         
         JLabel lblRunProfesor = new JLabel(Integer.toString(instituto.getProfesorCurso(indiceCurso).getRUN()));
-        lblRunProfesor.setBounds(137, 118, 287, 14);
+        lblRunProfesor.setBounds(137, 118, 163, 14);
         contentPane.add(lblRunProfesor);
         
         JLabel lblNewLabel_1_2 = new JLabel("Asignatura:");
@@ -173,6 +178,15 @@ public class VentanaCurso extends JFrame {
         contentPane.add(lblAsignaturaProfesor);
         
         JButton btnCambiarProfesor = new JButton("Cambiar Profesor");
+        btnCambiarProfesor.addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		VentanaCambiarProfesor ventanaCambiarProfesor = new VentanaCambiarProfesor(instituto, indiceCurso);
+				ventanaCambiarProfesor.setVisible(true);
+				dispose();
+        	}
+        });
         btnCambiarProfesor.setBounds(307, 114, 117, 23);
         contentPane.add(btnCambiarProfesor);
         

@@ -109,46 +109,56 @@ public class VentanaAnyadirCurso extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
                 boolean encontrado = false;
-                boolean valido = false; //?????
                 String endOfCurso = "*****";
                 String endOfFile = "—————";
-                while (Objects.equals(txtNombreCurso.getText(), endOfCurso) || Objects.equals(txtNombreCurso.getText(), endOfFile))
-            	{
-                	//sacar popup
-            		System.out.println("Nombre del curso inválido, inténtelo de nuevo");
-            	}
                 
                 for (int cont = 0; cont < instituto.getTamaño() ; cont++)
                 {
                 	//podríamos cambiar esto para que se repita hasta que se indique un nombre válido o se quiera salir???
                 	if (Objects.equals(txtNombreCurso.getText(),instituto.getNombreCurso(cont)))
                 	{
-                		//sacar popup
-                		System.out.println("Un curso con ese nombre ya existe."); 
                 		encontrado = true;
                 	}
                 }
                 
-                if (encontrado == false)
+                if (Objects.equals(txtNombreCurso.getText(), endOfCurso) || Objects.equals(txtNombreCurso.getText(), endOfFile))
+            	{
+                	//sacar popup
+                	JOptionPane.showMessageDialog(null, "Nombre del curso inválido, inténtelo de nuevo");
+            	}
+                else if (encontrado == true)
+                {
+                	JOptionPane.showMessageDialog(null, "El nombre ingresado ya existe, ingrese otro");
+                	encontrado = false;
+                }
+                else
                 {
                 	//EDITAR PARA QUE TENGA QUE METER PROFESOR Y HABILIDADES
                 	Curso cursoTemp = new Curso();
                 	Profesor profesorAux = new Profesor();
                 	profesorAux.setNombre(txtNombreProfesor.getText());
                 	//PONER TRYCATCH
-                	profesorAux.setEdad(Integer.parseInt(txtEdadProfesor.getText()));
-                	profesorAux.setRUN(Integer.parseInt(txtRUTProfesor.getText()));
+                	try
+                	{
+                		profesorAux.setEdad(Integer.parseInt(txtEdadProfesor.getText()));
+                    	profesorAux.setRUN(Integer.parseInt(txtRUTProfesor.getText()));
+                	}
+                	catch (NumberFormatException e1)
+                	{
+                		JOptionPane.showMessageDialog(null, "Los datos del profesor no son válidos");
+                		return;
+                	}
                 	profesorAux.setMateriaPrincipal(comboBoxAsignaturaProfesor.getSelectedItem().toString());
                 	
                 	cursoTemp.setNombre(txtNombreCurso.getText());
                 	cursoTemp.setProfesor(profesorAux);
                 	instituto.addCurso(cursoTemp);
-                }
-                
-                VentanaInstituto ventanaCursos = new VentanaInstituto(instituto);
-                ventanaCursos.setVisible(true);
-                JOptionPane.showMessageDialog(null, "Nuevo curso "+txtNombreCurso.getText()+" creado correctamente.");
-                dispose();
+                    
+                    JOptionPane.showMessageDialog(null, "Nuevo curso "+txtNombreCurso.getText()+" creado correctamente.");
+                    VentanaInstituto ventanaCursos = new VentanaInstituto(instituto);
+                    ventanaCursos.setVisible(true);
+                    dispose();
+                } 
 			}
 		});
 		btnCrear.setBounds(325, 226, 97, 25);
