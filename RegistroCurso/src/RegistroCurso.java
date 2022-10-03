@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import java.io.*;
-//import java.io.PrintWriter;
-import java.util.*;
 /**
  * @author Benjamín Vega
  * @author Diego Truyol
  * @author Pablo Paillalef Avendaño
  */
+
+import java.io.*;
+//import java.io.PrintWriter;
+import java.util.*;
+
 public class RegistroCurso 
 {
     public static void main (String arg[]) throws IOException 

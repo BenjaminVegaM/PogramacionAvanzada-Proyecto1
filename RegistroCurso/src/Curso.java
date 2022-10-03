@@ -1,33 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import java.util.*;
-import java.io.*;
-
 /**
  * @author Benjamín Vega
  * @author Diego Truyol
  * @author Pablo Paillalef Avendaño
  */
+import java.util.*;
+import java.io.*;
+
 public class Curso 
 {
-   private String nombre;
-   private Profesor profesor;
-   private Hashtable<Integer,Alumno> alumnos;
- //posiblemente se elimine cantAlumnos
-   private int cantAlumnos;
+	private String nombre;
+	private Profesor profesor;
+	private Hashtable<Integer,Alumno> alumnos;
 
-    /*constructores: igual lo cambiamos luego*/
     public Curso() 
     {
         this.nombre = "Nombre";
         this.profesor = new Profesor();
         this.alumnos = new Hashtable<>();
-        this.cantAlumnos = 0;
-        //this.nombreHabilidades = new ArrayList<>();
     }
     
     /*Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters----------Setters*/
@@ -39,18 +28,8 @@ public class Curso
     {
     	this.profesor = newProfesor;
     }
-    public void setCantAlumnos (int cantidad)
-    {
-    	this.cantAlumnos = cantidad;
-    }
 
     /*Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters*/
-    public Hashtable<Integer,Alumno> getAlumnos()
-    {
-    	//CAMBIAR A COPIA
-    	Hashtable<Integer,Alumno> copiaAlumnos = this.alumnos;
-        return copiaAlumnos;
-    }
     public String getNombre()
     {
     	return this.nombre;
@@ -65,7 +44,12 @@ public class Curso
     	Alumno alumno = this.alumnos.get(run);
     	return alumno.getNombre();
     }
-    //no se que es esto
+    public Hashtable<Integer,Alumno> getAlumnos()
+    {
+    	//CAMBIAR A COPIA
+    	Hashtable<Integer,Alumno> copiaAlumnos = this.alumnos;
+        return copiaAlumnos;
+    }
     public ArrayList<Habilidades> getHabilidadesAlumno_RUN(int run)
     {
     	Alumno alumno = this.alumnos.get(run);
@@ -74,7 +58,7 @@ public class Curso
     }
     public int getCantAlumnos() 
     {
-        return this.cantAlumnos;
+        return this.alumnos.size();
     }
     public String getNombreCurso() 
     {
@@ -98,9 +82,6 @@ public class Curso
         int resultado = (cantAprobados*100)/(this.alumnos.size());
         return resultado;
     }
-    
-    // Métodos (funciones)
-    /*para agrergar un alumno con los datos separados, puede que no queramos esto*/
     public boolean agregarAlumno (String nombre, int run, ArrayList<Habilidades> habilidades)
     {
     	Alumno nuevo = new Alumno();
@@ -108,15 +89,11 @@ public class Curso
     	nuevo.setRUN(run);
     	nuevo.setHabilidades(habilidades);
     	this.alumnos.put(run, nuevo);
-    	this.cantAlumnos += 1;
     	return true;
     }
-    
-    /*para cuando se quiera agregar un objeto alumno al hashtable*/
     public boolean agregarAlumno (Alumno alumno)
     {
     	this.alumnos.put(alumno.getRUN(), alumno);
-    	this.cantAlumnos += 1;
     	return true;
     }
     
@@ -128,10 +105,8 @@ public class Curso
     	return copiaAlumno;
     }
 
-    
     //funciones de importacion
-    
-    /*importa un alumno de una línea de texto previamente separada, también la podríamos separar ahí mismo tambien te digo*/
+    /*importa un alumno de una línea de texto previamente separada*/
     public boolean importarAlumno (ArrayList<String> nombreHabilidades, String[] textoSeparado) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
@@ -159,7 +134,7 @@ public class Curso
 		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
 		{
 			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
-			//igual este no es lugar para ponerlo pero bueno
+			return false;
 		}
 		
 
@@ -181,7 +156,6 @@ public class Curso
 		}
         
         this.agregarAlumno(alumnoTemp);
-        this.cantAlumnos += 1;
 		return true;
     }
     
@@ -213,7 +187,7 @@ public class Curso
 		if (textoSeparado[0].equals("*****") == true || textoSeparado[0].equals("—————"))
 		{
 			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
-			//igual este no es lugar para ponerlo pero bueno
+			return false;
 		}
 		
 
@@ -235,7 +209,6 @@ public class Curso
 		}
         
         this.agregarAlumno(alumnoTemp);
-        this.cantAlumnos += 1;
 		return true;
     }
     
@@ -251,7 +224,7 @@ public class Curso
     	newProfesor.setMateriaPrincipal(textoSeparado[3]);
     	newProfesor.setAnyosEnsenyando(Integer.parseInt(textoSeparado[4]));
     	newProfesor.setCalidad(Integer.parseInt(textoSeparado[5]));
-    	//ACUERDATE ME CAGO EN DIOS
+    	//ACUERDATE
     	
     	this.setProfesor(newProfesor);
     }
@@ -259,8 +232,6 @@ public class Curso
     public void updateFile (File file, FileWriter fileWriter, PrintWriter printWriter, Enumeration<Integer> enu)
     {
     	//No sabía como hacer esto para actualizar los cursos cuando no tienen a ningún alumno sin hacer esto
-    	//vaya solución más fea tio...
-    	//QUE FALTAN LAS HABILIDADES ME CAGO EN LA PUTA, QUE NO SE SABE SI LAS TIENE O NO
     	int rutPrueba;
     	try
 		{
@@ -320,8 +291,6 @@ public class Curso
     	this.alumnos.get(rut).cambiarEstadoHabilidad(inputUsuario);
     }
     
-    //podríamos pasarle un número a la mierda esta para indicar si queremos que retorne los aprobados o los reprobados
-    //solo habría que hacer otra lista más y guardar los reprobados en ella y retornar la indicada
     public ArrayList<Alumno> alumnosAprobados ()
     {
     	ArrayList<Alumno> aprobados = new ArrayList<>();

@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import java.util.*;
-
 /**
  * @author Benjamín Vega
  * @author Diego Truyol
  * @author Pablo Paillalef Avendaño
  */
+import java.util.*;
+
 public class Alumno extends Persona
 {
     private ArrayList<Habilidades> habilidades;
@@ -34,19 +28,6 @@ public class Alumno extends Persona
     }
     
 	// Getters----------Getters----------Getters----------Getters----------Getters----------Getters----------Getters
-    public String getInfo()
-    {
-        String aprovado;
-        if(this.aprobado)
-        {
-            aprovado = "aprovado";
-        }
-        else
-        {
-            aprovado = "repitiendo";
-        }
-        return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un alumno que tiene "+ this.getEdad() +" años y está "+ aprovado +".";
-    }
     public boolean getAprovacion()
     {
     	return this.aprobado;
@@ -56,6 +37,19 @@ public class Alumno extends Persona
     	//REVISAR
     	ArrayList<Habilidades> copiaHabilidades = this.habilidades;
         return copiaHabilidades;
+    }
+    public String getInfo()
+    {
+    	String aprovado;
+    	if(this.aprobado)
+    	{
+    		aprovado = "aprovado";
+    	}
+    	else
+    	{
+    		aprovado = "repitiendo";
+    	}
+    	return this.getNombre() +"de R.U.N. "+ this.getRUN() +" es un alumno que tiene "+ this.getEdad() +" años y está "+ aprovado +".";
     }
     public ArrayList<String> getNombreHabilidades()
     {
@@ -90,7 +84,7 @@ public class Alumno extends Persona
     	return this.aprobado;
     }
     
-    //funciones
+    //Métodos
     public void cambiarEstadoHabilidad (int index)
     {
     	if (this.habilidades.get(index).getEstado() == true)

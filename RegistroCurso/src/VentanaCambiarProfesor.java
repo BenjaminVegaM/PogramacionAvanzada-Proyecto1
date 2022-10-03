@@ -88,7 +88,7 @@ public class VentanaCambiarProfesor extends JFrame
 		contentPane.add(btnAtras);
 		
 		//FALTA PONER LA SELECCION DE SU ASIGNATURA
-		JButton btnCrear = new JButton("Crear");
+		JButton btnCrear = new JButton("Cambiar");
 		btnCrear.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)

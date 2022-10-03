@@ -63,6 +63,7 @@ public class Instituto
 	{
 	    return this.cursos.get(i).getPorcentajeAprobacion();
 	}
+
 	/*métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos----------métodos*/
 	public boolean importarAlumno(int i, String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
 	{
@@ -76,7 +77,6 @@ public class Instituto
 			throw new ImportarAlumnosException();
 		}
 	}
-	
 	public void cambiarEstadoHabilidadesAlumno (int index, int rut, int inputUsuario)
 	{
 		cursos.get(index).cambiarEstadoHabilidadesAlumno(rut, inputUsuario);
