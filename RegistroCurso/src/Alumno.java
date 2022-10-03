@@ -130,4 +130,8 @@ public class Alumno extends Persona
     {
     	this.habilidades.add(nuevaHabilidad);
     }
+    public boolean getEstadoHabilidad (int index)
+    {
+        return this.habilidades.get(index).getEstado();
+    } 
 }

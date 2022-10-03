@@ -96,7 +96,14 @@ public class RegistroCurso
     		while(linea.equals(endOfCurso) != true)
     		{
     			lineaDividida = linea.split(",");
-    			cursoAImportar.importarAlumno(lineaDividida, nombreHabilidadesTemp1);
+    			try
+    			{
+					cursoAImportar.importarAlumno(lineaDividida, nombreHabilidadesTemp1);
+				}
+    			catch (ImportarAlumnosException e)
+    			{
+					e.printStackTrace();
+				}
         		linea = lectorInstituto.readLine();
     		}
     		
@@ -450,5 +457,6 @@ public class RegistroCurso
                 }
             }
         }*/
+		
     }
 }

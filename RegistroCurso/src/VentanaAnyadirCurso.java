@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -53,63 +54,54 @@ public class VentanaAnyadirCurso extends JFrame
 		
 		lblTextoNombreCurso = new JLabel("Nombre Curso:");
 		lblTextoNombreCurso.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTextoNombreCurso.setBounds(57, 16, 117, 14);
+		lblTextoNombreCurso.setBounds(57, 32, 117, 14);
 		contentPane.add(lblTextoNombreCurso);
 		
 		lblNombreProfesor = new JLabel("Nombre Profesor:");
 		lblNombreProfesor.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNombreProfesor.setBounds(57, 52, 117, 14);
+		lblNombreProfesor.setBounds(57, 68, 117, 14);
 		contentPane.add(lblNombreProfesor);
 		
 		txtNombreCurso = new JTextField();
-		txtNombreCurso.setBounds(184, 13, 160, 20);
+		txtNombreCurso.setBounds(184, 29, 160, 20);
 		contentPane.add(txtNombreCurso);
 		txtNombreCurso.setColumns(10);
 		
 		txtNombreProfesor = new JTextField();
 		txtNombreProfesor.setColumns(10);
-		txtNombreProfesor.setBounds(184, 49, 160, 20);
+		txtNombreProfesor.setBounds(184, 65, 160, 20);
 		contentPane.add(txtNombreProfesor);
 		
 		lblRUTProfesor = new JLabel("R.U.N. Profesor:");
 		lblRUTProfesor.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblRUTProfesor.setBounds(57, 80, 117, 14);
+		lblRUTProfesor.setBounds(57, 96, 117, 14);
 		contentPane.add(lblRUTProfesor);
 		
 		txtRUTProfesor = new JTextField();
 		txtRUTProfesor.setColumns(10);
-		txtRUTProfesor.setBounds(184, 77, 160, 20);
+		txtRUTProfesor.setBounds(184, 93, 160, 20);
 		contentPane.add(txtRUTProfesor);
 		
 		lblAsignaturaProfesor = new JLabel("Asignatura Profesor:");
 		lblAsignaturaProfesor.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblAsignaturaProfesor.setBounds(57, 141, 117, 14);
+		lblAsignaturaProfesor.setBounds(57, 157, 117, 14);
 		contentPane.add(lblAsignaturaProfesor);
 		
 		comboBoxAsignaturaProfesor = new JComboBox();
 		comboBoxAsignaturaProfesor.setModel(new DefaultComboBoxModel(new String[] {"Lenguaje", "Matemáticas", "Historia", "Ciencias", "Inglés"}));
-		comboBoxAsignaturaProfesor.setBounds(184, 137, 160, 22);
+		comboBoxAsignaturaProfesor.setBounds(184, 153, 160, 22);
 		contentPane.add(comboBoxAsignaturaProfesor);
 		
 		JLabel lblTextoEdad = new JLabel("Edad Profesor");
 		lblTextoEdad.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTextoEdad.setBounds(57, 110, 117, 14);
+		lblTextoEdad.setBounds(57, 126, 117, 14);
 		contentPane.add(lblTextoEdad);
 		
 		txtEdadProfesor = new JTextField();
 		txtEdadProfesor.getText();
 		txtEdadProfesor.setColumns(10);
-		txtEdadProfesor.setBounds(184, 107, 160, 20);
+		txtEdadProfesor.setBounds(184, 123, 160, 20);
 		contentPane.add(txtEdadProfesor);
-		
-		JTextArea textAreaHabilidades = new JTextArea();
-		textAreaHabilidades.setBounds(182, 172, 162, 41);
-		contentPane.add(textAreaHabilidades);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Habilidades:");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_3_1.setBounds(57, 175, 117, 14);
-		contentPane.add(lblNewLabel_3_1);
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener()
@@ -147,9 +139,6 @@ public class VentanaAnyadirCurso extends JFrame
                 	profesorAux.setEdad(Integer.parseInt(txtEdadProfesor.getText()));
                 	profesorAux.setRUN(Integer.parseInt(txtRUTProfesor.getText()));
                 	profesorAux.setMateriaPrincipal(comboBoxAsignaturaProfesor.getSelectedItem().toString());
-                	
-                	//habilidades
-                	
                 	
                 	cursoTemp.setNombre(txtNombreCurso.getText());
                 	cursoTemp.setProfesor(profesorAux);

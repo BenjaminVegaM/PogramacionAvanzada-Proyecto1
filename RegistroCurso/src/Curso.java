@@ -90,7 +90,11 @@ public class Curso
     }
     public int getPorcentajeAprobacion()
     {
-        int cantAprobados = this.alumnosAprobados().size();  
+    	if (this.alumnos.size() <= 0)
+    	{
+    		return 0;
+    	}
+        int cantAprobados = this.alumnosAprobados().size();
         int resultado = (cantAprobados*100)/(this.alumnos.size());
         return resultado;
     }
@@ -204,7 +208,7 @@ public class Curso
     }
     
     //parametros de entrada invertido
-    public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades)
+    public boolean importarAlumno (String[] textoSeparado, ArrayList<String> nombreHabilidades) throws ImportarAlumnosException
     {
     	Alumno alumnoTemp = new Alumno();
     	ArrayList<Habilidades> habilidadesTemp = new ArrayList<>();
@@ -233,23 +237,27 @@ public class Curso
 			//esto es por si ocurre que el nombre es igual al fin de línea o algo así
 			//igual este no es lugar para ponerlo pero bueno
 		}
-		alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
-		alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+		
 
 		//se asegura que el run sea válido, el proceso se corta en caso de no ser así
-		/*Pasar a Try Catch
+		try
+		{
+			alumnoTemp.setRUN(Integer.parseInt(textoSeparado[1]));
+			alumnoTemp.setEdad(Integer.parseInt(textoSeparado[2]));
+		}
+		catch (NumberFormatException exception)
+		{
+			throw new ImportarAlumnosException();
+		}
+		
 		if (alumnoTemp.getRUN() <= 1000000 || this.alumnos.get(alumnoTemp.getRUN()) != null)
 		{
 			System.out.println("RUT inválido o repetido, cancelando la importación del alumno");
-			return;
+			return false;
 		}
-		*/
-		//alumnoTemp.mostrarDatos();
-        //alumnoTemp.mostrarHabilidades();
         
         this.agregarAlumno(alumnoTemp);
         this.cantAlumnos += 1;
-		//System.out.println("Importación realizada con éxito\n");
 		return true;
     }
     
@@ -353,5 +361,24 @@ public class Curso
     	
     	return aprobados;
     }
+    
+    private Alumno getAlumnoIndice (int indiceAlumno)
+    {
+        Enumeration<Integer> enu = this.getAlumnos().keys();
+        Alumno alumnoAux = new Alumno();
+        for(int i = 0 ; i < this.alumnos.size() && alumnoAux != null ; i++)
+        {
+            alumnoAux = this.alumnos.get(enu.nextElement());
+        }
+        return alumnoAux;
+    }
+    public void cambiarEstadoHabilidadesAlumnoIndice (int indiceAlumno, int indiceHabilidad)
+    {
+        this.getAlumnoIndice(indiceAlumno).cambiarEstadoHabilidad(indiceHabilidad);
+    }
+    public boolean getEstadoHabilidad(int indiceAlumno, int indiceHabilidad)
+    {
+        return this.getAlumnoIndice(indiceAlumno).getEstadoHabilidad(indiceHabilidad);
+    } 
     
 }

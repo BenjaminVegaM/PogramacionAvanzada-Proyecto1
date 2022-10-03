@@ -21,6 +21,5 @@ UWU,Sumar(Matemáticas),Restar(Matemáticas),Leer(Lenguaje),Leer inglés (Inglé
 Yukari Yakumo,23498738,1200,Old Hag,10,100
 Clownpiece,3021291,500,true,true,true,true
 Junko,31111330,10000,true,true,true,true
-Hecatia Lapislázuli,500,21373170,true,true,true,true
 *****
 —————

@@ -46,8 +46,10 @@ public class VentanaInstituto extends JFrame {
 		contentPane.add(comboBox_Cursos);
 		
 		JButton btn_Atras = new JButton("Atrás");
-		btn_Atras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btn_Atras.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				VentanaInicio ventanaInicio = new VentanaInicio(instituto);
 		    	ventanaInicio.setVisible(true);
 		    	dispose();
@@ -77,8 +79,10 @@ public class VentanaInstituto extends JFrame {
 		contentPane.add(btnVerCurso);
 		
 		JButton btnAnyadirCurso = new JButton("Añadir Curso");
-		btnAnyadirCurso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAnyadirCurso.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				VentanaAnyadirCurso ventanaAnyadirCurso = new VentanaAnyadirCurso(instituto);
 				ventanaAnyadirCurso.setVisible(true);
 				dispose();
@@ -87,9 +91,25 @@ public class VentanaInstituto extends JFrame {
 		btnAnyadirCurso.setBounds(152, 227, 118, 23);
 		contentPane.add(btnAnyadirCurso);
 		
-		JButton btnNewButton = new JButton("Eliminar");
-		btnNewButton.setBounds(355, 145, 69, 23);
-		contentPane.add(btnNewButton);
+		JButton btnEliminarCurso = new JButton("Eliminar");
+		btnEliminarCurso.setBounds(355, 145, 69, 23);
+		contentPane.add(btnEliminarCurso);
+		btnEliminarCurso.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				if(comboBox_Cursos.getSelectedIndex() == 0)
+				{
+					JOptionPane.showMessageDialog(null, "Por favor seleccione un curso.");
+				}
+				else
+				{
+					VentanaEstaSeguro ventanaEstaSeguro = new VentanaEstaSeguro(instituto, comboBox_Cursos.getSelectedIndex());
+					ventanaEstaSeguro.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 136, 414, 2);

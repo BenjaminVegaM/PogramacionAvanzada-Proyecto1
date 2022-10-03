@@ -31,8 +31,8 @@ public class VentanaCurso extends JFrame {
         JButton btnAtras = new JButton("Atrás");
         btnAtras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaInstituto ventanaCursos = new VentanaInstituto(instituto);
-                ventanaCursos.setVisible(true);
+                VentanaInstituto ventanaInstituto = new VentanaInstituto(instituto);
+                ventanaInstituto.setVisible(true);
                 dispose();
             }
         });
@@ -44,23 +44,39 @@ public class VentanaCurso extends JFrame {
         lblSeleccionarAlumno.setBounds(10, 172, 117, 14);
         contentPane.add(lblSeleccionarAlumno);
         
-        JComboBox comboBox_Alumnos = new JComboBox();
+        JComboBox<String[]> comboBox_Alumnos = new JComboBox<>();
         String [] arrayAlumnos= new String [instituto.getCantAlumnosCurso(indiceCurso)+1];
         arrayAlumnos[0] = "";
         // Puede ser que el curso este vacio, eso puede dar un error
         Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
-        for(int index = 1 ; index-1 < instituto.getCantAlumnosCurso(indiceCurso);index++) 
+        try
         {
-        	// Deberiamos poner un break si enu.hasMoreElements() == null
-        	arrayAlumnos[index] = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement()).getNombre();
+        	for(int index = 1 ; index-1 < instituto.getCantAlumnosCurso(indiceCurso);index++) 
+            {
+            	// Deberiamos poner un break si enu.hasMoreElements() == null
+            	arrayAlumnos[index] = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement()).getNombre();
+            }
+        	comboBox_Alumnos.setModel(new DefaultComboBoxModel(arrayAlumnos));
+        }
+        catch (NoSuchElementException exception)
+        {
+        	comboBox_Alumnos.setModel(new DefaultComboBoxModel(arrayAlumnos));
         }
         
-        comboBox_Alumnos.setModel(new DefaultComboBoxModel(arrayAlumnos));
         comboBox_Alumnos.setToolTipText("Lista de Cursos");
         comboBox_Alumnos.setBounds(137, 168, 208, 22);
         contentPane.add(comboBox_Alumnos);
         
         JButton btnAadirAlumno = new JButton("Añadir Alumno");
+        btnAadirAlumno.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                VentanaAnyadirAlumno ventanaAnyadirAlumno = new VentanaAnyadirAlumno(instituto, indiceCurso);
+                ventanaAnyadirAlumno.setVisible(true);
+                dispose();
+            }
+        });
         btnAadirAlumno.setBounds(152, 227, 118, 23);
         contentPane.add(btnAadirAlumno);
         

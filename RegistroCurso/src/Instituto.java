@@ -94,4 +94,17 @@ public class Instituto
 		}
 		return cantAlumnos;
 	}
+	public boolean eliminarCurso(int index)
+	{
+		this.cursos.remove(index);
+		return true;
+	}
+	public void cambiarEstadoHabilidadesAlumnoIndice (int indiceCurso, int indiceAlumno, int indiceHabilidad)
+    {
+        cursos.get(indiceCurso).cambiarEstadoHabilidadesAlumnoIndice(indiceAlumno, indiceHabilidad);
+    }
+	public boolean getEstadoHabilidad (int indiceCurso, int indiceAlumno, int indiceHabilidad)
+    {
+        return cursos.get(indiceCurso).getEstadoHabilidad(indiceAlumno, indiceHabilidad);
+    }
 }
