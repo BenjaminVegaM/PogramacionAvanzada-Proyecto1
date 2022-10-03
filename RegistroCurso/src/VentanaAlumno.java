@@ -86,11 +86,10 @@ public class VentanaAlumno extends JFrame {
 		lblEstadoHabilidad.setBounds(10, 162, 111, 14);
 		contentPane.add(lblEstadoHabilidad);
 		
-		int runAux;
 		Enumeration<Integer> enu = instituto.getKeysAlumnosCurso(indiceCurso);
 	    for(int index = 0 ; index < indiceAlumno;index++) 
     	{
-        	// Deberiamos poner un break si enu.hasMoreElements() == null
+        	// Deberiamos poner un break si enu.hasMoreElements() == null??????
         	enu.nextElement();
         }
 	    Alumno alumnoAux = instituto.getCopiaAlumnoCurso(indiceCurso, enu.nextElement());
@@ -111,9 +110,9 @@ public class VentanaAlumno extends JFrame {
 		lblNewLabel_1_3.setBounds(131, 86, 293, 14);
 		contentPane.add(lblNewLabel_1_3);
 		
-		JLabel lblNewLabel_1_5 = new JLabel(Boolean.toString(alumnoAux.getAprobado()));
-		lblNewLabel_1_5.setBounds(131, 162, 293, 14);
-		contentPane.add(lblNewLabel_1_5);
+		JLabel lblEstadoH = new JLabel(Boolean.toString(alumnoAux.getAprobado()));
+		lblEstadoH.setBounds(131, 162, 293, 14);
+		contentPane.add(lblEstadoH);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 111, 414, 2);
